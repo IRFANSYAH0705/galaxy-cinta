@@ -1,14 +1,23 @@
 // ======================================
-// LATAR BINTANG
+// BINTANG, METEOR, DAN CAHAYA LUAR ANGKASA
 // ======================================
 
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
-let stars = [];
+const effectCanvas = document.getElementById("spaceEffects");
+const effectCtx = effectCanvas.getContext("2d");
+
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
 let width = 0;
 let height = 0;
-let animationFrame;
+let stars = [];
+let meteors = [];
+let lastMeteorTime = 0;
+let nextMeteorDelay = 1800;
 
 function resizeCanvas() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -16,25 +25,29 @@ function resizeCanvas() {
   width = window.innerWidth;
   height = window.innerHeight;
 
-  canvas.width = width * dpr;
-  canvas.height = height * dpr;
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
+  [canvas, effectCanvas].forEach((element) => {
+    element.width = Math.floor(width * dpr);
+    element.height = Math.floor(height * dpr);
+
+    element.style.width = width + "px";
+    element.style.height = height + "px";
+  });
 
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  effectCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
   const count = Math.min(
-    Math.floor((width * height) / 3000),
+    Math.floor((width * height) / 2500),
     350
   );
 
   stars = Array.from({ length: count }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
-    radius: Math.random() * 1.5 + 0.3,
-    alpha: Math.random() * 0.7 + 0.2,
-    speed: Math.random() * 0.25 + 0.04,
-    phase: Math.random() * Math.PI * 2
+    radius: Math.random() * 1.4 + 0.3,
+    alpha: Math.random() * 0.8 + 0.2,
+    phase: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.2 + 0.03
   }));
 }
 
@@ -42,44 +55,101 @@ function drawStars() {
   ctx.clearRect(0, 0, width, height);
 
   stars.forEach((star) => {
-    star.phase += 0.018;
-    star.y -= star.speed;
+    if (!reduceMotion) {
+      star.phase += 0.025;
+      star.y += star.speed * 0.12;
+    }
 
-    if (star.y < -2) {
-      star.y = height + 2;
+    if (star.y > height) {
+      star.y = 0;
       star.x = Math.random() * width;
     }
 
-    const alpha =
-      star.alpha * (0.65 + 0.35 * Math.sin(star.phase));
+    const alpha = reduceMotion
+      ? star.alpha
+      : star.alpha * (0.6 + 0.4 * Math.sin(star.phase));
 
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(183, 221, 255, ${alpha})`;
+    ctx.fillStyle = `rgba(190, 225, 255, ${alpha})`;
     ctx.fill();
+  });
+}
 
-    if (star.radius > 1.25) {
-      ctx.beginPath();
-      ctx.moveTo(star.x - 4, star.y);
-      ctx.lineTo(star.x + 4, star.y);
-      ctx.moveTo(star.x, star.y - 4);
-      ctx.lineTo(star.x, star.y + 4);
-      ctx.strokeStyle = `rgba(127, 197, 255, ${alpha * 0.35})`;
-      ctx.lineWidth = 0.5;
-      ctx.stroke();
-    }
+function createMeteor() {
+  meteors.push({
+    x: Math.random() * width * 0.8,
+    y: Math.random() * height * 0.35,
+    length: Math.random() * 100 + 65,
+    speed: Math.random() * 4 + 6,
+    opacity: 1,
+    angle: Math.PI / 4
+  });
+}
+
+function drawMeteors(timestamp) {
+  effectCtx.clearRect(0, 0, width, height);
+
+  if (
+    !reduceMotion &&
+    timestamp - lastMeteorTime > nextMeteorDelay
+  ) {
+    createMeteor();
+    lastMeteorTime = timestamp;
+    nextMeteorDelay = Math.random() * 2600 + 1700;
+  }
+
+  meteors.forEach((meteor) => {
+    const tailX =
+      meteor.x - Math.cos(meteor.angle) * meteor.length;
+
+    const tailY =
+      meteor.y - Math.sin(meteor.angle) * meteor.length;
+
+    const gradient = effectCtx.createLinearGradient(
+      meteor.x,
+      meteor.y,
+      tailX,
+      tailY
+    );
+
+    gradient.addColorStop(0, "rgba(255,255,255,1)");
+    gradient.addColorStop(0.25, "rgba(130,210,255,0.8)");
+    gradient.addColorStop(1, "rgba(70,140,255,0)");
+
+    effectCtx.beginPath();
+    effectCtx.moveTo(meteor.x, meteor.y);
+    effectCtx.lineTo(tailX, tailY);
+    effectCtx.strokeStyle = gradient;
+    effectCtx.lineWidth = 2;
+    effectCtx.stroke();
+
+    meteor.x += meteor.speed * Math.cos(meteor.angle);
+    meteor.y += meteor.speed * Math.sin(meteor.angle);
+    meteor.opacity -= 0.012;
   });
 
-  animationFrame = requestAnimationFrame(drawStars);
+  meteors = meteors.filter((meteor) =>
+    meteor.opacity > 0 &&
+    meteor.x < width + 150 &&
+    meteor.y < height + 150
+  );
+}
+
+function animateSpace(timestamp) {
+  drawStars();
+  drawMeteors(timestamp);
+  requestAnimationFrame(animateSpace);
 }
 
 resizeCanvas();
-drawStars();
 
 window.addEventListener("resize", resizeCanvas);
 
+requestAnimationFrame(animateSpace);
+
 // ======================================
-// EMPAT SURAT FOTO
+// ISI EMPAT SURAT FOTO
 // ======================================
 
 const letters = [
@@ -161,7 +231,7 @@ const bunnyLetter = {
 };
 
 // ======================================
-// PENGATUR SURAT
+// PENGATUR JENDELA SURAT
 // ======================================
 
 const modal = document.getElementById("letterModal");
@@ -202,16 +272,15 @@ function openLetter(letter) {
   signature.textContent = letter.signature;
   letterContent.appendChild(signature);
 
-  // Reset foto setiap surat dibuka.
   hiddenPhoto.hidden = true;
 
-  // Surat kelinci tidak memiliki tombol kejutan foto.
+  // Hanya surat foto yang memiliki kejutan foto.
   surpriseArea.hidden = !letter.photo;
 
   if (letter.photo) {
     surpriseImage.src = letter.photo;
     revealPhotoButton.hidden = false;
-    revealPhotoButton.textContent = "Buka kejutan untukmu 💗";
+    revealPhotoButton.textContent = "Buka kejutan untukmu ♥";
   }
 
   modal.classList.add("open");
@@ -233,7 +302,7 @@ function closeLetter() {
   }
 }
 
-// Klik salah satu foto untuk membuka suratnya.
+// Klik foto untuk membuka surat yang sesuai.
 document.querySelectorAll(".photo-card").forEach((card) => {
   card.addEventListener("click", () => {
     const index = Number(card.dataset.letter);
@@ -244,12 +313,12 @@ document.querySelectorAll(".photo-card").forEach((card) => {
   });
 });
 
-// Klik kelinci untuk membuka surat khususnya.
+// Klik kelinci untuk membuka surat tambahan.
 document.getElementById("bunnyLetterButton").addEventListener("click", () => {
   openLetter(bunnyLetter);
 });
 
-// Foto baru terlihat setelah tombol kejutan diklik.
+// Tampilkan foto setelah tombol kejutan diklik.
 revealPhotoButton.addEventListener("click", () => {
   if (!activeLetter || !activeLetter.photo) {
     return;
@@ -259,15 +328,16 @@ revealPhotoButton.addEventListener("click", () => {
   revealPhotoButton.hidden = true;
 
   hiddenPhoto.scrollIntoView({
-    behavior: "smooth",
+    behavior: reduceMotion ? "auto" : "smooth",
     block: "nearest"
   });
 });
 
-// Tutup surat.
+// Tombol untuk menutup surat.
 closeLetterButton.addEventListener("click", closeLetter);
 closeLetterBottom.addEventListener("click", closeLetter);
 
+// Klik area gelap untuk menutup surat.
 modal.addEventListener("click", (event) => {
   if (event.target.dataset.close === "true") {
     closeLetter();
