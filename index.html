@@ -4,44 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="theme-color" content="#08040f">
+
     <title>My Lovely Gaby ♥</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Latar belakang bintang -->
     <div class="stars" id="stars"></div>
 
-    <!-- INTRO -->
+    <!-- Intro pembuka -->
     <section class="intro" id="intro">
         <div class="intro-content">
+
             <div class="intro-planet">🪐</div>
 
-            <p class="intro-small">A LITTLE UNIVERSE</p>
+            <p class="intro-label">A LITTLE UNIVERSE</p>
 
-            <h1>For My Lovely Gaby ♥</h1>
+            <h1>For My Lovely Gaby <span>♥</span></h1>
 
-            <p class="intro-text">
+            <p class="intro-description">
                 Ada seseorang yang membuat semesta terasa lebih indah.
             </p>
 
-            <button id="startButton" class="main-button">
+            <button class="main-button" id="startButton">
                 Masuk ke Galaksi ✨
             </button>
+
         </div>
     </section>
 
-    <!-- HALAMAN UTAMA -->
+    <!-- Halaman utama -->
     <main class="universe hidden" id="universe">
 
         <header class="header">
-            <p class="small-title">A LITTLE UNIVERSE MADE JUST FOR YOU ✨</p>
+
+            <p class="small-title">
+                A LITTLE UNIVERSE MADE JUST FOR YOU ✨
+            </p>
 
             <h1>My Lovely Gaby <span>♥</span></h1>
 
             <p class="subtitle">
                 Sebuah pesan kecil untuk seseorang yang istimewa.
             </p>
+
         </header>
 
         <button class="letter-button" id="letterButton">
@@ -49,86 +58,83 @@
         </button>
 
         <p class="hint">
-            Sentuh planet, geser galaksi, dan temukan surat rahasianya ♡
+            Sentuh planet atau geser untuk menjelajahi galaksi ♡
         </p>
 
-        <!-- GALAKSI FOTO -->
+        <!-- Area galaksi -->
         <section class="galaxy-area" id="galaxyArea">
 
-            <div class="photo-galaxy" id="photoGalaxy">
+            <!-- Foto dibuat otomatis oleh JavaScript -->
+            <div class="photo-galaxy" id="photoGalaxy"></div>
 
-                <img src="gaby1.jpeg" class="memory-photo" alt="Foto Gaby">
+            <!-- Planet utama -->
+            <button
+                class="planet"
+                id="planet"
+                type="button"
+                aria-label="Buka Surat Rahasia"
+            >
+                <span class="planet-glow"></span>
+                <span class="planet-ring"></span>
 
-                <img src="gaby2.jpeg" class="memory-photo" alt="Foto Gaby">
-
-                <img src="gaby3.jpeg" class="memory-photo" alt="Foto Gaby">
-
-                <img src="gaby4.jpeg" class="memory-photo" alt="Foto Gaby">
-
-            </div>
-
-            <!-- PLANET INTERAKTIF -->
-            <div class="planet" id="planet" role="button"
-                 tabindex="0" aria-label="Buka Surat Rahasia">
-
-                <div class="planet-ring"></div>
-
-                <div class="planet-body">
-                    <span>💌</span>
-                </div>
-
-                <div class="planet-light"></div>
-
-            </div>
+                <span class="planet-body">
+                    <span class="planet-letter">💌</span>
+                </span>
+            </button>
 
         </section>
 
         <p class="bottom-text">
-            Kamu adalah bagian terindah dari galaksi kecil ini. ♥
+            Di antara jutaan bintang, kamu tetap istimewa. ♥
         </p>
 
     </main>
 
-    <!-- SURAT RAHASIA -->
-    <div class="letter-overlay hidden" id="letterOverlay">
+    <!-- Surat rahasia -->
+    <section
+        class="letter-overlay hidden"
+        id="letterOverlay"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="letterTitle"
+    >
 
-        <div class="letter-card">
+        <article class="letter-card">
 
-            <button class="close-button" id="closeLetter"
-                    aria-label="Tutup surat">×</button>
+            <button
+                class="close-button"
+                id="closeLetter"
+                type="button"
+                aria-label="Tutup surat"
+            >×</button>
 
-            <div class="envelope" id="envelope">
-                💌
-            </div>
+            <div class="envelope" id="envelope">💌</div>
 
             <p class="letter-label">A SECRET LETTER FOR YOU</p>
 
-            <h2>Untuk Gaby ♡</h2>
+            <h2 id="letterTitle">Untuk Gaby ♡</h2>
 
-            <div class="letter-content" id="letterContent">
+            <div class="letter-content">
+
+                <p>Hai, Gaby cantik. ❤️</p>
 
                 <p>
-                    Hai, Gaby cantik. ❤️
+                    Kamu itu imut, lucu, dan menggemaskan.
+                    Ada sesuatu dari senyummu yang bisa membuat
+                    hari biasa terasa lebih menyenangkan.
                 </p>
 
                 <p>
-                    Aku cuma mau bilang kalau kamu itu imut, lucu,
-                    dan menggemaskan dengan caramu sendiri.
-                    Ada sesuatu dari senyummu yang bikin hari biasa
-                    terasa lebih menyenangkan.
-                </p>
-
-                <p>
-                    Buatku, kamu adalah salah satu wanita tercantik
-                    di dunia. Bukan cuma karena penampilanmu,
-                    tetapi juga karena hal-hal sederhana yang
-                    membuatmu menjadi dirimu sendiri.
+                    Buatku, kamu adalah salah satu wanita
+                    tercantik di dunia. Bukan cuma karena
+                    penampilanmu, tetapi juga karena hal-hal
+                    sederhana yang membuatmu menjadi dirimu sendiri.
                 </p>
 
                 <p>
                     Kalau galaksi punya jutaan bintang,
-                    aku tetap akan memilih untuk mengagumi satu
-                    bintang yang paling istimewa di mataku: kamu.
+                    aku tetap ingin mengagumi bintang yang
+                    paling istimewa di mataku: kamu.
                 </p>
 
                 <p class="signature">
@@ -137,13 +143,13 @@
 
             </div>
 
-            <button class="main-button" id="finishLetter">
+            <button class="main-button" id="finishLetter" type="button">
                 Kembali ke Galaksi ✨
             </button>
 
-        </div>
+        </article>
 
-    </div>
+    </section>
 
     <script src="script.js"></script>
 
