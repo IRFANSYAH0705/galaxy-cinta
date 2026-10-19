@@ -1,7 +1,3 @@
-/* =========================
-   PENGATURAN DASAR
-========================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -9,508 +5,132 @@
 }
 
 :root {
-    --pink: #ff9dce;
-    --purple: #b98cff;
-    --white: #fffaff;
-}
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-
-    background: #05030b;
-    color: var(--white);
-
-    font-family: Arial, Helvetica, sans-serif;
+    --pink: #f28bcf;
+    --purple: #a66bff;
+    --white: #fff7ff;
 }
 
 body {
     min-height: 100vh;
-    min-height: 100dvh;
-
     overflow-x: hidden;
+    background: #07040e;
+    color: var(--white);
+    font-family: "Segoe UI", Arial, sans-serif;
+    text-align: center;
 }
 
 button {
     font: inherit;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
 }
 
-button:focus-visible {
-    outline: 2px solid var(--pink);
-    outline-offset: 5px;
+.hidden {
+    display: none !important;
 }
 
-/* =========================
-   LATAR GALAKSI
-========================= */
+/* BINTANG */
 
-#stars,
-#galaxy {
+.stars {
     position: fixed;
     inset: 0;
-
-    width: 100%;
-    height: 100%;
-
+    z-index: 0;
+    overflow: hidden;
     pointer-events: none;
 }
 
-#stars {
-    z-index: 0;
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.45;
+    animation: twinkle 3s ease-in-out infinite alternate;
 }
 
-#galaxy {
-    z-index: 1;
+@keyframes twinkle {
+    from {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.5);
+    }
 }
 
-/* =========================
-   JUDUL
-========================= */
-
-.header {
-    position: relative;
-    z-index: 2;
-
-    padding: 25px 20px 0;
-    text-align: center;
-}
-
-.header h1 {
-    font-size: clamp(25px, 5vw, 42px);
-    letter-spacing: 1px;
-
-    text-shadow: 0 0 22px rgba(255, 157, 206, 0.28);
-}
-
-.header h1 span {
-    color: var(--pink);
-}
-
-.header p {
-    margin-top: 10px;
-
-    color: #d8c9e8;
-    font-size: clamp(12px, 2vw, 15px);
-}
-
-/* =========================
-   TAMPILAN UTAMA
-========================= */
-
-main {
-    position: relative;
-    z-index: 2;
-}
+/* INTRO */
 
 .intro {
     position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 30px 20px;
+    animation: introAppear 1.5s ease both;
+}
 
+.intro-content {
     width: 100%;
-    margin-top: 45px;
-
-    padding: 15px 20px;
-
-    text-align: center;
+    max-width: 600px;
 }
 
-.subtitle {
-    margin-bottom: 20px;
-
-    color: #e7d7f5;
-    font-size: clamp(13px, 2.4vw, 17px);
+.intro-planet {
+    font-size: clamp(70px, 15vw, 110px);
+    margin-bottom: 25px;
+    animation: floatPlanet 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px #b66aff);
 }
 
-.secret-button,
-.read-button,
-.hug-button {
-    padding: 13px 23px;
-
-    color: white;
-
-    background: linear-gradient(
-        135deg,
-        #a45bce,
-        #e66ba9
-    );
-
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 30px;
-
-    box-shadow: 0 0 25px rgba(203, 103, 218, 0.2);
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.secret-button:hover,
-.read-button:hover,
-.hug-button:hover {
-    transform: translateY(-3px);
-
-    box-shadow: 0 0 30px rgba(255, 157, 206, 0.35);
-}
-
-.hint {
-    margin-top: 15px;
-
-    color: #bdb0cb;
+.intro-small {
+    color: var(--pink);
     font-size: 12px;
+    letter-spacing: 5px;
+    margin-bottom: 18px;
 }
 
-/* =========================
-   PLANET
-========================= */
-
-.planet {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 112px;
-    height: 112px;
-
-    margin: 45px auto 0;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #f9c7ff,
-            #c17ce7 35%,
-            #623d9e 72%,
-            #24113f
-        );
-
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 25px rgba(193, 124, 231, 0.5),
-        0 0 65px rgba(145, 75, 211, 0.24);
-
-    animation: planetFloat 4s ease-in-out infinite;
+.intro h1 {
+    font-size: clamp(28px, 6vw, 48px);
+    margin-bottom: 20px;
 }
 
-.planet-core {
-    position: relative;
-    z-index: 2;
-
-    font-size: 37px;
-
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+.intro-text {
+    color: #c8bbd7;
+    line-height: 1.8;
+    margin-bottom: 30px;
 }
 
-.planet-ring {
-    position: absolute;
+/* TOMBOL */
 
-    width: 145px;
-    height: 38px;
-
-    border: 3px solid rgba(255, 196, 237, 0.85);
-    border-radius: 50%;
-
-    transform: rotate(-22deg);
-
-    box-shadow: 0 0 12px rgba(255, 157, 206, 0.35);
+.main-button,
+.letter-button {
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: linear-gradient(110deg, #a85bdb, #e15cab);
+    border-radius: 50px;
+    padding: 15px 28px;
+    box-shadow: 0 0 25px rgba(207, 94, 221, 0.22);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@keyframes planetFloat {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-12px);
-    }
+.main-button:hover,
+.letter-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px rgba(231, 113, 222, 0.5);
 }
 
-/* =========================
-   FOOTER
-========================= */
-
-.footer {
-    position: relative;
-    z-index: 2;
-
-    margin-top: 45px;
-    padding: 15px;
-
-    color: #c4b4d3;
-
-    font-size: 11px;
-    text-align: center;
+.main-button:active,
+.letter-button:active {
+    transform: scale(0.96);
 }
 
-/* =========================
-   OVERLAY
-========================= */
-
-.overlay {
-    position: fixed;
-    inset: 0;
-
-    z-index: 5;
-
-    background: rgba(0, 0, 0, 0.75);
-
-    opacity: 0;
-    visibility: hidden;
-
-    backdrop-filter: blur(5px);
-
-    transition:
-        opacity 0.4s ease,
-        visibility 0.4s ease;
-}
-
-.overlay.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* =========================
-   AMPLOP DAN SURAT
-========================= */
-
-.envelope-box,
-.letter-box {
-    position: fixed;
-
-    top: 50%;
-    left: 50%;
-
-    z-index: 6;
-
-    width: min(90%, 460px);
-    max-height: 85vh;
-    max-height: 85dvh;
-
-    overflow-y: auto;
-
-    padding: 30px 25px;
-
-    color: #4a304b;
-
-    background: #fff5fb;
-
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 20px;
-
-    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: translate(-50%, -45%) scale(0.92);
-
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease,
-        visibility 0.4s ease;
-
-    overscroll-behavior: contain;
-}
-
-.envelope-box.show,
-.letter-box.show {
-    opacity: 1;
-    visibility: visible;
-
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.envelope-box {
-    text-align: center;
-}
-
-.envelope-icon {
-    margin-bottom: 15px;
-
-    font-size: 65px;
-
-    animation: envelopePulse 2s ease-in-out infinite;
-}
-
-@keyframes envelopePulse {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.08);
-    }
-}
-
-.envelope-box h2 {
-    font-size: 23px;
-}
-
-.envelope-box > p {
-    margin: 14px 0 22px;
-
-    color: #7c607b;
-
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.close-button {
-    position: absolute;
-
-    top: 10px;
-    right: 13px;
-
-    width: 34px;
-    height: 34px;
-
-    color: #7b5279;
-
-    background: transparent;
-    border: none;
-
-    font-size: 28px;
-    line-height: 1;
-}
-
-.read-button {
-    background: linear-gradient(
-        135deg,
-        #a34bc3,
-        #e16b9e
-    );
-}
-
-/* =========================
-   ISI SURAT
-========================= */
-
-.letter-box {
-    background:
-        linear-gradient(
-            145deg,
-            #fffafc,
-            #ffedf6
-        );
-
-    scrollbar-color: #dca3c8 transparent;
-    scrollbar-width: thin;
-}
-
-.letter-decoration {
-    margin-bottom: 8px;
-
-    color: #d46eaa;
-
-    font-family: Georgia, serif;
-    font-size: 32px;
-
-    text-align: center;
-}
-
-.letter-label {
-    margin-bottom: 12px;
-
-    color: #bd73a0;
-
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 2px;
-
-    text-align: center;
-}
-
-.letter-box h2 {
-    margin-bottom: 22px;
-
-    color: #794c78;
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(20px, 5vw, 27px);
-    line-height: 1.4;
-
-    text-align: center;
-}
-
-.letter-content p {
-    margin-bottom: 17px;
-
-    color: #62465d;
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 15px;
-    line-height: 1.85;
-}
-
-.letter-signature {
-    margin: 24px 0;
-
-    text-align: right;
-}
-
-.letter-signature p {
-    color: #8a6983;
-
-    font-family: Georgia, serif;
-    font-size: 14px;
-}
-
-.letter-signature h3 {
-    margin-top: 5px;
-
-    color: #c14c91;
-
-    font-family: Georgia, serif;
-    font-size: 25px;
-}
-
-.hug-button {
-    display: block;
-
-    width: 100%;
-
-    margin-top: 12px;
-
-    background: linear-gradient(
-        135deg,
-        #b95aa7,
-        #ed8caf
-    );
-}
-
-.hug-message {
-    display: none;
-
-    margin-top: 18px;
-    padding: 15px;
-
-    color: #a34481;
-
-    background: #ffe4f1;
-    border-radius: 12px;
-
-    font-size: 13px;
-    line-height: 1.6;
-
-    text-align: center;
-}
-
-.hug-message.show {
-    display: block;
-
-    animation: messageAppear 0.5s ease both;
-}
-
-@keyframes messageAppear {
+@keyframes introAppear {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(20px);
     }
 
     to {
@@ -519,118 +139,411 @@ main {
     }
 }
 
-/* =========================
-   ANIMASI HATI
-========================= */
+/* HALAMAN UTAMA */
 
-.floating-heart {
-    position: fixed;
+.universe {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 55px 20px 40px;
+    animation: introAppear 1s ease both;
+}
 
-    z-index: 9;
+.header {
+    max-width: 800px;
+    margin: 0 auto 28px;
+}
 
-    bottom: -30px;
+.small-title {
+    font-size: 11px;
+    color: #d5a4fa;
+    letter-spacing: 3px;
+    margin-bottom: 17px;
+}
 
+.header h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-bottom: 15px;
+}
+
+.header h1 span {
+    color: #ff83c7;
+}
+
+.subtitle {
+    color: #c9bdd8;
+    line-height: 1.7;
+}
+
+.letter-button {
+    font-size: 17px;
+    padding: 15px 32px;
+}
+
+.hint {
+    color: #bdb0ce;
+    font-size: 13px;
+    margin-top: 18px;
+}
+
+/* AREA GALAKSI */
+
+.galaxy-area {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    height: clamp(390px, 65vw, 570px);
+    margin: 0 auto;
+    perspective: 900px;
+    overflow: hidden;
+    touch-action: pan-y;
+}
+
+.photo-galaxy {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* FOTO GALAKSI */
+
+.memory-photo {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    width: clamp(45px, 7vw, 85px);
+    height: clamp(60px, 10vw, 110px);
+    object-fit: cover;
+    padding: 3px;
+    background: #fff8f2;
+    border-radius: 2px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.65);
+    transform-origin: center;
+    opacity: 0;
+    animation: photoAppear 1.2s ease forwards;
+    transition: filter 0.3s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.memory-photo:hover {
+    filter: brightness(1.1);
+}
+
+/* POSISI FOTO MEMBENTUK PERMUKAAN GALAKSI */
+
+.memory-photo:nth-child(1) {
+    --x: -34%;
+    --y: 25%;
+    --r: -13deg;
+    --s: 1.1;
+}
+
+.memory-photo:nth-child(2) {
+    --x: 10%;
+    --y: 32%;
+    --r: 12deg;
+    --s: 0.9;
+}
+
+.memory-photo:nth-child(3) {
+    --x: -8%;
+    --y: 8%;
+    --r: -5deg;
+    --s: 1.2;
+}
+
+.memory-photo:nth-child(4) {
+    --x: 35%;
+    --y: 23%;
+    --r: 16deg;
+    --s: 1;
+}
+
+@keyframes photoAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(35px) scale(0.7);
+    }
+
+    to {
+        opacity: 0.95;
+        transform:
+            translate(-50%, -50%)
+            translate(var(--x), var(--y))
+            rotate(var(--r))
+            scale(var(--s));
+    }
+}
+
+/* PLANET */
+
+.planet {
+    position: absolute;
+    left: 50%;
+    top: 43%;
+    width: clamp(115px, 20vw, 185px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    touch-action: none;
+    z-index: 5;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.planet:active {
+    cursor: grabbing;
+}
+
+.planet-body {
+    position: absolute;
+    inset: 12%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 25%, #f9c8ff, transparent 30%),
+        radial-gradient(circle at 70% 75%, #6c36bd, transparent 55%),
+        linear-gradient(135deg, #e6a0ff, #9755d7 60%, #5427a0);
+    box-shadow:
+        inset -15px -15px 30px rgba(24, 6, 57, 0.4),
+        0 0 35px rgba(190, 102, 255, 0.55);
+    animation: planetFloat 4s ease-in-out infinite;
+}
+
+.planet-body span {
+    font-size: clamp(35px, 6vw, 55px);
+    filter: drop-shadow(0 0 10px white);
+}
+
+.planet-ring {
+    position: absolute;
+    width: 145%;
+    height: 35%;
+    left: -22%;
+    top: 35%;
+    z-index: 3;
+    border: 5px solid rgba(244, 176, 255, 0.9);
+    border-radius: 50%;
+    transform: rotate(-22deg);
+    box-shadow: 0 0 15px rgba(242, 135, 255, 0.6);
     pointer-events: none;
-
-    animation: heartRise 3.5s ease-out forwards;
 }
 
-@keyframes heartRise {
-    0% {
-        opacity: 0;
-        transform: translateY(0) rotate(0deg) scale(0.7);
+.planet-light {
+    position: absolute;
+    inset: -15%;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(206, 123, 255, 0.16),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+@keyframes planetFloat {
+    0%, 100% {
+        transform: translateY(0);
     }
 
-    15% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(-100vh) rotate(30deg) scale(1.3);
+    50% {
+        transform: translateY(-9px);
     }
 }
 
-/* =========================
-   TAMPILAN HP
-========================= */
+@keyframes floatPlanet {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+.bottom-text {
+    color: #cbb7dc;
+    line-height: 1.7;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 0 10px 30px;
+}
+
+/* SURAT RAHASIA */
+
+.letter-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    background: rgba(5, 2, 12, 0.88);
+    backdrop-filter: blur(12px);
+    overflow-y: auto;
+    animation: introAppear 0.4s ease both;
+}
+
+.letter-card {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90%;
+    overflow-y: auto;
+    padding: 35px 25px;
+    border: 1px solid rgba(244, 174, 255, 0.3);
+    border-radius: 24px;
+    background: linear-gradient(145deg, #21132e, #100a1b);
+    box-shadow: 0 0 50px rgba(176, 95, 229, 0.2);
+    text-align: left;
+}
+
+.close-button {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 42px;
+    height: 42px;
+    color: white;
+    border: none;
+    background: transparent;
+    font-size: 30px;
+}
+
+.envelope {
+    text-align: center;
+    font-size: 65px;
+    margin-bottom: 15px;
+    animation: floatPlanet 3s ease-in-out infinite;
+}
+
+.letter-label {
+    color: #e4a6fa;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.letter-card h2 {
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 25px;
+}
+
+.letter-content {
+    color: #e8dcec;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.letter-content p {
+    margin-bottom: 17px;
+}
+
+.signature {
+    color: #ffaddb;
+    font-style: italic;
+}
+
+#finishLetter {
+    display: block;
+    margin: 25px auto 0;
+}
+
+/* RESPONSIF HP */
 
 @media (max-width: 600px) {
+    .universe {
+        padding: 38px 14px 25px;
+    }
+
+    .small-title {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
     .header {
-        padding-top: 22px;
+        margin-bottom: 23px;
     }
 
-    .intro {
-        margin-top: 35px;
-    }
-
-    .planet {
-        width: 95px;
-        height: 95px;
-
-        margin-top: 35px;
-    }
-
-    .planet-ring {
-        width: 125px;
-        height: 32px;
-    }
-
-    .footer {
-        margin-top: 35px;
-    }
-
-    .envelope-box,
-    .letter-box {
-        width: calc(100% - 26px);
-
-        max-height: 82vh;
-        max-height: 82dvh;
-
-        padding: 27px 20px;
-    }
-
-    .letter-content p {
+    .subtitle {
         font-size: 14px;
-        line-height: 1.8;
-    }
-}
-
-/* =========================
-   HP DENGAN LAYAR PENDEK
-========================= */
-
-@media (max-height: 650px) {
-    .header {
-        padding-top: 12px;
     }
 
-    .intro {
-        margin-top: 20px;
+    .letter-button {
+        font-size: 16px;
+        padding: 14px 27px;
+    }
+
+    .hint {
+        font-size: 12px;
+        line-height: 1.7;
+        max-width: 310px;
+        margin: 15px auto 0;
+    }
+
+    .galaxy-area {
+        height: 430px;
+        margin-top: 5px;
+    }
+
+    .memory-photo {
+        width: 58px;
+        height: 78px;
+    }
+
+    .memory-photo:nth-child(1) {
+        --x: -105%;
+        --y: 85%;
+        --r: -13deg;
+        --s: 0.95;
+    }
+
+    .memory-photo:nth-child(2) {
+        --x: 40%;
+        --y: 100%;
+        --r: 12deg;
+        --s: 0.85;
+    }
+
+    .memory-photo:nth-child(3) {
+        --x: -55%;
+        --y: 125%;
+        --r: -5deg;
+        --s: 0.95;
+    }
+
+    .memory-photo:nth-child(4) {
+        --x: 100%;
+        --y: 65%;
+        --r: 16deg;
+        --s: 0.85;
     }
 
     .planet {
-        margin-top: 20px;
+        top: 35%;
+        width: 145px;
     }
 
-    .footer {
-        margin-top: 20px;
+    .letter-card {
+        padding: 32px 20px 25px;
     }
 }
-
-/* =========================
-   PENGATURAN ANIMASI
-========================= */
 
 @media (prefers-reduced-motion: reduce) {
-    .planet,
-    .envelope-icon {
-        animation: none;
-    }
-
     *,
     *::before,
     *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
     }
 }
