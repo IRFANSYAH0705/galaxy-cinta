@@ -3,145 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#05030b">
 
-    <title>Galaxy Cinta | My Lovely Gaby</title>
+    <title>My Lovely Gaby ♥</title>
 
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
-
 <body>
 
-    <!-- Latar belakang galaksi -->
-    <canvas id="stars"></canvas>
-    <canvas id="galaxy"></canvas>
+    <div class="stars" id="stars"></div>
 
-    <!-- Judul -->
-    <header class="header">
-        <h1>My Lovely Gaby <span>♥</span></h1>
-        <p>A little universe made just for you ✨</p>
-    </header>
+    <!-- INTRO -->
+    <section class="intro" id="intro">
+        <div class="intro-content">
+            <div class="intro-planet">🪐</div>
 
-    <!-- Pesan utama -->
-    <main>
-        <section class="intro">
-            <p class="subtitle">Sebuah pesan kecil untuk seseorang yang istimewa</p>
+            <p class="intro-small">A LITTLE UNIVERSE</p>
 
-            <button id="openSecret" class="secret-button">
-                💌 Surat Rahasia
+            <h1>For My Lovely Gaby ♥</h1>
+
+            <p class="intro-text">
+                Ada seseorang yang membuat semesta terasa lebih indah.
+            </p>
+
+            <button id="startButton" class="main-button">
+                Masuk ke Galaksi ✨
             </button>
+        </div>
+    </section>
 
-            <p class="hint">Klik tombol atau planet untuk membuka surat ♡</p>
-        </section>
+    <!-- HALAMAN UTAMA -->
+    <main class="universe hidden" id="universe">
 
-        <!-- Planet interaktif -->
-        <button id="planet" class="planet" aria-label="Buka surat rahasia">
-            <span class="planet-ring"></span>
-            <span class="planet-core">💌</span>
+        <header class="header">
+            <p class="small-title">A LITTLE UNIVERSE MADE JUST FOR YOU ✨</p>
+
+            <h1>My Lovely Gaby <span>♥</span></h1>
+
+            <p class="subtitle">
+                Sebuah pesan kecil untuk seseorang yang istimewa.
+            </p>
+        </header>
+
+        <button class="letter-button" id="letterButton">
+            💌 Surat Rahasia
         </button>
 
-        <!-- Lapisan gelap untuk surat -->
-        <div id="overlay" class="overlay"></div>
+        <p class="hint">
+            Sentuh planet, geser galaksi, dan temukan surat rahasianya ♡
+        </p>
 
-        <!-- Amplop -->
-        <section id="envelope" class="envelope-box" aria-label="Amplop surat">
-            <button id="closeEnvelope" class="close-button" aria-label="Tutup">×</button>
+        <!-- GALAKSI FOTO -->
+        <section class="galaxy-area" id="galaxyArea">
 
-            <div class="envelope-icon">💌</div>
+            <div class="photo-galaxy" id="photoGalaxy">
 
-            <h2>Surat Rahasia untuk Gaby</h2>
+                <img src="gaby1.jpeg" class="memory-photo" alt="Foto Gaby">
 
-            <p>Ada sesuatu yang ingin aku sampaikan kepadamu...</p>
+                <img src="gaby2.jpeg" class="memory-photo" alt="Foto Gaby">
 
-            <button id="readLetter" class="read-button">
-                Buka Surat ❤️
-            </button>
+                <img src="gaby3.jpeg" class="memory-photo" alt="Foto Gaby">
+
+                <img src="gaby4.jpeg" class="memory-photo" alt="Foto Gaby">
+
+            </div>
+
+            <!-- PLANET INTERAKTIF -->
+            <div class="planet" id="planet" role="button"
+                 tabindex="0" aria-label="Buka Surat Rahasia">
+
+                <div class="planet-ring"></div>
+
+                <div class="planet-body">
+                    <span>💌</span>
+                </div>
+
+                <div class="planet-light"></div>
+
+            </div>
+
         </section>
 
-        <!-- Surat -->
-        <section id="letter" class="letter-box">
-            <button id="closeLetter" class="close-button" aria-label="Tutup">×</button>
+        <p class="bottom-text">
+            Kamu adalah bagian terindah dari galaksi kecil ini. ♥
+        </p>
 
-            <div class="letter-decoration">♡</div>
-
-            <p class="letter-label">A LITTLE LETTER FOR YOU</p>
-
-            <h2>Untuk Gaby, wanita cantikku ❤️</h2>
-
-            <div class="letter-content">
-                <p>Hai, Gaby cantik! 🥺💗</p>
-
-                <p>
-                    Ada sesuatu yang ingin aku sampaikan melalui
-                    galaksi kecil ini. Mungkin sederhana, tetapi
-                    aku membuatnya dengan sepenuh hati.
-                </p>
-
-                <p>
-                    Menurutku, kamu itu cantik, imut, lucu,
-                    dan menggemaskan. Apalagi kalau kamu senyum,
-                    rasanya ada sesuatu dari senyummu yang
-                    bikin suasana jadi lebih indah.
-                </p>
-
-                <p>
-                    Buatku, kamu adalah wanita paling cantik
-                    di dunia. Kalau kecantikanmu bisa dihitung
-                    seperti bintang di langit, mungkin aku
-                    bakal kehabisan angka sebelum selesai
-                    menghitungnya. 🌌✨
-                </p>
-
-                <p>
-                    Aku membuat galaksi ini bukan karena aku
-                    bisa memberikan seluruh bintang di langit
-                    untukmu, tetapi karena aku ingin memberikan
-                    sesuatu yang kubuat sendiri dan bisa
-                    membuatmu tersenyum.
-                </p>
-
-                <p>
-                    Kalau suatu hari kamu sedang lelah atau
-                    harimu terasa kurang menyenangkan, semoga
-                    kamu tetap ingat bahwa kamu adalah seseorang
-                    yang berharga.
-                </p>
-
-                <p>
-                    Jadi, jangan lupa tersenyum, ya, Gaby cantik.
-                    Senyummu itu manis banget. 🫶🏻
-                </p>
-
-                <p>
-                    Kamu nggak perlu menjadi orang lain untuk
-                    terlihat istimewa. Menjadi dirimu sendiri
-                    saja sudah cukup. 💕
-                </p>
-
-                <p>
-                    Terima kasih sudah menjadi Gaby yang aku kenal.
-                </p>
-            </div>
-
-            <div class="letter-signature">
-                <p>Dengan penuh kasih,</p>
-                <h3>Irfan ❤️</h3>
-            </div>
-
-            <button id="hugButton" class="hug-button">
-                Kirim Peluk dari Jauh 🤗
-            </button>
-
-            <div id="hugMessage" class="hug-message">
-                🤗❤️ Semoga hari-harimu selalu dipenuhi kebahagiaan!
-            </div>
-        </section>
     </main>
 
-    <footer class="footer">
-        Dibuat dengan cinta, khusus untuk Gaby ♡
-    </footer>
+    <!-- SURAT RAHASIA -->
+    <div class="letter-overlay hidden" id="letterOverlay">
+
+        <div class="letter-card">
+
+            <button class="close-button" id="closeLetter"
+                    aria-label="Tutup surat">×</button>
+
+            <div class="envelope" id="envelope">
+                💌
+            </div>
+
+            <p class="letter-label">A SECRET LETTER FOR YOU</p>
+
+            <h2>Untuk Gaby ♡</h2>
+
+            <div class="letter-content" id="letterContent">
+
+                <p>
+                    Hai, Gaby cantik. ❤️
+                </p>
+
+                <p>
+                    Aku cuma mau bilang kalau kamu itu imut, lucu,
+                    dan menggemaskan dengan caramu sendiri.
+                    Ada sesuatu dari senyummu yang bikin hari biasa
+                    terasa lebih menyenangkan.
+                </p>
+
+                <p>
+                    Buatku, kamu adalah salah satu wanita tercantik
+                    di dunia. Bukan cuma karena penampilanmu,
+                    tetapi juga karena hal-hal sederhana yang
+                    membuatmu menjadi dirimu sendiri.
+                </p>
+
+                <p>
+                    Kalau galaksi punya jutaan bintang,
+                    aku tetap akan memilih untuk mengagumi satu
+                    bintang yang paling istimewa di mataku: kamu.
+                </p>
+
+                <p class="signature">
+                    Dari seseorang yang ingin melihatmu tersenyum. ♥
+                </p>
+
+            </div>
+
+            <button class="main-button" id="finishLetter">
+                Kembali ke Galaksi ✨
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
