@@ -1,14 +1,14 @@
-// ========================================
-// BINTANG-BINTANG DI LATAR GALAKSI
-// ========================================
+// ======================================
+// LATAR BINTANG
+// ======================================
 
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
 let stars = [];
-let animationFrame;
 let width = 0;
 let height = 0;
+let animationFrame;
 
 function resizeCanvas() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -41,7 +41,7 @@ function resizeCanvas() {
 function drawStars() {
   ctx.clearRect(0, 0, width, height);
 
-  for (const star of stars) {
+  stars.forEach((star) => {
     star.phase += 0.018;
     star.y -= star.speed;
 
@@ -68,7 +68,7 @@ function drawStars() {
       ctx.lineWidth = 0.5;
       ctx.stroke();
     }
-  }
+  });
 
   animationFrame = requestAnimationFrame(drawStars);
 }
@@ -78,43 +78,41 @@ drawStars();
 
 window.addEventListener("resize", resizeCanvas);
 
-// ========================================
-// ISI 4 SURAT UNTUK 4 FOTO GABY
-// ========================================
+// ======================================
+// EMPAT SURAT FOTO
+// ======================================
 
 const letters = [
   {
-    title: "Untuk Gaby, bintangku 💙",
+    title: "Untuk Gaby, Bintangku 💙",
     decoration: "💌",
     eyebrow: "MY FIRST LITTLE LETTER",
     paragraphs: [
       "Hai, Gaby sayang. 💙",
-      "Aku cuma ingin bilang kalau senyummu itu punya cara sederhana untuk bikin hari terasa lebih indah. Bahkan ketika hariku biasa saja, melihat kamu tersenyum bisa membuat suasana hatiku jadi lebih baik.",
+      "Aku cuma ingin bilang kalau senyummu punya cara sederhana untuk membuat hari terasa lebih indah. Bahkan ketika hariku biasa saja, melihat kamu tersenyum bisa membuat suasana hatiku menjadi lebih baik.",
       "Aku harap kamu selalu punya alasan untuk bahagia, selalu dikelilingi hal-hal baik, dan tidak pernah lupa betapa berharganya dirimu.",
       "Kalau suatu hari kamu sedang capek, semoga kamu ingat bahwa kamu pantas mendapatkan ketenangan, perhatian, dan kasih sayang.",
-      "Terus tersenyum ya, Gaby. Senyummu itu manis sekali. 💗"
+      "Terus tersenyum, ya, Gaby. Senyummu itu manis sekali. 💗"
     ],
     signature: "Dengan sayang, untukmu ♡",
-    photo: "gaby1.jpeg",
-    surprise: true
+    photo: "./gaby1.jpeg"
   },
   {
-    title: "Kamu itu istimewa 🌷",
+    title: "Kamu Itu Istimewa 🌷",
     decoration: "🌷",
     eyebrow: "MY SECOND LITTLE LETTER",
     paragraphs: [
       "Hai, Gaby cantik. 🩷",
-      "Ada banyak hal indah di dunia ini, tetapi setiap orang punya keistimewaannya sendiri. Dan buatku, kamu punya cara tersendiri untuk membuat seseorang merasa senang hanya dengan menjadi dirimu sendiri.",
+      "Ada banyak hal indah di dunia ini, tetapi setiap orang punya keistimewaannya sendiri. Buatku, kamu punya cara tersendiri untuk membuat seseorang merasa senang hanya dengan menjadi dirimu sendiri.",
       "Aku suka caramu menjadi kamu. Kamu tidak harus selalu sempurna, tidak harus selalu terlihat kuat, dan tidak perlu selalu menyenangkan semua orang.",
       "Jangan lupa untuk menyayangi dirimu sendiri juga, ya. Kamu layak mendapatkan kebahagiaan yang tulus.",
       "Semoga hari-harimu dipenuhi senyum kecil dan kejutan manis. ✨"
     ],
     signature: "Peluk hangat dari jauh 💗",
-    photo: "gaby2.jpeg",
-    surprise: true
+    photo: "./gaby2.jpeg"
   },
   {
-    title: "Untuk bintang kecilku ✨",
+    title: "Untuk Bintang Kecilku ✨",
     decoration: "⭐",
     eyebrow: "MY THIRD LITTLE LETTER",
     paragraphs: [
@@ -125,11 +123,10 @@ const letters = [
       "Semoga besok membawa lebih banyak hal baik untukmu, Gaby. 🌙"
     ],
     signature: "Semoga kamu selalu bahagia ♡",
-    photo: "gaby3.jpeg",
-    surprise: true
+    photo: "./gaby3.jpeg"
   },
   {
-    title: "Surat paling spesial 💗",
+    title: "Surat Paling Spesial 💗",
     decoration: "💖",
     eyebrow: "MY FOURTH LITTLE LETTER",
     paragraphs: [
@@ -140,14 +137,13 @@ const letters = [
       "Simpan surat kecil ini sebagai pengingat bahwa ada seseorang yang ingin melihatmu tersenyum. 💙"
     ],
     signature: "Kamu berharga, Gaby. ♡",
-    photo: "gaby4.jpeg",
-    surprise: true
+    photo: "./gaby4.jpeg"
   }
 ];
 
-// ========================================
-// ISI SURAT KHUSUS KELINCI
-// ========================================
+// ======================================
+// SURAT KHUSUS KELINCI
+// ======================================
 
 const bunnyLetter = {
   title: "Pesan Rahasia dari Kelinci 🐰",
@@ -155,26 +151,25 @@ const bunnyLetter = {
   eyebrow: "A TINY BUNNY HAS A MESSAGE",
   paragraphs: [
     "Psst... Gaby! Ada kelinci kecil yang mau ngomong sesuatu. 🐰",
-    "Halo, Gaby! Aku kelinci penjaga surat cinta ini. Aku datang jauh-jauh membawa pesan kecil untuk kamu. Hihi! 💗",
+    "Halo, Gaby! Aku kelinci penjaga surat ini. Aku datang jauh-jauh membawa pesan kecil untuk kamu. Hihi! 💗",
     "Aku punya satu tugas penting: mengingatkan kamu supaya jangan lupa tersenyum, makan dengan baik, istirahat kalau lelah, dan menyayangi diri sendiri.",
     "Kalau hari ini kamu sedih, anggap saja aku sedang mengirim pelukan kelinci paling empuk untukmu. Kalau kamu bahagia, aku ikut melompat-lompat senang! 🐰💕",
     "Terakhir, ada satu rahasia kecil... kamu itu spesial, Gaby. Jadi jangan terlalu keras kepada dirimu sendiri, ya?",
     "Nah, tugasku selesai! Sekarang aku mau makan wortel sambil menjaga surat ini. Sampai jumpa, Gaby! 🥕💙"
   ],
-  signature: "Hop hop, penuh sayang! 🐰♡",
-  photo: null,
-  surprise: false
+  signature: "Hop hop, penuh sayang! 🐰♡"
 };
 
-// ========================================
-// MENGATUR JENDELA SURAT
-// ========================================
+// ======================================
+// PENGATUR SURAT
+// ======================================
 
 const modal = document.getElementById("letterModal");
 const letterTitle = document.getElementById("letterTitle");
 const letterDecoration = document.getElementById("letterDecoration");
 const letterEyebrow = document.getElementById("letterEyebrow");
 const letterContent = document.getElementById("letterContent");
+
 const surpriseArea = document.getElementById("surpriseArea");
 const revealPhotoButton = document.getElementById("revealPhoto");
 const hiddenPhoto = document.getElementById("hiddenPhoto");
@@ -183,8 +178,8 @@ const surpriseImage = document.getElementById("surpriseImage");
 const closeLetterButton = document.getElementById("closeLetter");
 const closeLetterBottom = document.getElementById("closeLetterBottom");
 
-let lastFocusedElement = null;
 let activeLetter = null;
+let lastFocusedElement = null;
 
 function openLetter(letter) {
   lastFocusedElement = document.activeElement;
@@ -207,16 +202,16 @@ function openLetter(letter) {
   signature.textContent = letter.signature;
   letterContent.appendChild(signature);
 
-  // Foto disembunyikan setiap kali surat dibuka.
+  // Reset foto setiap surat dibuka.
   hiddenPhoto.hidden = true;
 
-  // Tombol kejutan hanya tersedia pada surat foto.
-  surpriseArea.hidden = !letter.surprise;
+  // Surat kelinci tidak memiliki tombol kejutan foto.
+  surpriseArea.hidden = !letter.photo;
 
-  if (letter.surprise && letter.photo) {
+  if (letter.photo) {
     surpriseImage.src = letter.photo;
-    revealPhotoButton.textContent = "Buka kejutan untukmu 💗";
     revealPhotoButton.hidden = false;
+    revealPhotoButton.textContent = "Buka kejutan untukmu 💗";
   }
 
   modal.classList.add("open");
@@ -238,26 +233,23 @@ function closeLetter() {
   }
 }
 
-// Setiap foto memiliki surat masing-masing.
+// Klik salah satu foto untuk membuka suratnya.
 document.querySelectorAll(".photo-card").forEach((card) => {
   card.addEventListener("click", () => {
     const index = Number(card.dataset.letter);
-    const letter = letters[index];
 
-    if (letter) {
-      openLetter(letter);
+    if (letters[index]) {
+      openLetter(letters[index]);
     }
   });
 });
 
-// Surat khusus kelinci terpisah dari keempat surat foto.
-document
-  .getElementById("bunnyLetterButton")
-  .addEventListener("click", () => {
-    openLetter(bunnyLetter);
-  });
+// Klik kelinci untuk membuka surat khususnya.
+document.getElementById("bunnyLetterButton").addEventListener("click", () => {
+  openLetter(bunnyLetter);
+});
 
-// Foto hanya muncul setelah tombol kejutan ditekan.
+// Foto baru terlihat setelah tombol kejutan diklik.
 revealPhotoButton.addEventListener("click", () => {
   if (!activeLetter || !activeLetter.photo) {
     return;
@@ -272,7 +264,7 @@ revealPhotoButton.addEventListener("click", () => {
   });
 });
 
-// Menutup surat.
+// Tutup surat.
 closeLetterButton.addEventListener("click", closeLetter);
 closeLetterBottom.addEventListener("click", closeLetter);
 
@@ -282,7 +274,7 @@ modal.addEventListener("click", (event) => {
   }
 });
 
-// Tombol Escape juga bisa menutup surat.
+// Tombol Escape untuk menutup surat.
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && modal.classList.contains("open")) {
     closeLetter();
