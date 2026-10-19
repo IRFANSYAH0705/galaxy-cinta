@@ -2,60 +2,53 @@
    PENGATURAN DASAR
 ========================= */
 
-:root {
-    --latar: #090714;
-    --ungu: #a66cff;
-    --ungu-terang: #d7b5ff;
-    --pink: #ff9fd5;
-    --putih: #fff8ff;
-    --teks-redup: #c5b9d8;
-}
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
+:root {
+    --pink: #ff9dce;
+    --purple: #b98cff;
+    --white: #fffaff;
+}
+
+html,
+body {
+    width: 100%;
     min-height: 100%;
+
+    background: #05030b;
+    color: var(--white);
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
     min-height: 100vh;
     min-height: 100dvh;
 
-    overflow: hidden;
-
-    color: var(--putih);
-    font-family: Arial, Helvetica, sans-serif;
-
-    background:
-        radial-gradient(
-            ellipse at 50% 45%,
-            #28163e 0%,
-            #120b22 42%,
-            var(--latar) 82%
-        );
+    overflow-x: hidden;
 }
 
 button {
     font: inherit;
     cursor: pointer;
-
     -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible {
     outline: 2px solid var(--pink);
-    outline-offset: 4px;
+    outline-offset: 5px;
 }
 
 /* =========================
-   LATAR BINTANG
+   LATAR GALAKSI
 ========================= */
 
-#bintang {
+#stars,
+#galaxy {
     position: fixed;
     inset: 0;
 
@@ -63,36 +56,14 @@ button:focus-visible {
     height: 100%;
 
     pointer-events: none;
+}
+
+#stars {
     z-index: 0;
 }
 
-.cahaya {
-    position: fixed;
-
-    width: 260px;
-    height: 260px;
-
-    border-radius: 50%;
-    filter: blur(100px);
-
-    opacity: 0.15;
-    pointer-events: none;
-
-    z-index: 0;
-}
-
-.cahaya-1 {
-    top: 15%;
-    left: -100px;
-
-    background: #a64dff;
-}
-
-.cahaya-2 {
-    right: -100px;
-    bottom: 15%;
-
-    background: #ff65bd;
+#galaxy {
+    z-index: 1;
 }
 
 /* =========================
@@ -100,513 +71,483 @@ button:focus-visible {
 ========================= */
 
 .header {
-    position: fixed;
+    position: relative;
+    z-index: 2;
 
-    top: 28px;
-    left: 0;
-
-    width: 100%;
-    padding: 0 18px;
-
+    padding: 25px 20px 0;
     text-align: center;
-    z-index: 3;
-
-    pointer-events: none;
-}
-
-.label {
-    margin-bottom: 10px;
-
-    color: var(--ungu-terang);
-
-    font-size: 10px;
-    letter-spacing: 4px;
 }
 
 .header h1 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(25px, 5vw, 42px);
+    letter-spacing: 1px;
 
-    font-size: clamp(30px, 5vw, 48px);
-    font-weight: normal;
-
-    text-shadow: 0 0 25px rgba(197, 137, 255, 0.5);
+    text-shadow: 0 0 22px rgba(255, 157, 206, 0.28);
 }
 
 .header h1 span {
     color: var(--pink);
 }
 
-.subtitle {
+.header p {
     margin-top: 10px;
 
-    color: var(--teks-redup);
-
-    font-size: 13px;
-    line-height: 1.6;
+    color: #d8c9e8;
+    font-size: clamp(12px, 2vw, 15px);
 }
 
 /* =========================
-   AREA GALAKSI
+   TAMPILAN UTAMA
 ========================= */
 
-.galaksi {
-    position: fixed;
-
-    top: 50%;
-    left: 50%;
-
-    width: min(78vw, 650px);
-    height: min(78vw, 650px);
-
-    transform: translate(-50%, -50%);
-    transform-style: preserve-3d;
-
-    touch-action: pan-y;
-
+main {
+    position: relative;
     z-index: 2;
 }
 
-/* Jalur orbit */
+.intro {
+    position: relative;
 
-.orbit {
-    position: absolute;
+    width: 100%;
+    margin-top: 45px;
 
-    top: 50%;
-    left: 50%;
+    padding: 15px 20px;
 
-    border: 1px solid rgba(207, 165, 255, 0.22);
-    border-radius: 50%;
-
-    transform: translate(-50%, -50%);
-
-    pointer-events: none;
+    text-align: center;
 }
 
-.orbit-1 {
-    width: 34%;
-    height: 34%;
+.subtitle {
+    margin-bottom: 20px;
+
+    color: #e7d7f5;
+    font-size: clamp(13px, 2.4vw, 17px);
 }
 
-.orbit-2 {
-    width: 61%;
-    height: 61%;
+.secret-button,
+.read-button,
+.hug-button {
+    padding: 13px 23px;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #a45bce,
+        #e66ba9
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 30px;
+
+    box-shadow: 0 0 25px rgba(203, 103, 218, 0.2);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-.orbit-3 {
-    width: 88%;
-    height: 88%;
+.secret-button:hover,
+.read-button:hover,
+.hug-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 0 30px rgba(255, 157, 206, 0.35);
 }
 
-/* Pusat galaksi */
+.hint {
+    margin-top: 15px;
 
-.pusat {
-    position: absolute;
+    color: #bdb0cb;
+    font-size: 12px;
+}
 
-    top: 50%;
-    left: 50%;
+/* =========================
+   PLANET
+========================= */
 
-    width: 23%;
-    aspect-ratio: 1;
+.planet {
+    position: relative;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    transform: translate(-50%, -50%);
+    width: 112px;
+    height: 112px;
 
-    border-radius: 50%;
+    margin: 45px auto 0;
 
     background:
         radial-gradient(
-            circle,
-            #ffffff 0%,
-            #ffd9fa 8%,
-            #dfa5ff 24%,
-            #8c48e9 47%,
-            transparent 73%
+            circle at 35% 30%,
+            #f9c7ff,
+            #c17ce7 35%,
+            #623d9e 72%,
+            #24113f
         );
 
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+
     box-shadow:
-        0 0 25px rgba(190, 117, 255, 0.75),
-        0 0 60px rgba(154, 78, 255, 0.35);
+        0 0 25px rgba(193, 124, 231, 0.5),
+        0 0 65px rgba(145, 75, 211, 0.24);
 
-    animation: cahayaPusat 4s ease-in-out infinite;
-
-    pointer-events: none;
+    animation: planetFloat 4s ease-in-out infinite;
 }
 
-.pusat span {
-    color: white;
+.planet-core {
+    position: relative;
+    z-index: 2;
 
-    font-size: clamp(20px, 4vw, 34px);
+    font-size: 37px;
 
-    text-shadow: 0 0 15px white;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
 
-@keyframes cahayaPusat {
-    0%, 100% {
-        filter: brightness(0.9);
+.planet-ring {
+    position: absolute;
+
+    width: 145px;
+    height: 38px;
+
+    border: 3px solid rgba(255, 196, 237, 0.85);
+    border-radius: 50%;
+
+    transform: rotate(-22deg);
+
+    box-shadow: 0 0 12px rgba(255, 157, 206, 0.35);
+}
+
+@keyframes planetFloat {
+    0%,
+    100% {
+        transform: translateY(0);
     }
 
     50% {
-        filter: brightness(1.25);
+        transform: translateY(-12px);
     }
 }
 
 /* =========================
-   FOTO GABY
+   FOOTER
 ========================= */
 
-.foto {
-    position: absolute;
+.footer {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 45px;
+    padding: 15px;
+
+    color: #c4b4d3;
+
+    font-size: 11px;
+    text-align: center;
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 5;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    opacity: 0;
+    visibility: hidden;
+
+    backdrop-filter: blur(5px);
+
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
+}
+
+.overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================
+   AMPLOP DAN SURAT
+========================= */
+
+.envelope-box,
+.letter-box {
+    position: fixed;
 
     top: 50%;
     left: 50%;
 
-    width: clamp(75px, 14vw, 125px);
-    aspect-ratio: 3 / 4;
+    z-index: 6;
 
-    padding: 4px;
+    width: min(90%, 460px);
+    max-height: 85vh;
+    max-height: 85dvh;
 
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 13px;
+    overflow-y: auto;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #c79aff,
-            var(--pink)
-        );
+    padding: 30px 25px;
 
-    box-shadow:
-        0 0 18px rgba(181, 112, 255, 0.35);
+    color: #4a304b;
 
-    overflow: hidden;
+    background: #fff5fb;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translate(-50%, -45%) scale(0.92);
 
     transition:
-        box-shadow 0.3s ease,
-        filter 0.3s ease;
+        opacity 0.4s ease,
+        transform 0.4s ease,
+        visibility 0.4s ease;
 
-    -webkit-user-select: none;
-    user-select: none;
+    overscroll-behavior: contain;
 }
 
-.foto img {
-    display: block;
+.envelope-box.show,
+.letter-box.show {
+    opacity: 1;
+    visibility: visible;
 
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    border-radius: 9px;
-
-    pointer-events: none;
+    transform: translate(-50%, -50%) scale(1);
 }
 
-.foto:hover {
-    box-shadow:
-        0 0 30px rgba(255, 159, 213, 0.8);
+.envelope-box {
+    text-align: center;
+}
 
-    filter: brightness(1.08);
+.envelope-icon {
+    margin-bottom: 15px;
+
+    font-size: 65px;
+
+    animation: envelopePulse 2s ease-in-out infinite;
+}
+
+@keyframes envelopePulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+.envelope-box h2 {
+    font-size: 23px;
+}
+
+.envelope-box > p {
+    margin: 14px 0 22px;
+
+    color: #7c607b;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.close-button {
+    position: absolute;
+
+    top: 10px;
+    right: 13px;
+
+    width: 34px;
+    height: 34px;
+
+    color: #7b5279;
+
+    background: transparent;
+    border: none;
+
+    font-size: 28px;
+    line-height: 1;
+}
+
+.read-button {
+    background: linear-gradient(
+        135deg,
+        #a34bc3,
+        #e16b9e
+    );
 }
 
 /* =========================
-   BAGIAN BAWAH
+   ISI SURAT
 ========================= */
 
-.footer {
-    position: fixed;
+.letter-box {
+    background:
+        linear-gradient(
+            145deg,
+            #fffafc,
+            #ffedf6
+        );
 
-    bottom: 22px;
-    left: 0;
-
-    width: 100%;
-    padding: 0 16px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    gap: 12px;
-
-    z-index: 4;
+    scrollbar-color: #dca3c8 transparent;
+    scrollbar-width: thin;
 }
 
-.kalimat {
-    max-width: 700px;
+.letter-decoration {
+    margin-bottom: 8px;
 
-    color: #f7d9f0;
+    color: #d46eaa;
+
+    font-family: Georgia, serif;
+    font-size: 32px;
+
+    text-align: center;
+}
+
+.letter-label {
+    margin-bottom: 12px;
+
+    color: #bd73a0;
+
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    text-align: center;
+}
+
+.letter-box h2 {
+    margin-bottom: 22px;
+
+    color: #794c78;
 
     font-family: Georgia, "Times New Roman", serif;
-    font-style: italic;
+    font-size: clamp(20px, 5vw, 27px);
+    line-height: 1.4;
 
-    font-size: clamp(14px, 2.3vw, 18px);
+    text-align: center;
+}
+
+.letter-content p {
+    margin-bottom: 17px;
+
+    color: #62465d;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.letter-signature {
+    margin: 24px 0;
+
+    text-align: right;
+}
+
+.letter-signature p {
+    color: #8a6983;
+
+    font-family: Georgia, serif;
+    font-size: 14px;
+}
+
+.letter-signature h3 {
+    margin-top: 5px;
+
+    color: #c14c91;
+
+    font-family: Georgia, serif;
+    font-size: 25px;
+}
+
+.hug-button {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #b95aa7,
+        #ed8caf
+    );
+}
+
+.hug-message {
+    display: none;
+
+    margin-top: 18px;
+    padding: 15px;
+
+    color: #a34481;
+
+    background: #ffe4f1;
+    border-radius: 12px;
+
+    font-size: 13px;
     line-height: 1.6;
 
     text-align: center;
 }
 
-.tombol {
-    display: flex;
-    flex-wrap: wrap;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 9px;
-}
-
-.tombol-utama,
-.tombol-biasa {
-    padding: 11px 16px;
-
-    color: white;
-    font-size: 12px;
-
-    border-radius: 30px;
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.tombol-utama {
-    border: 1px solid transparent;
-
-    background:
-        linear-gradient(110deg, #9253df, #e46eae);
-
-    box-shadow:
-        0 5px 20px rgba(183, 91, 228, 0.18);
-}
-
-.tombol-biasa {
-    border: 1px solid rgba(255, 255, 255, 0.22);
-
-    background: rgba(39, 25, 61, 0.9);
-}
-
-.tombol-utama:hover,
-.tombol-biasa:hover {
-    transform: translateY(-2px);
-}
-
-.tombol-utama:hover {
-    box-shadow:
-        0 7px 25px rgba(222, 111, 206, 0.3);
-}
-
-.tombol-biasa:hover {
-    background: #493263;
-}
-
-.petunjuk {
-    color: var(--teks-redup);
-
-    font-size: 10px;
-    line-height: 1.5;
-
-    text-align: center;
-}
-
-/* =========================
-   MODAL SURAT CINTA
-========================= */
-
-.modal {
-    position: fixed;
-    inset: 0;
-
-    z-index: 10;
-
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-
-    background: rgba(4, 3, 13, 0.85);
-
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    overflow-y: auto;
-    overscroll-behavior: contain;
-}
-
-.modal.aktif {
-    display: flex;
-    animation: muncul 0.3s ease;
-}
-
-.surat {
-    width: 100%;
-    max-width: 440px;
-
-    max-height: 90vh;
-    max-height: 90dvh;
-
-    padding: 25px 23px;
-
-    text-align: center;
-
-    overflow-y: auto;
-    overscroll-behavior: contain;
-
-    border: 1px solid rgba(255, 210, 243, 0.3);
-    border-radius: 24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #302047,
-            #130d25
-        );
-
-    box-shadow:
-        0 0 50px rgba(165, 91, 232, 0.22);
-}
-
-.ikon-surat {
-    margin-bottom: 10px;
-
-    font-size: 38px;
-}
-
-.label-surat {
-    color: var(--ungu-terang);
-
-    font-size: 9px;
-    letter-spacing: 3px;
-}
-
-.surat h2 {
-    margin: 13px 0 20px;
-
-    font-family: Georgia, "Times New Roman", serif;
-
-    font-size: 26px;
-    font-weight: normal;
-    line-height: 1.4;
-}
-
-.isi-surat {
-    color: #e8dff1;
-
-    font-size: 14px;
-    line-height: 1.85;
-
-    text-align: left;
-}
-
-.isi-surat p {
-    margin-bottom: 16px;
-}
-
-.penutup-surat {
-    color: var(--pink);
-
-    font-family: Georgia, "Times New Roman", serif;
-
-    font-weight: bold;
-    text-align: center;
-}
-
-.surat > button {
-    margin-top: 12px;
-}
-
-/* =========================
-   PESAN FOTO
-========================= */
-
-.pesan-foto {
-    position: fixed;
-
-    top: 50%;
-    left: 50%;
-
-    width: min(86%, 340px);
-    padding: 25px;
-
-    display: none;
-
-    text-align: center;
-
-    transform: translate(-50%, -50%);
-
-    border: 1px solid rgba(218, 182, 255, 0.6);
-    border-radius: 22px;
-
-    background: rgba(32, 20, 53, 0.97);
-
-    box-shadow:
-        0 0 40px rgba(180, 120, 255, 0.3);
-
-    z-index: 8;
-}
-
-.pesan-foto.aktif {
+.hug-message.show {
     display: block;
-    animation: muncul 0.3s ease;
+
+    animation: messageAppear 0.5s ease both;
 }
 
-.ikon-pesan {
-    margin-bottom: 10px;
-
-    color: var(--pink);
-    font-size: 32px;
-}
-
-.pesan-foto p {
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.pesan-foto button {
-    margin-top: 18px;
-}
-
-/* =========================
-   PARTIKEL BINTANG
-========================= */
-
-.partikel {
-    position: fixed;
-
-    z-index: 7;
-
-    color: #ffc6ef;
-
-    text-shadow:
-        0 0 12px #bc8aff;
-
-    pointer-events: none;
-
-    animation: terbang 1.8s ease-out forwards;
-}
-
-@keyframes terbang {
-    to {
-        transform:
-            translateY(-130px)
-            rotate(180deg)
-            scale(0.4);
-
-        opacity: 0;
-    }
-}
-
-@keyframes muncul {
+@keyframes messageAppear {
     from {
         opacity: 0;
+        transform: translateY(10px);
     }
 
     to {
         opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   ANIMASI HATI
+========================= */
+
+.floating-heart {
+    position: fixed;
+
+    z-index: 9;
+
+    bottom: -30px;
+
+    pointer-events: none;
+
+    animation: heartRise 3.5s ease-out forwards;
+}
+
+@keyframes heartRise {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.7);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(30deg) scale(1.3);
     }
 }
 
@@ -616,135 +557,80 @@ button:focus-visible {
 
 @media (max-width: 600px) {
     .header {
-        top: 22px;
+        padding-top: 22px;
     }
 
-    .label {
-        font-size: 9px;
-        letter-spacing: 3px;
+    .intro {
+        margin-top: 35px;
     }
 
-    .header h1 {
-        font-size: clamp(29px, 8vw, 38px);
+    .planet {
+        width: 95px;
+        height: 95px;
+
+        margin-top: 35px;
     }
 
-    .subtitle {
-        max-width: 300px;
-        margin: 9px auto 0;
-
-        font-size: 11px;
-    }
-
-    .galaksi {
-        top: 47%;
-
-        width: min(94vw, 48vh);
-        height: min(94vw, 48vh);
-    }
-
-    .foto {
-        width: clamp(65px, 18vw, 100px);
-        padding: 3px;
-
-        border-radius: 10px;
-    }
-
-    .foto img {
-        border-radius: 7px;
+    .planet-ring {
+        width: 125px;
+        height: 32px;
     }
 
     .footer {
-        bottom: 14px;
-        gap: 9px;
+        margin-top: 35px;
     }
 
-    .kalimat {
-        max-width: 340px;
+    .envelope-box,
+    .letter-box {
+        width: calc(100% - 26px);
 
-        font-size: 13px;
+        max-height: 82vh;
+        max-height: 82dvh;
+
+        padding: 27px 20px;
     }
 
-    .tombol {
-        gap: 6px;
-    }
-
-    .tombol-utama,
-    .tombol-biasa {
-        padding: 10px 11px;
-
-        font-size: 10px;
-    }
-
-    .petunjuk {
-        max-width: 300px;
-        font-size: 10px;
-    }
-
-    .surat {
-        padding: 23px 18px;
-    }
-
-    .surat h2 {
-        font-size: 23px;
-    }
-
-    .isi-surat {
-        font-size: 13px;
+    .letter-content p {
+        font-size: 14px;
+        line-height: 1.8;
     }
 }
 
 /* =========================
-   LAYAR PENDEK
+   HP DENGAN LAYAR PENDEK
 ========================= */
 
 @media (max-height: 650px) {
     .header {
-        top: 12px;
+        padding-top: 12px;
     }
 
-    .label {
-        margin-bottom: 5px;
+    .intro {
+        margin-top: 20px;
     }
 
-    .header h1 {
-        font-size: clamp(24px, 4vw, 34px);
-    }
-
-    .subtitle {
-        margin-top: 5px;
-    }
-
-    .galaksi {
-        top: 48%;
-
-        width: min(65vh, 65vw);
-        height: min(65vh, 65vw);
+    .planet {
+        margin-top: 20px;
     }
 
     .footer {
-        bottom: 8px;
-        gap: 6px;
-    }
-
-    .kalimat {
-        font-size: 12px;
-    }
-
-    .petunjuk {
-        font-size: 9px;
+        margin-top: 20px;
     }
 }
 
 /* =========================
-   PENGATURAN AKSESIBILITAS
+   PENGATURAN ANIMASI
 ========================= */
 
 @media (prefers-reduced-motion: reduce) {
+    .planet,
+    .envelope-icon {
+        animation: none;
+    }
+
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
