@@ -1,116 +1,110 @@
-// EMPAT SURAT UNTUK GABY
+// EMPAT SURAT FOTO GABY
 
 const letters = [
-
     {
-        title: 'Untuk senyummu 🌷',
-        eyebrow: 'A LITTLE NOTE FOR YOU',
-
+        title: "Untuk senyummu 🌷",
+        eyebrow: "A LITTLE NOTE FOR YOU",
         paragraphs: [
-            'Hai Gaby, ada hal sederhana yang pengin aku bilang. Senyummu itu punya cara sendiri untuk bikin suasana terasa lebih hangat.',
-
-            'Semoga hari-harimu dipenuhi hal baik, orang-orang yang tulus, dan alasan kecil untuk tersenyum. Jangan lupa istirahat dan jaga diri, ya.',
-
-            'Kalau hari ini terasa berat, semoga kamu ingat kalau kamu tetap berharga, bahkan saat kamu sedang tidak merasa baik-baik saja.'
+            "Hai Gaby, ada hal sederhana yang pengin aku bilang. Senyummu itu punya cara sendiri untuk bikin suasana terasa lebih hangat.",
+            "Semoga hari-harimu dipenuhi hal baik, orang-orang yang tulus, dan alasan kecil untuk tersenyum. Jangan lupa istirahat dan jaga diri, ya.",
+            "Kalau hari ini terasa berat, semoga kamu ingat kalau kamu tetap berharga, bahkan saat kamu sedang tidak merasa baik-baik saja."
         ],
-
-        signoff: 'Semoga senyummu selalu punya alasan ♡',
-        photo: 'gaby1.jpeg'
+        signoff: "Semoga senyummu selalu punya alasan ♡",
+        photo: "gaby1.jpeg"
     },
 
     {
-        title: 'Hal kecil tentangmu ✨',
-        eyebrow: 'THINGS I APPRECIATE',
-
+        title: "Hal kecil tentangmu ✨",
+        eyebrow: "THINGS I APPRECIATE",
         paragraphs: [
-            'Kadang yang bikin seseorang spesial bukan hal besar, tapi hal-hal kecil yang mungkin dia sendiri tidak sadar.',
-
-            'Cara kamu bercerita, caramu tertawa, dan hal sederhana tentang dirimu bisa membuat hari biasa terasa sedikit lebih menyenangkan.',
-
-            'Aku harap kamu tidak lupa menghargai dirimu sendiri. Kamu tidak harus selalu sempurna untuk pantas disayangi.'
+            "Kadang yang bikin seseorang spesial bukan hal besar, tapi hal-hal kecil yang mungkin dia sendiri tidak sadar.",
+            "Cara kamu bercerita, caramu tertawa, dan hal sederhana tentang dirimu bisa membuat hari biasa terasa sedikit lebih menyenangkan.",
+            "Aku harap kamu tidak lupa menghargai dirimu sendiri. Kamu tidak harus selalu sempurna untuk pantas disayangi."
         ],
-
-        signoff: 'Hal kecil tentangmu tetap berarti 💗',
-        photo: 'gaby2.jpeg'
+        signoff: "Hal kecil tentangmu tetap berarti 💗",
+        photo: "gaby2.jpeg"
     },
 
     {
-        title: 'Kamu yang spesial 💗',
-        eyebrow: 'A GENTLE REMINDER',
-
+        title: "Kamu yang spesial 💗",
+        eyebrow: "A GENTLE REMINDER",
         paragraphs: [
-            'Gaby, kalau suatu saat kamu merasa kurang percaya diri, coba lihat dirimu dengan lebih lembut. Kamu punya banyak hal baik yang mungkin belum kamu sadari.',
-
-            'Kamu boleh capek, boleh sedih, dan boleh mengambil waktu untuk diri sendiri. Tidak apa-apa kalau semuanya tidak selalu berjalan sesuai rencana.',
-
-            'Aku cuma berharap kamu selalu bertemu alasan untuk bahagia dan orang-orang yang memperlakukanmu dengan baik.'
+            "Gaby, kalau suatu saat kamu merasa kurang percaya diri, coba lihat dirimu dengan lebih lembut. Kamu punya banyak hal baik yang mungkin belum kamu sadari.",
+            "Kamu boleh capek, boleh sedih, dan boleh mengambil waktu untuk diri sendiri. Tidak apa-apa kalau semuanya tidak selalu berjalan sesuai rencana.",
+            "Aku cuma berharap kamu selalu bertemu alasan untuk bahagia dan orang-orang yang memperlakukanmu dengan baik."
         ],
-
-        signoff: 'Kamu spesial dengan caramu sendiri ♡',
-        photo: 'gaby3.jpeg'
+        signoff: "Kamu spesial dengan caramu sendiri ♡",
+        photo: "gaby3.jpeg"
     },
 
     {
-        title: 'Satu pesan lagi 🌙',
-        eyebrow: 'BEFORE YOU GO',
-
+        title: "Satu pesan lagi 🌙",
+        eyebrow: "BEFORE YOU GO",
         paragraphs: [
-            'Terima kasih sudah menjadi dirimu sendiri, Gaby. Semoga kamu selalu punya keberanian untuk mengejar hal yang kamu inginkan.',
-
-            'Jangan terlalu keras pada diri sendiri, ya. Kamu juga pantas mendapatkan perhatian, ketenangan, dan waktu untuk beristirahat.',
-
-            'Kalau suatu hari kamu membaca surat ini lagi, semoga kamu tersenyum kecil dan ingat bahwa ada pesan baik yang dibuat khusus untukmu.'
+            "Terima kasih sudah menjadi dirimu sendiri, Gaby. Semoga kamu selalu punya keberanian untuk mengejar hal yang kamu inginkan.",
+            "Jangan terlalu keras pada diri sendiri, ya. Kamu juga pantas mendapatkan perhatian, ketenangan, dan waktu untuk beristirahat.",
+            "Kalau suatu hari kamu membaca surat ini lagi, semoga kamu tersenyum kecil dan ingat bahwa ada pesan baik yang dibuat khusus untukmu."
         ],
-
-        signoff: 'Jaga diri baik-baik, Gaby 🌙',
-        photo: 'gaby4.jpeg'
+        signoff: "Jaga diri baik-baik, Gaby 🌙",
+        photo: "gaby4.jpeg"
     }
-
 ];
 
 
-// SURAT KHUSUS KELINCI
+// SURAT KELINCI
 
 const bunnyLetter = {
-
-    title: 'Surat rahasia dari kelinci 🐰',
-    eyebrow: 'A TINY SECRET FOR GABY',
+    title: "Surat rahasia dari kelinci 🐰",
+    eyebrow: "A TINY SECRET FOR GABY",
     bunny: true,
 
     paragraphs: [
-
-        'Hop hop, Gaby! 🐰 Aku kelinci kecil yang datang membawa pesan rahasia untukmu.',
-
-        'Aku punya satu tugas penting: mengingatkan kamu supaya jangan lupa tersenyum, makan dengan baik, istirahat kalau lelah, dan menyayangi diri sendiri.',
-
-        'Kalau hari ini kamu sedih, anggap saja aku sedang mengirim pelukan kelinci paling empuk untukmu. Kalau kamu bahagia, aku ikut melompat-lompat senang! 💗',
-
-        'Terakhir, ada satu rahasia kecil... kamu itu spesial. Jadi jangan terlalu keras kepada dirimu sendiri, ya?',
-
-        'Nah, tugasku selesai! Sekarang aku mau makan wortel sambil menjaga surat ini. Sampai jumpa, Gaby! 🥕💙'
-
+        "Hop hop, Gaby! 🐰 Aku kelinci kecil yang datang membawa pesan rahasia untukmu.",
+        "Aku punya satu tugas penting: mengingatkan kamu supaya jangan lupa tersenyum, makan dengan baik, istirahat kalau lelah, dan menyayangi diri sendiri.",
+        "Kalau hari ini kamu sedih, anggap saja aku sedang mengirim pelukan kelinci paling empuk untukmu. Kalau kamu bahagia, aku ikut melompat-lompat senang! 💗",
+        "Terakhir, ada satu rahasia kecil... kamu itu spesial. Jadi jangan terlalu keras kepada dirimu sendiri, ya?",
+        "Nah, tugasku selesai! Sekarang aku mau makan wortel sambil menjaga surat ini. Sampai jumpa, Gaby! 🥕💙"
     ],
 
-    signoff: 'Hop hop, penuh sayang! 🐰♡'
-
+    signoff: "Hop hop, penuh sayang! 🐰♡"
 };
 
 
-// MENGAMBIL ELEMEN HTML
+// HALAMAN PEMBUKA
 
-const modal = document.getElementById('letterModal');
-const titleEl = document.getElementById('letterTitle');
-const eyebrowEl = document.getElementById('letterEyebrow');
-const contentEl = document.getElementById('letterContent');
-const decorationEl = document.getElementById('letterDecoration');
+const openingPage = document.getElementById("openingPage");
+const mainContent = document.getElementById("mainContent");
 
-const surpriseArea = document.getElementById('surpriseArea');
-const revealPhoto = document.getElementById('revealPhoto');
-const imageWrap = document.getElementById('surpriseImageWrap');
-const surpriseImage = document.getElementById('surpriseImage');
+document.getElementById("enterButton").addEventListener("click", () => {
 
-const startHug = document.getElementById('startHug');
-const hugScene = document.getElementById('hugScene');
+    openingPage.classList.add("leaving");
+
+    setTimeout(() => {
+
+        openingPage.hidden = true;
+        mainContent.hidden = false;
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 650);
+
+});
+
+
+// ELEMEN SURAT
+
+const modal = document.getElementById("letterModal");
+const titleEl = document.getElementById("letterTitle");
+const eyebrowEl = document.getElementById("letterEyebrow");
+const contentEl = document.getElementById("letterContent");
+const symbolEl = document.getElementById("letterSymbol");
+
+const showPhoto = document.getElementById("showPhoto");
+const letterPhoto = document.getElementById("letterPhoto");
+const hugButton = document.getElementById("hugButton");
 
 
 // MEMBUKA SURAT
@@ -119,76 +113,52 @@ function openLetter(letter) {
 
     titleEl.textContent = letter.title;
     eyebrowEl.textContent = letter.eyebrow;
-
-    decorationEl.textContent = letter.bunny ? '🐰' : '♡';
+    symbolEl.textContent = letter.bunny ? "🐰" : "♡";
 
     contentEl.replaceChildren();
 
     letter.paragraphs.forEach((text, index) => {
 
-        const p = document.createElement('p');
+        const p = document.createElement("p");
 
         p.textContent = text;
-
-        p.style.animationDelay =
-            `${Math.min(index * 0.12, 0.48)}s`;
+        p.style.animationDelay = `${index * 0.12}s`;
 
         contentEl.appendChild(p);
 
     });
 
-    const signoff = document.createElement('p');
+    const signoff = document.createElement("p");
 
-    signoff.className = 'letter-signoff';
+    signoff.className = "letter-signoff";
     signoff.textContent = letter.signoff;
 
     contentEl.appendChild(signoff);
 
-    surpriseArea.hidden = false;
+    showPhoto.hidden = !letter.photo;
+    letterPhoto.hidden = true;
+    showPhoto.disabled = false;
+    showPhoto.textContent = "Lihat foto kecil 💗";
 
-    // Foto hanya muncul di surat foto.
-
-    revealPhoto.hidden = !!letter.bunny;
-    revealPhoto.disabled = false;
-    revealPhoto.textContent = 'Lihat foto kecil 💗';
-
-    imageWrap.hidden = true;
-
-    // Tombol pelukan hanya muncul di surat kelinci.
-
-    startHug.hidden = !letter.bunny;
+    hugButton.hidden = !letter.bunny;
 
     if (letter.photo) {
-        surpriseImage.src = letter.photo;
+        letterPhoto.src = letter.photo;
     }
 
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
 
-    document.body.style.overflow = 'hidden';
-
-    document.getElementById('closeModal').focus();
+    document.body.style.overflow = "hidden";
 
 }
 
 
-// MENUTUP SURAT
+// KLIK EMPAT KARTU FOTO
 
-function closeLetter() {
+document.querySelectorAll("[data-letter]").forEach(card => {
 
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-
-    document.body.style.overflow = '';
-
-}
-
-
-// KLIK EMPAT FOTO
-
-document.querySelectorAll('[data-letter]').forEach(card => {
-
-    card.addEventListener('click', () => {
+    card.addEventListener("click", () => {
 
         const index = Number(card.dataset.letter);
 
@@ -201,109 +171,119 @@ document.querySelectorAll('[data-letter]').forEach(card => {
 
 // KLIK SURAT KELINCI
 
-document.getElementById('bunnyLetterButton')
-    .addEventListener('click', () => {
+document.getElementById("bunnyButton").addEventListener("click", () => {
 
-        openLetter(bunnyLetter);
-
-    });
-
-
-// TOMBOL TUTUP SURAT
-
-document.getElementById('closeModal')
-    .addEventListener('click', closeLetter);
-
-modal.querySelector('.modal-backdrop')
-    .addEventListener('click', closeLetter);
-
-
-// MEMUNCULKAN FOTO KEJUTAN
-
-revealPhoto.addEventListener('click', () => {
-
-    imageWrap.hidden = false;
-
-    revealPhoto.textContent = 'Foto kecil untukmu 💗';
-
-    revealPhoto.disabled = true;
+    openLetter(bunnyLetter);
 
 });
 
 
-// MEMULAI ANIMASI PELUKAN
+// TAMPILKAN FOTO
 
-startHug.addEventListener('click', () => {
+showPhoto.addEventListener("click", () => {
+
+    letterPhoto.hidden = false;
+    showPhoto.disabled = true;
+    showPhoto.textContent = "Foto kecil untukmu 💗";
+
+});
+
+
+// TUTUP SURAT
+
+function closeLetter() {
+
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+
+    document.body.style.overflow = "";
+
+}
+
+document.getElementById("closeLetter").addEventListener("click", closeLetter);
+
+document.getElementById("modalBackground").addEventListener("click", closeLetter);
+
+
+// MEMULAI ADEGAN PELUKAN
+
+const hugScene = document.getElementById("hugScene");
+
+hugButton.addEventListener("click", () => {
 
     closeLetter();
 
-    hugScene.classList.add('show');
+    hugScene.classList.add("show");
+    hugScene.setAttribute("aria-hidden", "false");
 
-    hugScene.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = "hidden";
 
-    document.body.style.overflow = 'hidden';
+    // Mulai gerakan karakter setelah adegan terbuka.
 
-    createHugHearts();
+    setTimeout(() => {
+
+        hugScene.classList.add("hugging");
+
+        createHugHearts();
+
+    }, 350);
 
 });
 
 
-// MENUTUP ANIMASI PELUKAN
+// MENUTUP ADEGAN PELUKAN
 
-document.getElementById('closeHug')
-    .addEventListener('click', () => {
+document.getElementById("closeHug").addEventListener("click", () => {
 
-        hugScene.classList.remove('show');
+    hugScene.classList.remove("show", "hugging");
 
-        hugScene.setAttribute('aria-hidden', 'true');
+    hugScene.setAttribute("aria-hidden", "true");
 
-        document.body.style.overflow = '';
+    document.body.style.overflow = "";
 
-    });
+});
 
 
-// TOMBOL ESC UNTUK MENUTUP
+// TOMBOL ESC
 
-document.addEventListener('keydown', event => {
+document.addEventListener("keydown", event => {
 
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
 
         closeLetter();
 
-        hugScene.classList.remove('show');
+        hugScene.classList.remove("show", "hugging");
 
-        hugScene.setAttribute('aria-hidden', 'true');
+        hugScene.setAttribute("aria-hidden", "true");
 
-        document.body.style.overflow = '';
+        document.body.style.overflow = "";
 
     }
 
 });
 
 
-// HATI YANG BERTERBANGAN
+// HATI BERTERBANGAN
 
 function createHugHearts() {
 
-    const holder = document.getElementById('hugHearts');
+    const holder = document.getElementById("hugHearts");
 
     holder.replaceChildren();
 
-    for (let i = 0; i < 19; i++) {
+    for (let i = 0; i < 24; i++) {
 
-        const heart = document.createElement('span');
+        const heart = document.createElement("span");
 
-        heart.className = 'floating-heart';
+        heart.className = "floating-heart";
 
-        heart.textContent = ['♡', '♥', '✦', '💕'][i % 4];
+        heart.textContent = ["♡", "♥", "✦", "💕"][i % 4];
 
-        heart.style.left = `${8 + Math.random() * 84}%`;
+        heart.style.left = `${Math.random() * 100}%`;
 
-        heart.style.animationDelay =
-            `${2.2 + Math.random() * 3.4}s`;
+        heart.style.animationDelay = `${Math.random() * 3}s`;
 
-        heart.style.fontSize =
-            `${14 + Math.random() * 18}px`;
+        heart.style.fontSize = `${14 + Math.random() * 20}px`;
 
         holder.appendChild(heart);
 
@@ -312,13 +292,13 @@ function createHugHearts() {
 }
 
 
-// ANIMASI BINTANG DAN METEOR
+// BINTANG DAN METEOR GALAKSI UTAMA
 
-const starCanvas = document.getElementById('stars');
-const starCtx = starCanvas.getContext('2d');
+const starCanvas = document.getElementById("stars");
+const starCtx = starCanvas.getContext("2d");
 
-const meteorCanvas = document.getElementById('meteors');
-const meteorCtx = meteorCanvas.getContext('2d');
+const meteorCanvas = document.getElementById("meteors");
+const meteorCtx = meteorCanvas.getContext("2d");
 
 let stars = [];
 let meteors = [];
@@ -328,132 +308,95 @@ let height = 0;
 let lastMeteor = 0;
 
 
-// MENYESUAIKAN UKURAN LAYAR
-
-function resizeSpace() {
+function resizeCanvas(canvas, ctx) {
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+
+    canvas.style.width = `${window.innerWidth}px`;
+    canvas.style.height = `${window.innerHeight}px`;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+}
+
+
+function resizeSpace() {
 
     width = window.innerWidth;
     height = window.innerHeight;
 
-    [starCanvas, meteorCanvas].forEach(canvas => {
+    resizeCanvas(starCanvas, starCtx);
+    resizeCanvas(meteorCanvas, meteorCtx);
 
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-
-        canvas.getContext('2d')
-            .setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    });
-
-    const jumlahBintang = Math.min(
-        180,
-        Math.floor(width * height / 6500)
-    );
-
-    stars = Array.from({ length: jumlahBintang }, () => ({
+    stars = Array.from({
+        length: Math.min(180, Math.floor(width * height / 6500))
+    }, () => ({
 
         x: Math.random() * width,
         y: Math.random() * height,
 
-        r: Math.random() * 1.5 + 0.25,
-        a: Math.random() * 0.7 + 0.15,
-
-        speed: Math.random() * 0.018 + 0.004,
-        phase: Math.random() * Math.PI * 2
+        radius: Math.random() * 1.5 + 0.3,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.002 + 0.0005
 
     }));
 
 }
 
 
-// MEMBUAT METEOR
-
 function addMeteor() {
-
-    const fromLeft = Math.random() > 0.5;
 
     meteors.push({
 
-        x: fromLeft ? Math.random() * width * 0.8 : width + 30,
+        x: Math.random() * width,
+        y: -20,
 
-        y: Math.random() * height * 0.42 - 20,
-
-        vx: fromLeft
-            ? -(4 + Math.random() * 3)
-            : -(5 + Math.random() * 4),
-
-        vy: 2 + Math.random() * 2.5,
+        vx: -(3 + Math.random() * 4),
+        vy: 3 + Math.random() * 2,
 
         life: 0,
-        max: 45 + Math.random() * 35,
+        maxLife: 65,
 
-        length: 70 + Math.random() * 90
+        length: 90 + Math.random() * 80
 
     });
 
 }
 
 
-// MENJALANKAN ANIMASI LATAR
-
 function animateSpace(time) {
 
     starCtx.clearRect(0, 0, width, height);
 
-    // BINTANG BERKEDIP
-
     stars.forEach(star => {
 
-        const glow =
-            0.45 + Math.sin(time * star.speed + star.phase) * 0.4;
+        const glow = 0.35 + Math.sin(
+            time * star.speed + star.phase
+        ) * 0.35;
 
         starCtx.beginPath();
 
         starCtx.arc(
             star.x,
             star.y,
-            star.r,
+            star.radius,
             0,
             Math.PI * 2
         );
 
-        starCtx.fillStyle =
-            `rgba(210,220,255,${Math.max(0.08, glow * star.a)})`;
+        starCtx.fillStyle = `rgba(225,230,255,${glow + 0.25})`;
 
         starCtx.fill();
-
-        if (star.r > 1.1) {
-
-            starCtx.beginPath();
-
-            starCtx.arc(
-                star.x,
-                star.y,
-                star.r * 2.8,
-                0,
-                Math.PI * 2
-            );
-
-            starCtx.fillStyle =
-                `rgba(140,160,255,${glow * 0.08})`;
-
-            starCtx.fill();
-
-        }
 
     });
 
 
-    // METEOR
-
     meteorCtx.clearRect(0, 0, width, height);
 
-    if (time - lastMeteor > 2400 + Math.random() * 2300) {
+    if (time - lastMeteor > 2200 + Math.random() * 2400) {
 
         addMeteor();
 
@@ -461,68 +404,33 @@ function animateSpace(time) {
 
     }
 
-    meteors = meteors.filter(meteor =>
-        meteor.life < meteor.max &&
-        meteor.x > -meteor.length &&
-        meteor.y < height + meteor.length
-    );
+    meteors = meteors.filter(m => m.life < m.maxLife);
 
+    meteors.forEach(m => {
 
-    meteors.forEach(meteor => {
+        m.x += m.vx;
+        m.y += m.vy;
+        m.life++;
 
-        meteor.x += meteor.vx;
-        meteor.y += meteor.vy;
-
-        meteor.life++;
-
-        const alpha =
-            Math.sin(Math.PI * meteor.life / meteor.max) * 0.8;
+        const alpha = Math.sin(Math.PI * m.life / m.maxLife);
 
         const gradient = meteorCtx.createLinearGradient(
-            meteor.x,
-            meteor.y,
-            meteor.x - meteor.vx * meteor.length / 6,
-            meteor.y - meteor.vy * meteor.length / 6
+            m.x,
+            m.y,
+            m.x + m.length,
+            m.y - m.length
         );
 
-        gradient.addColorStop(
-            0,
-            `rgba(255,245,255,${alpha})`
-        );
-
-        gradient.addColorStop(
-            1,
-            'rgba(160,140,255,0)'
-        );
+        gradient.addColorStop(0, `rgba(255,255,255,${alpha})`);
+        gradient.addColorStop(1, "rgba(170,140,255,0)");
 
         meteorCtx.strokeStyle = gradient;
-        meteorCtx.lineWidth = 1.7;
+        meteorCtx.lineWidth = 2;
 
         meteorCtx.beginPath();
-
-        meteorCtx.moveTo(meteor.x, meteor.y);
-
-        meteorCtx.lineTo(
-            meteor.x - meteor.vx * meteor.length / 6,
-            meteor.y - meteor.vy * meteor.length / 6
-        );
-
+        meteorCtx.moveTo(m.x, m.y);
+        meteorCtx.lineTo(m.x + m.length, m.y - m.length);
         meteorCtx.stroke();
-
-        meteorCtx.beginPath();
-
-        meteorCtx.arc(
-            meteor.x,
-            meteor.y,
-            1.7,
-            0,
-            Math.PI * 2
-        );
-
-        meteorCtx.fillStyle =
-            `rgba(255,255,255,${alpha})`;
-
-        meteorCtx.fill();
 
     });
 
@@ -531,10 +439,86 @@ function animateSpace(time) {
 }
 
 
-// MULAI ANIMASI
+// BINTANG KHUSUS ADEGAN PELUKAN
 
-window.addEventListener('resize', resizeSpace);
+const hugCanvas = document.getElementById("hugStars");
+const hugCtx = hugCanvas.getContext("2d");
+
+let hugStars = [];
+
+function resizeHugStars() {
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    hugCanvas.width = window.innerWidth * dpr;
+    hugCanvas.height = window.innerHeight * dpr;
+
+    hugCanvas.style.width = `${window.innerWidth}px`;
+    hugCanvas.style.height = `${window.innerHeight}px`;
+
+    hugCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    hugStars = Array.from({ length: 130 }, () => ({
+
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+
+        radius: Math.random() * 1.8 + 0.3,
+        phase: Math.random() * Math.PI * 2
+
+    }));
+
+}
+
+
+function animateHugStars(time) {
+
+    hugCtx.clearRect(
+        0,
+        0,
+        window.innerWidth,
+        window.innerHeight
+    );
+
+    hugStars.forEach(star => {
+
+        const glow = .35 + Math.sin(
+            time * .0015 + star.phase
+        ) * .4;
+
+        hugCtx.beginPath();
+
+        hugCtx.arc(
+            star.x,
+            star.y,
+            star.radius,
+            0,
+            Math.PI * 2
+        );
+
+        hugCtx.fillStyle =
+            `rgba(255,220,255,${Math.max(.1, glow)})`;
+
+        hugCtx.fill();
+
+    });
+
+    requestAnimationFrame(animateHugStars);
+
+}
+
+
+// JALANKAN SEMUA ANIMASI
+
+window.addEventListener("resize", () => {
+
+    resizeSpace();
+    resizeHugStars();
+
+});
 
 resizeSpace();
+resizeHugStars();
 
 requestAnimationFrame(animateSpace);
+requestAnimationFrame(animateHugStars);
