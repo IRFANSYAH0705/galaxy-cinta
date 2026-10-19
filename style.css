@@ -1,13 +1,14 @@
-/* =========================
+/* ==============================
    PENGATURAN DASAR
-========================= */
+============================== */
 
 :root {
     --background: #080510;
-    --pink: #ff70c8;
-    --purple: #b56bff;
-    --white: #fff8ff;
-    --muted: #c8bbd8;
+    --purple: #a96aff;
+    --pink: #f078d2;
+    --light-pink: #ffc2f0;
+    --white: #fffaff;
+    --muted: #c5b8d3;
 }
 
 * {
@@ -25,92 +26,155 @@ body {
     overflow-x: hidden;
     background: var(--background);
     color: var(--white);
-    font-family: "Segoe UI", Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 button {
     font: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible {
-    outline: 2px solid white;
+    outline: 2px solid var(--light-pink);
     outline-offset: 5px;
 }
 
-#galaxy {
+::selection {
+    background: #bd75ff;
+    color: white;
+}
+
+
+/* ==============================
+   LANGIT GALAKSI
+============================== */
+
+#starCanvas {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
     z-index: 0;
+    pointer-events: none;
 }
-
-
-/* =========================
-   CAHAYA GALAKSI
-========================= */
 
 .nebula {
     position: fixed;
     width: 450px;
     height: 450px;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.14;
+    filter: blur(110px);
+    opacity: 0.13;
     pointer-events: none;
     z-index: 0;
-    animation: nebulaFloat 12s ease-in-out infinite alternate;
 }
 
 .nebula-one {
-    top: 10%;
+    top: 5%;
     left: -180px;
-    background: #923bff;
+    background: #8237ff;
+    animation: nebulaFloat 14s ease-in-out infinite alternate;
 }
 
 .nebula-two {
     right: -200px;
-    bottom: 0;
-    background: #ed3cae;
-    animation-delay: -6s;
+    bottom: 5%;
+    background: #d52f9d;
+    animation: nebulaFloat 17s ease-in-out infinite alternate-reverse;
 }
 
 @keyframes nebulaFloat {
     from {
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0) scale(1);
     }
 
     to {
-        transform: translate3d(50px, -35px, 0);
+        transform: translate3d(40px, -30px, 0) scale(1.15);
     }
 }
 
 
-/* =========================
-   INTRO PEMBUKA
-========================= */
+/* ==============================
+   BINTANG JATUH
+============================== */
 
-.intro {
+#shootingStars {
     position: fixed;
     inset: 0;
-    z-index: 100;
-    display: grid;
-    place-items: center;
-    padding: 24px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    border-radius: 50%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #ffffff,
+        #e9b8ff,
+        transparent
+    );
+    box-shadow: 0 0 12px #e3b1ff;
+    opacity: 0;
+    transform: rotate(-35deg);
+    animation: shooting 1.5s linear forwards;
+}
+
+@keyframes shooting {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) rotate(-35deg);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(-280px, 200px, 0) rotate(-35deg);
+    }
+}
+
+
+/* ==============================
+   INTRO
+============================== */
+
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 22px;
+    overflow-y: auto;
+
     background:
         radial-gradient(
-            circle at 50% 45%,
-            rgba(104, 43, 143, 0.25),
-            transparent 40%
+            ellipse at 50% 40%,
+            rgba(108, 52, 160, 0.12),
+            transparent 55%
         ),
-        #080510;
+        var(--background);
+
+    opacity: 1;
+    visibility: visible;
+
     transition:
         opacity 0.9s ease,
         visibility 0.9s ease;
 }
 
-.intro.hide {
+.intro-screen.hide {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -118,80 +182,16 @@ button:focus-visible {
 
 .intro-content {
     width: 100%;
-    max-width: 650px;
+    max-width: 540px;
     text-align: center;
+
     animation: introAppear 1.2s ease both;
-}
-
-.intro-star {
-    margin-bottom: 24px;
-    color: var(--pink);
-    font-size: 42px;
-    text-shadow: 0 0 30px var(--pink);
-    animation: starPulse 2s ease-in-out infinite;
-}
-
-.intro-label {
-    margin-bottom: 20px;
-    color: #e5b4ff;
-    font-size: 11px;
-    letter-spacing: 4px;
-}
-
-.intro h1 {
-    margin-bottom: 24px;
-    font-family: Georgia, serif;
-    font-size: clamp(34px, 6vw, 62px);
-    line-height: 1.15;
-    font-weight: 500;
-    text-shadow: 0 0 35px rgba(255, 112, 200, 0.22);
-}
-
-.intro h1 span {
-    color: var(--pink);
-}
-
-.intro-text {
-    max-width: 470px;
-    margin: 0 auto 35px;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.9;
-}
-
-.enter-button {
-    padding: 16px 30px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 50px;
-    color: white;
-    background: linear-gradient(120deg, #a34be9, #f05bb8);
-    box-shadow: 0 0 35px rgba(216, 80, 225, 0.25);
-    cursor: pointer;
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.enter-button:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 0 45px rgba(216, 80, 225, 0.5);
-}
-
-.enter-button span {
-    margin: 0 5px;
-}
-
-.intro-footer {
-    margin-top: 28px;
-    color: #8f7d9f;
-    font-size: 11px;
-    letter-spacing: 1px;
 }
 
 @keyframes introAppear {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(22px);
     }
 
     to {
@@ -200,898 +200,1107 @@ button:focus-visible {
     }
 }
 
-@keyframes starPulse {
+.intro-symbol {
+    margin-bottom: 26px;
+    color: var(--pink);
+    font-size: 55px;
+    text-shadow: 0 0 35px rgba(240, 120, 210, 0.9);
+
+    animation: symbolFloat 3s ease-in-out infinite;
+}
+
+@keyframes symbolFloat {
     0%, 100% {
-        opacity: 0.7;
-        transform: scale(0.95);
+        transform: translateY(0) rotate(0);
     }
 
     50% {
-        opacity: 1;
-        transform: scale(1.1);
+        transform: translateY(-9px) rotate(8deg);
     }
 }
 
+.eyebrow {
+    color: #d9b4fa;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    line-height: 1.9;
+}
 
-/* =========================
-   KONTEN UTAMA
-========================= */
+.intro-content h1 {
+    margin-top: 22px;
+    font-size: clamp(30px, 6vw, 46px);
+    line-height: 1.25;
+    letter-spacing: -1.4px;
+}
 
-.main-content {
+.pink-heart {
+    color: #f477c8;
+    display: inline-block;
+    animation: heartBeat 2s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    8% {
+        transform: scale(1.14);
+    }
+
+    16% {
+        transform: scale(1);
+    }
+
+    24% {
+        transform: scale(1.09);
+    }
+
+    32% {
+        transform: scale(1);
+    }
+}
+
+.intro-description {
+    max-width: 410px;
+    margin: 25px auto 28px;
+
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.enter-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    min-height: 53px;
+    padding: 15px 30px;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 50px;
+
+    color: white;
+    background: linear-gradient(110deg, #a34de5, #ec63b6);
+
+    font-size: 15px;
+    font-weight: 600;
+
+    box-shadow:
+        0 0 25px rgba(190, 83, 232, 0.22),
+        inset 0 1px rgba(255, 255, 255, 0.25);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.enter-button:hover {
+    transform: translateY(-3px) scale(1.03);
+
+    box-shadow:
+        0 0 38px rgba(218, 95, 231, 0.48),
+        inset 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.enter-button:active {
+    transform: scale(0.96);
+}
+
+.intro-note {
+    margin-top: 18px;
+    color: #a99bb8;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+
+/* ==============================
+   HALAMAN GALAKSI
+============================== */
+
+.galaxy-page {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+
     width: 100%;
     min-height: 100vh;
-    padding: 75px 24px 30px;
+    padding: 45px 20px 25px;
+
     opacity: 0;
     visibility: hidden;
-    transform: translateY(15px);
+    pointer-events: none;
+
     transition:
         opacity 1s ease,
-        transform 1s ease,
         visibility 1s ease;
 }
 
-.main-content.show {
+.galaxy-page.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    pointer-events: auto;
 }
 
-.hero {
+.page-header {
     position: relative;
     z-index: 2;
-    width: 100%;
-    max-width: 900px;
+
+    max-width: 700px;
     margin: 0 auto;
     text-align: center;
 }
 
-.eyebrow {
-    margin-bottom: 22px;
-    color: #e4b3ff;
-    font-size: 11px;
-    letter-spacing: 4px;
+.page-header h1 {
+    margin-top: 18px;
+    font-size: clamp(30px, 5vw, 44px);
+    letter-spacing: -1.3px;
 }
 
-.hero h1 {
-    font-family: Georgia, serif;
-    font-size: clamp(38px, 6vw, 68px);
-    font-weight: 500;
-    line-height: 1.2;
-    text-shadow: 0 0 30px rgba(255, 112, 200, 0.16);
-}
+.page-description {
+    margin-top: 18px;
 
-.pink-heart {
-    color: var(--pink);
-}
-
-.subtitle {
-    margin-top: 20px;
-    color: #e1d6eb;
-    font-size: clamp(14px, 2vw, 18px);
-    line-height: 1.7;
+    color: #d0c4db;
+    font-size: 15px;
+    line-height: 1.8;
 }
 
 .letter-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-top: 36px;
-    padding: 17px 35px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 60px;
+    gap: 11px;
+
+    min-width: 220px;
+    margin-top: 27px;
+    padding: 15px 27px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+
+    background: linear-gradient(110deg, #a74ce3, #e85cb4);
     color: white;
-    background: linear-gradient(110deg, #a64ce9, #e955b6);
-    box-shadow:
-        0 0 25px rgba(190, 76, 235, 0.28),
-        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+
+    font-size: 16px;
+    font-weight: 600;
+
+    box-shadow: 0 0 28px rgba(211, 81, 224, 0.22);
+
     cursor: pointer;
+
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
 }
 
 .letter-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 40px rgba(220, 81, 221, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px rgba(221, 101, 238, 0.4);
 }
 
-.hint {
-    margin-top: 22px;
-    color: #c6b7d6;
-    font-size: 14px;
+.letter-button span {
+    font-size: 20px;
+}
+
+.interaction-note {
+    margin-top: 20px;
+    color: #c1b3d0;
+    font-size: 13px;
     line-height: 1.8;
 }
 
 
-/* =========================
-   AREA GALAKSI
-========================= */
+/* ==============================
+   AREA PLANET DAN GALAKSI
+============================== */
 
-.universe {
+.galaxy-scene {
     position: relative;
+
     width: 100%;
-    max-width: 1100px;
-    height: 690px;
-    margin: 10px auto 0;
+    max-width: 850px;
+    height: 570px;
+
+    margin: 15px auto 0;
+
     isolation: isolate;
     touch-action: pan-y;
-}
-
-.orbit {
-    position: absolute;
-    top: 52%;
-    left: 50%;
-    border: 1px solid rgba(211, 145, 255, 0.14);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.orbit-one {
-    width: 410px;
-    height: 210px;
-    transform: translate(-50%, -50%) rotate(-20deg);
-}
-
-.orbit-two {
-    width: 600px;
-    height: 310px;
-    transform: translate(-50%, -50%) rotate(18deg);
-}
-
-.orbit-three {
-    width: 780px;
-    height: 420px;
-    transform: translate(-50%, -50%) rotate(-12deg);
-    border-color: rgba(183, 117, 255, 0.09);
-}
-
-
-/* =========================
-   ORBIT FOTO
-========================= */
-
-.photo-orbit {
-    position: absolute;
-    top: 52%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    transform-origin: center;
-    pointer-events: none;
-    will-change: transform;
-}
-
-.photo-card {
-    position: absolute;
-    width: 132px;
-    padding: 8px 8px 23px;
-    border: 1px solid rgba(255, 255, 255, 0.75);
-    border-radius: 3px;
-    background: #fffaf8;
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.45),
-        0 0 25px rgba(219, 136, 255, 0.12);
-    pointer-events: auto;
-    cursor: grab;
     user-select: none;
     -webkit-user-select: none;
-    will-change: transform;
-    transition:
-        box-shadow 0.3s ease,
-        filter 0.3s ease;
-    animation: photoFloat 4s ease-in-out infinite;
-}
-
-.photo-card:active {
-    cursor: grabbing;
-}
-
-.photo-card:hover {
-    z-index: 10;
-    box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.55),
-        0 0 30px rgba(237, 119, 255, 0.4);
-    filter: brightness(1.05);
-}
-
-.photo-card img {
-    display: block;
-    width: 100%;
-    height: 155px;
-    object-fit: cover;
-    border: 1px solid #eee3e5;
-    pointer-events: none;
-}
-
-.photo-card span {
-    position: absolute;
-    right: 10px;
-    bottom: 3px;
-    color: #ed72b6;
-    font-family: Georgia, serif;
-    font-size: 15px;
-}
-
-.card-one {
-    top: 14%;
-    left: 12%;
-    transform: rotate(-10deg);
-    animation-delay: -1s;
-}
-
-.card-two {
-    top: 12%;
-    right: 12%;
-    transform: rotate(9deg);
-    animation-delay: -2s;
-}
-
-.card-three {
-    bottom: 13%;
-    left: 20%;
-    transform: rotate(7deg);
-    animation-delay: -3s;
-}
-
-.card-four {
-    right: 20%;
-    bottom: 12%;
-    transform: rotate(-8deg);
-    animation-delay: -1.5s;
-}
-
-@keyframes photoFloat {
-    0%, 100% {
-        margin-top: 0;
-    }
-
-    50% {
-        margin-top: -12px;
-    }
-}
-
-
-/* =========================
-   PLANET UTAMA
-========================= */
-
-.planet-area {
-    position: absolute;
-    top: 52%;
-    left: 50%;
-    width: 260px;
-    height: 260px;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
-}
-
-.planet-area:active {
-    cursor: grabbing;
-}
-
-.planet-glow {
-    position: absolute;
-    inset: -65px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        rgba(190, 93, 255, 0.3),
-        rgba(145, 57, 220, 0.1) 45%,
-        transparent 72%
-    );
-    filter: blur(12px);
-    animation: glowPulse 4s ease-in-out infinite;
-    pointer-events: none;
 }
 
 .planet {
     position: absolute;
-    top: 50%;
+
     left: 50%;
-    width: 180px;
-    height: 180px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 228, 255, 0.7);
-    border-radius: 50%;
+    top: 41%;
+
+    width: 170px;
+    height: 170px;
+
     transform: translate(-50%, -50%);
+    border-radius: 50%;
+
+    overflow: hidden;
+    isolation: isolate;
+
     background:
         radial-gradient(
-            circle at 32% 25%,
-            rgba(255, 210, 255, 0.95),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 35% 30%,
-            #e9a3ff,
-            #a95be8 38%,
-            #7333bc 70%,
-            #35145f 100%
+            circle at 30% 25%,
+            #f6c8ff 0%,
+            #d68aff 15%,
+            #a451e0 43%,
+            #7130b7 72%,
+            #32134f 100%
         );
+
     box-shadow:
-        inset -18px -20px 35px rgba(22, 4, 49, 0.65),
-        inset 10px 10px 30px rgba(255, 210, 255, 0.25),
-        0 0 45px rgba(186, 87, 255, 0.55);
-    cursor: pointer;
-    animation: planetFloat 6s ease-in-out infinite;
+        0 0 28px rgba(186, 94, 255, 0.6),
+        0 0 75px rgba(164, 67, 255, 0.32),
+        inset -18px -15px 35px rgba(27, 7, 52, 0.7),
+        inset 12px 10px 24px rgba(255, 255, 255, 0.25);
+
+    cursor: grab;
+    z-index: 4;
+
+    transition: box-shadow 0.3s ease;
 }
 
-.planet-shine {
+.planet:active {
+    cursor: grabbing;
+}
+
+.planet:focus-visible {
+    outline: 2px solid #ffd4fa;
+    outline-offset: 8px;
+}
+
+.planet-light {
     position: absolute;
-    top: 12%;
-    left: 18%;
-    width: 65px;
-    height: 65px;
+    inset: -10%;
+
     border-radius: 50%;
-    background: rgba(255, 220, 255, 0.28);
-    filter: blur(18px);
+
+    background:
+        radial-gradient(
+            ellipse at 30% 25%,
+            rgba(255, 255, 255, 0.45),
+            transparent 35%
+        );
+
+    animation: planetLight 6s ease-in-out infinite alternate;
 }
 
-.planet-crater {
+@keyframes planetLight {
+    from {
+        transform: translate(-3%, -2%);
+    }
+
+    to {
+        transform: translate(4%, 4%);
+    }
+}
+
+.planet-surface {
     position: absolute;
+    inset: 0;
+
     border-radius: 50%;
-    background: rgba(89, 36, 148, 0.15);
-    box-shadow: inset 2px 2px 7px rgba(53, 18, 98, 0.18);
+
+    background:
+        radial-gradient(
+            ellipse at 65% 60%,
+            transparent 0 20%,
+            rgba(88, 34, 145, 0.12) 45%,
+            rgba(27, 9, 52, 0.58) 100%
+        );
 }
 
-.crater-one {
-    top: 36%;
-    right: 25%;
-    width: 28px;
-    height: 20px;
-}
+.planet-highlight {
+    position: absolute;
+    inset: 5px;
 
-.crater-two {
-    bottom: 25%;
-    left: 23%;
-    width: 20px;
-    height: 15px;
-}
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
 
-.crater-three {
-    top: 65%;
-    right: 17%;
-    width: 12px;
-    height: 12px;
+    pointer-events: none;
 }
 
 .planet-envelope {
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 45px;
+
+    font-size: 48px;
+
     transform: translate(-50%, -50%);
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
-    animation: envelopePulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+
+    animation: envelopeFloat 3s ease-in-out infinite;
 }
+
+@keyframes envelopeFloat {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(-4deg);
+    }
+
+    50% {
+        transform: translate(-50%, -57%) rotate(4deg);
+    }
+}
+
+
+/* ==============================
+   CINCIN PLANET
+============================== */
 
 .planet-ring {
     position: absolute;
-    top: 50%;
+
     left: 50%;
-    width: 270px;
-    height: 85px;
-    border: 7px solid rgba(228, 151, 255, 0.9);
+    top: 41%;
+
+    width: 330px;
+    height: 95px;
+
+    border: 5px solid transparent;
     border-radius: 50%;
+
+    transform: translate(-50%, -50%) rotate(-20deg);
+
     pointer-events: none;
-    box-shadow:
-        0 0 12px rgba(219, 105, 255, 0.8),
-        inset 0 0 10px rgba(231, 169, 255, 0.3);
 }
 
 .ring-back {
-    z-index: -1;
-    border-bottom-color: transparent;
-    border-left-color: rgba(213, 139, 255, 0.8);
-    border-right-color: rgba(242, 169, 255, 0.8);
-    transform: translate(-50%, -50%) rotate(-22deg);
+    z-index: 2;
+
+    border-top-color: rgba(238, 155, 255, 0.75);
+    border-left-color: rgba(238, 155, 255, 0.3);
+
+    filter: drop-shadow(0 0 5px rgba(222, 126, 255, 0.6));
 }
 
 .ring-front {
-    z-index: 2;
-    border-top-color: transparent;
-    border-left-color: rgba(244, 166, 255, 0.95);
-    border-right-color: rgba(213, 139, 255, 0.8);
-    transform: translate(-50%, -50%) rotate(-22deg);
+    z-index: 5;
+
+    border-bottom-color: #e5a2ff;
+    border-right-color: rgba(229, 162, 255, 0.65);
+
+    filter: drop-shadow(0 0 7px rgba(226, 137, 255, 0.7));
 }
 
-@keyframes planetFloat {
-    0%, 100% {
-        margin-top: 0;
-    }
 
-    50% {
-        margin-top: -8px;
-    }
-}
+/* ==============================
+   ORBIT FOTO
+============================== */
 
-@keyframes glowPulse {
-    0%, 100% {
-        opacity: 0.7;
-        transform: scale(0.95);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.08);
-    }
-}
-
-@keyframes envelopePulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.08);
-    }
-}
-
-.universe-caption {
+.photo-orbit {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    inset: 0;
+
+    z-index: 6;
+
+    pointer-events: none;
+}
+
+.photo-card {
+    position: absolute;
+
+    left: 50%;
+    top: 41%;
+
+    width: 104px;
+    height: 143px;
+
+    padding: 6px;
+
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 3px;
+
+    background: #fffaf4;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45),
+        0 0 15px rgba(236, 177, 255, 0.1);
+
+    cursor: pointer;
+
+    pointer-events: auto;
+    overflow: hidden;
+
+    transform-origin: center center;
+    will-change: transform;
+
+    transition:
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.photo-card img {
+    display: block;
+
     width: 100%;
-    color: #bca5d4;
-    font-size: 12px;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    pointer-events: none;
+}
+
+.photo-card:hover {
+    border-color: #f5b8ff;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.5),
+        0 0 22px rgba(224, 133, 255, 0.55);
+}
+
+.photo-one {
+    --tilt: -12deg;
+}
+
+.photo-two {
+    --tilt: 9deg;
+}
+
+.photo-three {
+    --tilt: -7deg;
+}
+
+.photo-four {
+    --tilt: 12deg;
+}
+
+
+/* ==============================
+   ORBIT HIASAN
+============================== */
+
+.orbit {
+    position: absolute;
+
+    top: 41%;
+    left: 50%;
+
+    border: 1px solid rgba(216, 158, 255, 0.12);
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.orbit-one {
+    width: 290px;
+    height: 290px;
+}
+
+.orbit-two {
+    width: 410px;
+    height: 410px;
+    border-color: rgba(216, 158, 255, 0.08);
+}
+
+.orbit-three {
+    width: 530px;
+    height: 530px;
+    border-color: rgba(216, 158, 255, 0.05);
+}
+
+
+/* ==============================
+   TEKS DI BAWAH GALAKSI
+============================== */
+
+.galaxy-caption {
+    position: absolute;
+
+    top: calc(41% + 135px);
+    left: 0;
+    right: 0;
+
     text-align: center;
+
+    color: #d8b4ef;
+    font-size: 13px;
     letter-spacing: 1px;
+
+    pointer-events: none;
 }
 
-.universe-caption span {
+.drag-hint {
+    position: absolute;
+
+    bottom: 15px;
+    left: 0;
+    right: 0;
+
+    text-align: center;
+
+    color: #9888a9;
+    font-size: 12px;
+
+    pointer-events: none;
+}
+
+
+/* ==============================
+   PESAN PENUTUP
+============================== */
+
+.bottom-message {
+    position: relative;
+
+    max-width: 570px;
+    margin: 0 auto;
+
+    padding: 35px 20px 45px;
+
+    text-align: center;
+}
+
+.small-star {
+    margin-bottom: 18px;
+
     color: var(--pink);
+    font-size: 30px;
+
+    text-shadow: 0 0 20px rgba(240, 120, 210, 0.8);
+}
+
+.bottom-message h2 {
+    font-size: clamp(19px, 4vw, 25px);
+    line-height: 1.5;
+}
+
+.bottom-message p {
+    margin-top: 15px;
+
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.text-button {
+    margin-top: 20px;
+    padding: 10px 0;
+
+    border: none;
+    background: transparent;
+
+    color: var(--light-pink);
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.text-button:hover {
+    color: white;
+}
+
+.page-footer {
+    padding: 22px 10px;
+
+    color: #85748f;
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    text-align: center;
 }
 
 
-/* =========================
-   SURAT RAHASIA
-========================= */
+/* ==============================
+   MODAL SURAT
+============================== */
 
-.letter-overlay {
+.modal,
+.photo-modal {
     position: fixed;
     inset: 0;
-    z-index: 200;
+
+    z-index: 30;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background: rgba(5, 3, 12, 0.82);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+
+    padding: 22px;
+
     opacity: 0;
     visibility: hidden;
+
     transition:
-        opacity 0.4s ease,
-        visibility 0.4s ease;
+        opacity 0.35s ease,
+        visibility 0.35s ease;
 }
 
-.letter-overlay.open {
+.modal.open,
+.photo-modal.open {
     opacity: 1;
     visibility: visible;
 }
 
-.letter-card {
-    position: relative;
-    width: 100%;
-    max-width: 540px;
-    max-height: 85vh;
-    overflow-y: auto;
-    padding: 38px;
-    border: 1px solid rgba(237, 176, 255, 0.35);
-    border-radius: 22px;
-    background:
-        radial-gradient(
-            circle at top right,
-            rgba(176, 83, 222, 0.16),
-            transparent 40%
-        ),
-        linear-gradient(145deg, #1a1027, #100b1a);
-    box-shadow:
-        0 0 70px rgba(175, 76, 255, 0.2),
-        0 25px 80px rgba(0, 0, 0, 0.5);
-    transform: translateY(25px) scale(0.96);
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    scrollbar-width: thin;
-    scrollbar-color: #8f52bd transparent;
+.modal-backdrop,
+.photo-modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(5, 2, 12, 0.83);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
-.letter-overlay.open .letter-card {
+.letter-paper {
+    position: relative;
+
+    width: 100%;
+    max-width: 500px;
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    padding: 38px 32px 28px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+
+    background:
+        radial-gradient(
+            ellipse at top,
+            rgba(145, 74, 177, 0.18),
+            transparent 65%
+        ),
+        #130d1e;
+
+    box-shadow:
+        0 25px 90px rgba(0, 0, 0, 0.55),
+        0 0 45px rgba(180, 91, 238, 0.12);
+
+    transform: translateY(20px) scale(0.97);
+
+    transition: transform 0.4s ease;
+}
+
+.modal.open .letter-paper {
     transform: translateY(0) scale(1);
 }
 
-.close-letter {
-    position: sticky;
-    top: 0;
-    float: right;
+.close-button {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
     width: 35px;
     height: 35px;
-    margin-top: -15px;
-    margin-right: -15px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 50%;
+
     color: white;
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.06);
+
     font-size: 25px;
     line-height: 1;
+
     cursor: pointer;
-    transition: background 0.3s ease;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
-.close-letter:hover {
-    background: rgba(255, 100, 180, 0.3);
+.close-button:hover {
+    background: rgba(239, 115, 206, 0.2);
+    transform: rotate(90deg);
 }
 
 .letter-decoration {
-    margin: 10px 0 20px;
-    font-size: 42px;
+    margin-bottom: 15px;
+
     text-align: center;
-    filter: drop-shadow(0 0 12px rgba(255, 112, 200, 0.35));
+    font-size: 44px;
+
+    filter: drop-shadow(0 0 15px rgba(255, 140, 220, 0.3));
 }
 
-.letter-label {
-    margin-bottom: 15px;
-    color: #e6a6ff;
-    font-size: 10px;
+.letter-eyebrow {
+    color: #d4a8f7;
+    font-size: 9px;
     letter-spacing: 3px;
     text-align: center;
+    line-height: 1.8;
 }
 
-.letter-card h2 {
-    margin-bottom: 25px;
-    color: #ffb1e4;
-    font-family: Georgia, serif;
-    font-size: 32px;
-    font-weight: 500;
+.letter-paper h2 {
+    margin-top: 15px;
+
+    font-size: 25px;
+    line-height: 1.4;
+
     text-align: center;
 }
 
-.letter-body {
-    color: #e5d9ed;
+.letter-divider {
+    margin: 20px 0;
+
+    color: var(--pink);
+    text-align: center;
+    font-size: 14px;
+}
+
+.letter-content p {
+    margin-bottom: 17px;
+
+    color: #e1d6eb;
     font-size: 14px;
     line-height: 1.95;
 }
 
-.letter-body p {
-    margin-bottom: 18px;
-}
-
-.letter-closing {
-    color: #ffb1e4;
-    font-family: Georgia, serif;
-    font-size: 18px;
-}
-
 .letter-signature {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbb6dd;
-    font-family: Georgia, serif;
-    text-align: right;
+    padding-top: 5px;
+    color: #f0b6e4 !important;
 }
 
-.letter-signature span {
-    color: var(--pink);
-}
+.letter-footer {
+    margin-top: 20px;
+    padding-top: 18px;
 
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
 
-/* =========================
-   EFEK INTERAKSI
-========================= */
+    color: #a68bbd;
+    font-size: 11px;
+    letter-spacing: 1px;
 
-.effects {
-    position: fixed;
-    inset: 0;
-    z-index: 300;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.floating-heart {
-    position: absolute;
-    color: #ff91d4;
-    font-size: 20px;
-    text-shadow: 0 0 12px rgba(255, 100, 200, 0.7);
-    animation: heartRise 1.8s ease-out forwards;
-}
-
-@keyframes heartRise {
-    from {
-        opacity: 0;
-        transform: translateY(0) scale(0.6) rotate(0);
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(-100px) scale(1.3) rotate(20deg);
-    }
+    text-align: center;
 }
 
 
-/* =========================
+/* ==============================
+   PREVIEW FOTO
+============================== */
+
+.photo-preview {
+    position: relative;
+
+    width: min(100%, 390px);
+    max-height: 85vh;
+
+    padding: 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+
+    background: #15101e;
+
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.5);
+
+    transform: scale(0.95);
+    transition: transform 0.35s ease;
+}
+
+.photo-modal.open .photo-preview {
+    transform: scale(1);
+}
+
+.photo-preview img {
+    display: block;
+
+    width: 100%;
+    max-height: 68vh;
+
+    border-radius: 5px;
+
+    object-fit: contain;
+}
+
+.photo-preview p {
+    padding: 15px 5px 5px;
+
+    color: #e5c7f6;
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* ==============================
    RESPONSIVE TABLET
-========================= */
+============================== */
 
-@media (max-width: 800px) {
-    .main-content {
-        padding: 60px 20px 25px;
+@media (max-width: 700px) {
+
+    .galaxy-page {
+        padding: 35px 16px 20px;
     }
 
-    .universe {
-        height: 600px;
+    .page-header h1 {
+        margin-top: 16px;
+    }
+
+    .page-description {
+        max-width: 430px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .galaxy-scene {
+        height: 490px;
         margin-top: 20px;
     }
 
-    .orbit-one {
-        width: 340px;
-        height: 180px;
+    .planet {
+        width: 145px;
+        height: 145px;
     }
 
-    .orbit-two {
-        width: 480px;
-        height: 260px;
+    .planet-envelope {
+        font-size: 41px;
     }
 
-    .orbit-three {
-        width: 620px;
-        height: 340px;
+    .planet-ring {
+        width: 275px;
+        height: 80px;
+        border-width: 4px;
     }
 
     .photo-card {
-        width: 112px;
-        padding: 6px 6px 19px;
+        width: 83px;
+        height: 116px;
+        padding: 5px;
     }
 
-    .photo-card img {
-        height: 135px;
+    .orbit-one {
+        width: 250px;
+        height: 250px;
     }
 
-    .planet-area {
-        transform: translate(-50%, -50%) scale(0.9);
+    .orbit-two {
+        width: 345px;
+        height: 345px;
     }
 
-    .card-one {
-        left: 6%;
+    .orbit-three {
+        width: 435px;
+        height: 435px;
     }
 
-    .card-two {
-        right: 6%;
+    .galaxy-caption {
+        top: calc(41% + 120px);
+        font-size: 12px;
     }
 
-    .card-three {
-        left: 10%;
+    .drag-hint {
+        bottom: 10px;
     }
 
-    .card-four {
-        right: 10%;
+    .bottom-message {
+        padding-top: 25px;
     }
 }
 
 
-/* =========================
+/* ==============================
    RESPONSIVE HP
-========================= */
+============================== */
 
-@media (max-width: 520px) {
-    .intro {
-        padding: 22px;
+@media (max-width: 420px) {
+
+    .intro-screen {
+        padding: 25px 20px;
     }
 
-    .intro-label {
+    .intro-symbol {
+        font-size: 46px;
+        margin-bottom: 20px;
+    }
+
+    .eyebrow {
         font-size: 9px;
         letter-spacing: 2.5px;
     }
 
-    .intro-text {
+    .intro-content h1 {
+        font-size: 31px;
+    }
+
+    .intro-description {
         font-size: 13px;
     }
 
     .enter-button {
-        padding: 14px 23px;
+        min-height: 49px;
+        padding: 13px 24px;
         font-size: 14px;
     }
 
-    .main-content {
-        padding: 42px 15px 25px;
+    .galaxy-page {
+        padding: 28px 14px 18px;
     }
 
-    .eyebrow {
-        margin-bottom: 17px;
-        font-size: 9px;
-        letter-spacing: 2px;
+    .page-header h1 {
+        font-size: 30px;
     }
 
-    .hero h1 {
-        font-size: clamp(32px, 9vw, 43px);
-    }
-
-    .subtitle {
-        max-width: 330px;
-        margin: 15px auto 0;
+    .page-description {
+        margin-top: 14px;
         font-size: 13px;
     }
 
     .letter-button {
-        margin-top: 28px;
-        padding: 15px 27px;
+        min-width: 205px;
+        margin-top: 23px;
+        padding: 14px 23px;
         font-size: 14px;
     }
 
-    .hint {
-        max-width: 310px;
-        margin: 18px auto 0;
-        font-size: 12px;
+    .interaction-note {
+        margin-top: 17px;
+        font-size: 11px;
     }
 
-    .universe {
-        height: 510px;
-        margin-top: 12px;
+    .galaxy-scene {
+        height: 425px;
+        margin-top: 15px;
+    }
+
+    .planet {
+        width: 120px;
+        height: 120px;
+    }
+
+    .planet-envelope {
+        font-size: 34px;
+    }
+
+    .planet-ring {
+        width: 235px;
+        height: 69px;
+        border-width: 4px;
+    }
+
+    .photo-card {
+        width: 69px;
+        height: 97px;
+        padding: 4px;
     }
 
     .orbit-one {
-        width: 280px;
-        height: 145px;
+        width: 205px;
+        height: 205px;
     }
 
     .orbit-two {
-        width: 370px;
-        height: 210px;
+        width: 285px;
+        height: 285px;
     }
 
     .orbit-three {
-        width: 450px;
-        height: 270px;
+        width: 365px;
+        height: 365px;
     }
 
-    .planet-area {
-        transform: translate(-50%, -50%) scale(0.72);
+    .galaxy-caption {
+        top: calc(41% + 100px);
+        font-size: 10px;
+        letter-spacing: 0.5px;
     }
 
-    .photo-card {
-        width: 88px;
-        padding: 5px 5px 16px;
+    .drag-hint {
+        bottom: 5px;
+        font-size: 10px;
     }
 
-    .photo-card img {
-        height: 105px;
+    .bottom-message {
+        padding: 20px 8px 30px;
     }
 
-    .photo-card span {
-        font-size: 11px;
-        bottom: 1px;
+    .bottom-message h2 {
+        font-size: 19px;
     }
 
-    .card-one {
-        top: 15%;
-        left: 2%;
+    .bottom-message p {
+        font-size: 13px;
     }
 
-    .card-two {
-        top: 15%;
-        right: 2%;
+    .letter-paper {
+        padding: 34px 22px 24px;
+        border-radius: 15px;
     }
 
-    .card-three {
-        bottom: 15%;
-        left: 5%;
+    .letter-paper h2 {
+        font-size: 22px;
     }
 
-    .card-four {
-        right: 5%;
-        bottom: 15%;
+    .letter-content p {
+        font-size: 13px;
+        line-height: 1.9;
     }
+}
 
-    .universe-caption {
-        bottom: 4px;
-        font-size: 9px;
-        letter-spacing: 0;
-    }
 
-    .letter-overlay {
-        padding: 12px;
-    }
+/* ==============================
+   HP KECIL
+============================== */
 
-    .letter-card {
-        max-height: 88vh;
-        padding: 28px 22px;
-        border-radius: 18px;
-    }
+@media (max-width: 350px) {
 
-    .letter-decoration {
-        font-size: 35px;
-    }
-
-    .letter-card h2 {
+    .intro-content h1 {
         font-size: 27px;
     }
 
-    .letter-body {
-        font-size: 13px;
-        line-height: 1.85;
+    .galaxy-scene {
+        height: 390px;
     }
 
-    .letter-label {
-        font-size: 8px;
-        letter-spacing: 2px;
+    .planet {
+        width: 105px;
+        height: 105px;
     }
 
-    .footer {
-        padding-bottom: 15px;
-    }
-}
-
-
-/* =========================
-   LAYAR SANGAT KECIL
-========================= */
-
-@media (max-width: 360px) {
-    .universe {
-        height: 450px;
+    .planet-ring {
+        width: 210px;
+        height: 62px;
     }
 
     .photo-card {
-        width: 76px;
+        width: 60px;
+        height: 85px;
+        padding: 3px;
     }
 
-    .photo-card img {
-        height: 90px;
+    .orbit-one {
+        width: 180px;
+        height: 180px;
     }
 
-    .planet-area {
-        transform: translate(-50%, -50%) scale(0.62);
+    .orbit-two {
+        width: 250px;
+        height: 250px;
     }
 
     .orbit-three {
-        width: 390px;
+        width: 320px;
+        height: 320px;
     }
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* ==============================
+   PENGURANGAN ANIMASI
+============================== */
 
-.footer {
-    position: relative;
-    z-index: 2;
-    padding: 20px 0 10px;
-    text-align: center;
-}
-
-.footer p {
-    color: #d6c4e6;
-    font-size: 12px;
-}
-
-.footer span {
-    display: block;
-    margin-top: 9px;
-    color: #8f7ca4;
-    font-size: 10px;
-    letter-spacing: 1px;
-}
-
-
-/* Mengurangi gerakan bagi pengguna yang memilihnya */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
         scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
     }
+
 }
