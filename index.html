@@ -4,22 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#030817">
-  <title>Untuk Gaby 💙</title>
-  <link rel="stylesheet" href="style.css">
+  <title>My Universe, Gaby 💙</title>
+  <link rel="stylesheet" href="./style.css?v=4">
 </head>
 <body>
-  <canvas id="stars"></canvas>
 
+  <canvas id="stars" aria-hidden="true"></canvas>
   <div class="nebula nebula-one"></div>
   <div class="nebula nebula-two"></div>
 
   <header class="hero">
     <p class="eyebrow">✦ A LITTLE UNIVERSE JUST FOR YOU ✦</p>
+
     <h1>My Universe, <span>Gaby</span> 💙</h1>
+
     <p class="subtitle">
-      Di antara miliaran bintang, ada satu orang yang ingin aku bahagiakan.
+      Di antara miliaran bintang, ada satu orang
+      yang ingin aku bahagiakan.
     </p>
-    <a href="#memories" class="explore-button">Jelajahi semesta kita ✨</a>
+
+    <a href="#memories" class="explore-button">
+      Jelajahi semesta kita ✨
+    </a>
   </header>
 
   <main>
@@ -31,37 +37,34 @@
       </div>
 
       <div class="photo-universe">
+
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
 
-        <button class="photo-card card-one" data-letter="0"
-          aria-label="Buka surat foto pertama">
+        <button type="button" class="photo-card card-one" data-letter="0">
           <span class="photo-number">01 · MY FAVORITE</span>
-          <img src="gaby1.jpeg" alt="Foto Gaby pertama">
+          <img src="./gaby1.jpeg" alt="Foto Gaby pertama">
           <span class="photo-caption">Senyummu 💙</span>
           <span class="card-hint">Klik untuk membuka surat</span>
         </button>
 
-        <button class="photo-card card-two" data-letter="1"
-          aria-label="Buka surat foto kedua">
+        <button type="button" class="photo-card card-two" data-letter="1">
           <span class="photo-number">02 · MY HAPPINESS</span>
-          <img src="gaby2.jpeg" alt="Foto Gaby kedua">
+          <img src="./gaby2.jpeg" alt="Foto Gaby kedua" loading="lazy">
           <span class="photo-caption">Kamu yang manis 🌷</span>
           <span class="card-hint">Klik untuk membuka surat</span>
         </button>
 
-        <button class="photo-card card-three" data-letter="2"
-          aria-label="Buka surat foto ketiga">
+        <button type="button" class="photo-card card-three" data-letter="2">
           <span class="photo-number">03 · MY STAR</span>
-          <img src="gaby3.jpeg" alt="Foto Gaby ketiga">
+          <img src="./gaby3.jpeg" alt="Foto Gaby ketiga" loading="lazy">
           <span class="photo-caption">Bintangku ✨</span>
           <span class="card-hint">Klik untuk membuka surat</span>
         </button>
 
-        <button class="photo-card card-four" data-letter="3"
-          aria-label="Buka surat foto keempat">
+        <button type="button" class="photo-card card-four" data-letter="3">
           <span class="photo-number">04 · MY DEAREST</span>
-          <img src="gaby4.jpeg" alt="Foto Gaby keempat">
+          <img src="./gaby4.jpeg" alt="Foto Gaby keempat" loading="lazy">
           <span class="photo-caption">Untuk Gaby 💗</span>
           <span class="card-hint">Klik untuk membuka surat</span>
         </button>
@@ -73,14 +76,16 @@
     <section class="bunny-section">
       <p class="eyebrow">A SPECIAL SURPRISE</p>
       <h2>Ada Satu Surat Lagi...</h2>
-      <p>Katanya ada kelinci kecil yang ingin menyampaikan sesuatu 🐰</p>
+      <p>Ada kelinci kecil yang ingin menyampaikan sesuatu untuk Gaby 🐰</p>
 
-      <button class="bunny-envelope" id="bunnyLetterButton"
-        aria-label="Buka surat khusus kelinci">
+      <button type="button" class="bunny-envelope" id="bunnyLetterButton">
+
         <span class="bunny-sparkle sparkle-left">✦</span>
+
         <span class="bunny" aria-hidden="true">
           <span class="bunny-ear ear-left"></span>
           <span class="bunny-ear ear-right"></span>
+
           <span class="bunny-head">
             <span class="bunny-eye eye-left"></span>
             <span class="bunny-eye eye-right"></span>
@@ -89,16 +94,20 @@
             <span class="bunny-nose"></span>
             <span class="bunny-mouth"></span>
           </span>
+
           <span class="bunny-body"></span>
           <span class="bunny-paw paw-left"></span>
           <span class="bunny-paw paw-right"></span>
           <span class="bunny-tail"></span>
         </span>
+
         <span class="envelope">
           <span class="envelope-heart">♥</span>
         </span>
+
         <span class="bunny-label">Surat dari Kelinci 🐰💌</span>
         <span class="bunny-hint">Klik aku, Gaby!</span>
+
         <span class="bunny-sparkle sparkle-right">✧</span>
       </button>
     </section>
@@ -118,10 +127,8 @@
   <div class="modal" id="letterModal" aria-hidden="true">
     <div class="modal-backdrop" data-close="true"></div>
 
-    <article class="letter-window" role="dialog"
-      aria-modal="true" aria-labelledby="letterTitle">
-      <button class="close-button" id="closeLetter"
-        aria-label="Tutup surat">×</button>
+    <article class="letter-window" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+      <button type="button" class="close-button" id="closeLetter" aria-label="Tutup surat">×</button>
 
       <div class="letter-decoration" id="letterDecoration">💌</div>
       <p class="eyebrow" id="letterEyebrow">A LETTER FOR YOU</p>
@@ -130,22 +137,22 @@
       <div class="letter-content" id="letterContent"></div>
 
       <div class="surprise-area" id="surpriseArea" hidden>
-        <button class="surprise-button" id="revealPhoto">
+        <button type="button" class="surprise-button" id="revealPhoto">
           Buka kejutan untukmu 💗
         </button>
 
         <div class="hidden-photo" id="hiddenPhoto" hidden>
-          <img id="surpriseImage" src="gaby1.jpeg" alt="Kejutan foto Gaby">
+          <img id="surpriseImage" src="./gaby1.jpeg" alt="Kejutan foto Gaby">
           <p class="photo-message">Satu foto, banyak alasan untuk tersenyum. 💙</p>
         </div>
       </div>
 
-      <button class="close-bottom" id="closeLetterBottom">
+      <button type="button" class="close-bottom" id="closeLetterBottom">
         Simpan surat ini di hati ♡
       </button>
     </article>
   </div>
 
-  <script src="script.js"></script>
+  <script src="./script.js?v=4" defer></script>
 </body>
 </html>
