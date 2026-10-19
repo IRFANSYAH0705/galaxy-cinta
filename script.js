@@ -1,87 +1,18 @@
-// =========================
-// ELEMEN WEBSITE
-// =========================
-
 const intro = document.getElementById("intro");
-const universe = document.getElementById("universe");
-const startButton = document.getElementById("startButton");
+const enterButton = document.getElementById("enterButton");
+const mainContent = document.getElementById("mainContent");
 
-const stars = document.getElementById("stars");
+const galaxy = document.getElementById("galaxy");
+const galaxySection = document.getElementById("galaxySection");
 const planet = document.getElementById("planet");
 
-const galaxyArea = document.getElementById("galaxyArea");
-const photoGalaxy = document.getElementById("photoGalaxy");
-
 const letterButton = document.getElementById("letterButton");
-const letterOverlay = document.getElementById("letterOverlay");
+const letterModal = document.getElementById("letterModal");
 const closeLetter = document.getElementById("closeLetter");
 const finishLetter = document.getElementById("finishLetter");
 
-
-// =========================
-// MEMBUAT BINTANG
-// =========================
-
-for (let i = 0; i < 110; i++) {
-    const star = document.createElement("span");
-
-    star.className = "star";
-
-    const size = 1 + Math.random() * 2.5;
-
-    star.style.width = size + "px";
-    star.style.height = size + "px";
-
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
-
-    star.style.animationDelay = Math.random() * 4 + "s";
-    star.style.animationDuration = 2 + Math.random() * 3 + "s";
-
-    stars.appendChild(star);
-}
-
-
-// =========================
-// INTRO
-// =========================
-
-startButton.addEventListener("click", function () {
-    intro.classList.add("hidden");
-    universe.classList.remove("hidden");
-});
-
-
-// =========================
-// SURAT RAHASIA
-// =========================
-
-function openLetter() {
-    letterOverlay.classList.remove("hidden");
-}
-
-function hideLetter() {
-    letterOverlay.classList.add("hidden");
-}
-
-planet.addEventListener("click", openLetter);
-letterButton.addEventListener("click", openLetter);
-
-closeLetter.addEventListener("click", hideLetter);
-finishLetter.addEventListener("click", hideLetter);
-
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-        hideLetter();
-    }
-});
-
-
-// =========================
-// FOTO GALAKSI
-// =========================
-
-// Empat foto asli dipakai secara bergantian.
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
 
 const fotoGaby = [
     "gaby1.jpeg",
@@ -90,251 +21,329 @@ const fotoGaby = [
     "gaby4.jpeg"
 ];
 
-// Jumlah foto dapat diubah sesuai kemampuan perangkat.
+let stars = [];
+let photos = [];
 
-const jumlahFoto = 64;
-const fotoItems = [];
+let width = window.innerWidth;
+let height = window.innerHeight;
 
-for (let i = 0; i < jumlahFoto; i++) {
-    const foto = document.createElement("img");
+let angle = 0;
+let rotationX = -0.18;
+let rotationY = 0;
 
-    foto.src = fotoGaby[i % fotoGaby.length];
-    foto.alt = "Foto kenangan Gaby";
-    foto.className = "memory-photo";
-    foto.draggable = false;
-    foto.loading = "eager";
-
-    photoGalaxy.appendChild(foto);
-
-    fotoItems.push({
-        element: foto,
-
-        // Posisi setiap foto di sepanjang lintasan.
-        angle: (Math.PI * 2 * i) / jumlahFoto,
-
-        // Variasi ukuran.
-        size: 0.65 + Math.random() * 0.45,
-
-        // Variasi kecepatan.
-        speed: 0.045 + Math.random() * 0.025,
-
-        // Variasi gerakan kecil.
-        wave: Math.random() * Math.PI * 2,
-
-        // Variasi kemiringan.
-        tilt: (Math.random() - 0.5) * 30
-    });
-}
-
-
-// =========================
-// INTERAKSI GALAKSI
-// =========================
+let targetX = -0.18;
+let targetY = 0;
 
 let dragging = false;
-let moved = false;
-let suppressClick = false;
+let previousX = 0;
+let previousY = 0;
 
-let activePointer = null;
+let animationStarted = false;
+let lastFrame = 0;
 
-let startX = 0;
-let startY = 0;
-let lastX = 0;
-let lastY = 0;
-
-let rotationY = 0;
-let rotationX = 0;
-
-let velocityX = 0;
-let velocityY = 0;
+const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
 
 
-// Mulai menggeser planet.
+// MEMBUAT LATAR BELAKANG BINTANG
 
-function startDrag(event) {
-    if (event.button !== undefined && event.button !== 0) {
-        return;
-    }
+function resizeCanvas() {
+    width = window.innerWidth;
+    height = window.innerHeight;
 
-    dragging = true;
-    moved = false;
-    activePointer = event.pointerId;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    startX = event.clientX;
-    startY = event.clientY;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
 
-    lastX = startX;
-    lastY = startY;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
 
-    velocityX = 0;
-    velocityY = 0;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    planet.setPointerCapture(event.pointerId);
-}
+    stars = [];
 
+    const jumlahBintang = Math.min(
+        Math.floor((width * height) / 4500),
+        220
+    );
 
-// Gerakkan galaksi mengikuti tarikan.
-
-function moveDrag(event) {
-    if (!dragging || event.pointerId !== activePointer) {
-        return;
-    }
-
-    const dx = event.clientX - lastX;
-    const dy = event.clientY - lastY;
-
-    if (
-        Math.abs(event.clientX - startX) > 5 ||
-        Math.abs(event.clientY - startY) > 5
-    ) {
-        moved = true;
-    }
-
-    rotationY += dx * 0.008;
-    rotationX += dy * 0.004;
-
-    rotationX = Math.max(-0.45, Math.min(0.45, rotationX));
-
-    velocityX = dx * 0.00015;
-    velocityY = dy * 0.0001;
-
-    lastX = event.clientX;
-    lastY = event.clientY;
-}
-
-
-// Selesai menggeser.
-
-function endDrag(event) {
-    if (!dragging || event.pointerId !== activePointer) {
-        return;
-    }
-
-    dragging = false;
-    activePointer = null;
-
-    if (moved) {
-        // Mencegah surat terbuka ketika pengguna selesai menyeret.
-        suppressClick = true;
-
-        setTimeout(function () {
-            suppressClick = false;
-        }, 250);
+    for (let i = 0; i < jumlahBintang; i++) {
+        stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 1.5 + 0.3,
+            alpha: Math.random() * 0.7 + 0.2,
+            speed: Math.random() * 0.6 + 0.2
+        });
     }
 }
 
-planet.addEventListener("pointerdown", startDrag);
-planet.addEventListener("pointermove", moveDrag);
-planet.addEventListener("pointerup", endDrag);
-planet.addEventListener("pointercancel", endDrag);
+function drawStars(time = 0) {
+    ctx.clearRect(0, 0, width, height);
 
-// Klik planet membuka surat, tetapi drag tidak.
+    for (const star of stars) {
+        let alpha = star.alpha;
 
-planet.addEventListener("click", function (event) {
-    if (suppressClick) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
+        if (!reducedMotion) {
+            alpha *= 0.75 + Math.sin(
+                time * 0.001 * star.speed + star.x
+            ) * 0.25;
+        }
+
+        ctx.beginPath();
+
+        ctx.arc(
+            star.x,
+            star.y,
+            star.radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.fill();
     }
-}, true);
+}
 
 
-// =========================
-// ANIMASI GALAKSI
-// =========================
+// MEMBUAT FOTO GALAKSI
 
-let animationFrame = 0;
-let lastTime = 0;
-let time = 0;
+function createGalaxyPhotos() {
+    photos = [];
 
-function animateGalaxy(timestamp) {
-    const delta = lastTime
-        ? Math.min((timestamp - lastTime) / 1000, 0.04)
-        : 0;
-
-    lastTime = timestamp;
-    time += delta;
-
-    // Galaksi bergerak perlahan secara otomatis.
-    if (!dragging) {
-        rotationY += 0.035 * delta;
-
-        rotationY += velocityX;
-        rotationX += velocityY;
-
-        velocityX *= 0.97;
-        velocityY *= 0.97;
-    }
-
-    const width = galaxyArea.clientWidth;
-    const height = galaxyArea.clientHeight;
-
-    // Mengatur lebar dan tinggi galaksi sesuai layar.
-    const radiusX = Math.min(width * 0.43, 490);
-    const radiusY = Math.min(height * 0.40, 240);
-
-    fotoItems.forEach(function (item) {
-        const angle = item.angle + time * item.speed + rotationY;
-
-        // Posisi horizontal dan vertikal.
-        const x = Math.cos(angle) * radiusX;
-
-        const y =
-            Math.sin(angle) * radiusY +
-            Math.sin(time * 0.6 + item.wave) * 8;
-
-        // Kedalaman foto mengikuti posisi pada lintasan.
-        const depth = Math.sin(angle);
-
-        const scale = item.size * (0.65 + (depth + 1) * 0.19);
-
-        const opacity = 0.48 + (depth + 1) * 0.25;
-
-        const tilt =
-            item.tilt +
-            Math.sin(angle * 1.5 + item.wave) * 8;
-
-        // Foto yang lebih dekat berada di depan.
-        const zIndex = Math.round((depth + 1) * 100);
-
-        item.element.style.zIndex = zIndex;
-        item.element.style.opacity = opacity;
-
-        item.element.style.transform = `
-            translate(-50%, -50%)
-            translate3d(${x}px, ${y}px, ${depth * 100}px)
-            rotate(${tilt}deg)
-            scale(${scale})
-        `;
+    document.querySelectorAll(".orbit-photo").forEach(photo => {
+        photo.remove();
     });
 
-    // Sedikit kemiringan memberikan kesan ruang 3D.
-    photoGalaxy.style.transform = `
-        rotateX(${rotationX * 25}deg)
-    `;
+    const jumlahFoto = 56;
 
-    animationFrame = requestAnimationFrame(animateGalaxy);
+    for (let i = 0; i < jumlahFoto; i++) {
+        const foto = document.createElement("img");
+
+        foto.className = "orbit-photo";
+
+        foto.src = fotoGaby[i % fotoGaby.length];
+        foto.alt = `Foto Gaby ${i % fotoGaby.length + 1}`;
+
+        foto.draggable = false;
+        foto.loading = "eager";
+        foto.decoding = "async";
+
+        foto.onerror = function () {
+            console.error("Foto gagal dimuat:", foto.src);
+            foto.style.visibility = "hidden";
+        };
+
+        galaxy.insertBefore(foto, planet);
+
+        const orbit = 0.45 + Math.random() * 0.55;
+
+        photos.push({
+            element: foto,
+
+            angle: (Math.PI * 2 * i) / jumlahFoto,
+
+            orbitX: orbit,
+            orbitY: orbit * (0.55 + Math.random() * 0.3),
+
+            speed: (0.025 + Math.random() * 0.035)
+                * (i % 2 === 0 ? 1 : -1),
+
+            depth: Math.random(),
+
+            rotation: Math.random() * 36 - 18,
+
+            size: 0.7 + Math.random() * 0.5,
+
+            offset: Math.random() * Math.PI * 2
+        });
+    }
 }
 
 
-// Mulai animasi.
+// MENGGERAKKAN FOTO MENGELILINGI PLANET
 
-function startAnimation() {
-    cancelAnimationFrame(animationFrame);
+function animateGalaxy(time = 0) {
+    if (!animationStarted) return;
 
-    lastTime = 0;
+    const delta = lastFrame
+        ? Math.min((time - lastFrame) / 1000, 0.05)
+        : 0;
 
-    animationFrame = requestAnimationFrame(animateGalaxy);
+    lastFrame = time;
+
+    drawStars(time);
+
+    if (!dragging && !reducedMotion) {
+        angle += delta * 0.13;
+
+        targetX += -0.18 * delta;
+    }
+
+    rotationX += (targetX - rotationX) * Math.min(delta * 4, 1);
+    rotationY += (targetY - rotationY) * Math.min(delta * 4, 1);
+
+    const rect = galaxy.getBoundingClientRect();
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const isMobile = window.innerWidth <= 600;
+
+    const radiusX = Math.min(
+        rect.width * (isMobile ? 0.43 : 0.43),
+        isMobile ? 220 : 440
+    );
+
+    const radiusY = Math.min(
+        rect.height * 0.39,
+        isMobile ? 205 : 300
+    );
+
+    for (const photo of photos) {
+        if (!reducedMotion && !dragging) {
+            photo.angle += photo.speed * delta;
+        }
+
+        const a = photo.angle + angle + photo.offset * 0.05;
+
+        const x = Math.cos(a) * radiusX * photo.orbitX;
+        const y = Math.sin(a) * radiusY * photo.orbitY;
+
+        const tiltX = Math.sin(rotationX) * y;
+        const tiltY = Math.sin(rotationY) * x;
+
+        const finalX = centerX + x + tiltY;
+        const finalY = centerY + y + tiltX;
+
+        const depth = (Math.sin(a) + 1) / 2;
+
+        const scale = photo.size * (
+            0.62 + depth * 0.48
+        );
+
+        const rotation = photo.rotation
+            + Math.sin(a * 0.7) * 5
+            + rotationY * 12;
+
+        photo.element.style.zIndex = Math.round(depth * 8);
+
+        photo.element.style.opacity = 0.72 + depth * 0.28;
+
+        photo.element.style.transform = `
+            translate(-50%, -50%)
+            translate(${finalX - centerX}px, ${finalY - centerY}px)
+            scale(${scale})
+            rotate(${rotation}deg)
+        `;
+    }
+
+    requestAnimationFrame(animateGalaxy);
 }
 
-startAnimation();
+
+// MEMULAI GALAKSI
+
+function startGalaxy() {
+    if (animationStarted) return;
+
+    animationStarted = true;
+
+    createGalaxyPhotos();
+
+    lastFrame = 0;
+
+    requestAnimationFrame(animateGalaxy);
+}
 
 
-// Menghemat sumber daya ketika tab tidak terlihat.
+// INTRO
 
-document.addEventListener("visibilitychange", function () {
-    if (document.hidden) {
-        cancelAnimationFrame(animationFrame);
-    } else {
-        startAnimation();
+enterButton.addEventListener("click", () => {
+    intro.classList.add("hide");
+    mainContent.classList.add("show");
+
+    startGalaxy();
+});
+
+
+// INTERAKSI PLANET DENGAN MOUSE DAN SENTUHAN
+
+planet.addEventListener("pointerdown", event => {
+    dragging = true;
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+
+    planet.setPointerCapture(event.pointerId);
+});
+
+planet.addEventListener("pointermove", event => {
+    if (!dragging) return;
+
+    const deltaX = event.clientX - previousX;
+    const deltaY = event.clientY - previousY;
+
+    targetY += deltaX * 0.005;
+    targetX += deltaY * 0.005;
+
+    targetX = Math.max(-1.1, Math.min(1.1, targetX));
+    targetY = Math.max(-1.1, Math.min(1.1, targetY));
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+});
+
+function stopDragging() {
+    dragging = false;
+}
+
+planet.addEventListener("pointerup", stopDragging);
+planet.addEventListener("pointercancel", stopDragging);
+planet.addEventListener("lostpointercapture", stopDragging);
+
+
+// SURAT RAHASIA
+
+function openLetter() {
+    letterModal.classList.add("open");
+    letterModal.setAttribute("aria-hidden", "false");
+
+    closeLetter.focus();
+}
+
+function hideLetter() {
+    letterModal.classList.remove("open");
+    letterModal.setAttribute("aria-hidden", "true");
+}
+
+letterButton.addEventListener("click", openLetter);
+closeLetter.addEventListener("click", hideLetter);
+finishLetter.addEventListener("click", hideLetter);
+
+letterModal.addEventListener("click", event => {
+    if (event.target === letterModal) {
+        hideLetter();
     }
 });
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        hideLetter();
+    }
+});
+
+
+// RESPONSIVE
+
+window.addEventListener("resize", () => {
+    resizeCanvas();
+});
+
+
+// JALANKAN BINTANG SEJAK HALAMAN DIBUKA
+
+resizeCanvas();
+drawStars();
