@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#090714">
+    <meta name="theme-color" content="#05030b">
 
-    <title>My Little Universe ❤️</title>
-
-    <meta name="description"
-          content="Sebuah galaksi kecil yang dibuat khusus untuk Gaby.">
+    <title>Galaxy Cinta | My Lovely Gaby</title>
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -16,209 +13,135 @@
 
 <body>
 
-    <!-- Latar belakang bintang -->
-    <canvas id="bintang" aria-hidden="true"></canvas>
+    <!-- Latar belakang galaksi -->
+    <canvas id="stars"></canvas>
+    <canvas id="galaxy"></canvas>
 
-    <!-- Cahaya latar -->
-    <div class="cahaya cahaya-1"></div>
-    <div class="cahaya cahaya-2"></div>
-
-    <!-- Judul website -->
+    <!-- Judul -->
     <header class="header">
-        <p class="label">A LITTLE UNIVERSE FOR YOU</p>
-
-        <h1>My Lovely <span>Gaby</span></h1>
-
-        <p class="subtitle">
-            Di antara jutaan bintang, kamu tetap istimewa. ✨
-        </p>
+        <h1>My Lovely Gaby <span>♥</span></h1>
+        <p>A little universe made just for you ✨</p>
     </header>
 
-    <!-- Area utama galaksi -->
+    <!-- Pesan utama -->
     <main>
-        <section class="galaksi" id="galaksi"
-                 aria-label="Galaksi berisi empat foto Gaby">
+        <section class="intro">
+            <p class="subtitle">Sebuah pesan kecil untuk seseorang yang istimewa</p>
 
-            <!-- Jalur orbit -->
-            <div class="orbit orbit-1"></div>
-            <div class="orbit orbit-2"></div>
-            <div class="orbit orbit-3"></div>
+            <button id="openSecret" class="secret-button">
+                💌 Surat Rahasia
+            </button>
 
-            <!-- Pusat galaksi -->
-            <div class="pusat">
-                <span>♡</span>
+            <p class="hint">Klik tombol atau planet untuk membuka surat ♡</p>
+        </section>
+
+        <!-- Planet interaktif -->
+        <button id="planet" class="planet" aria-label="Buka surat rahasia">
+            <span class="planet-ring"></span>
+            <span class="planet-core">💌</span>
+        </button>
+
+        <!-- Lapisan gelap untuk surat -->
+        <div id="overlay" class="overlay"></div>
+
+        <!-- Amplop -->
+        <section id="envelope" class="envelope-box" aria-label="Amplop surat">
+            <button id="closeEnvelope" class="close-button" aria-label="Tutup">×</button>
+
+            <div class="envelope-icon">💌</div>
+
+            <h2>Surat Rahasia untuk Gaby</h2>
+
+            <p>Ada sesuatu yang ingin aku sampaikan kepadamu...</p>
+
+            <button id="readLetter" class="read-button">
+                Buka Surat ❤️
+            </button>
+        </section>
+
+        <!-- Surat -->
+        <section id="letter" class="letter-box">
+            <button id="closeLetter" class="close-button" aria-label="Tutup">×</button>
+
+            <div class="letter-decoration">♡</div>
+
+            <p class="letter-label">A LITTLE LETTER FOR YOU</p>
+
+            <h2>Untuk Gaby, wanita cantikku ❤️</h2>
+
+            <div class="letter-content">
+                <p>Hai, Gaby cantik! 🥺💗</p>
+
+                <p>
+                    Ada sesuatu yang ingin aku sampaikan melalui
+                    galaksi kecil ini. Mungkin sederhana, tetapi
+                    aku membuatnya dengan sepenuh hati.
+                </p>
+
+                <p>
+                    Menurutku, kamu itu cantik, imut, lucu,
+                    dan menggemaskan. Apalagi kalau kamu senyum,
+                    rasanya ada sesuatu dari senyummu yang
+                    bikin suasana jadi lebih indah.
+                </p>
+
+                <p>
+                    Buatku, kamu adalah wanita paling cantik
+                    di dunia. Kalau kecantikanmu bisa dihitung
+                    seperti bintang di langit, mungkin aku
+                    bakal kehabisan angka sebelum selesai
+                    menghitungnya. 🌌✨
+                </p>
+
+                <p>
+                    Aku membuat galaksi ini bukan karena aku
+                    bisa memberikan seluruh bintang di langit
+                    untukmu, tetapi karena aku ingin memberikan
+                    sesuatu yang kubuat sendiri dan bisa
+                    membuatmu tersenyum.
+                </p>
+
+                <p>
+                    Kalau suatu hari kamu sedang lelah atau
+                    harimu terasa kurang menyenangkan, semoga
+                    kamu tetap ingat bahwa kamu adalah seseorang
+                    yang berharga.
+                </p>
+
+                <p>
+                    Jadi, jangan lupa tersenyum, ya, Gaby cantik.
+                    Senyummu itu manis banget. 🫶🏻
+                </p>
+
+                <p>
+                    Kamu nggak perlu menjadi orang lain untuk
+                    terlihat istimewa. Menjadi dirimu sendiri
+                    saja sudah cukup. 💕
+                </p>
+
+                <p>
+                    Terima kasih sudah menjadi Gaby yang aku kenal.
+                </p>
             </div>
 
-            <!-- Foto pertama -->
-            <button class="foto" data-index="0"
-                    aria-label="Lihat foto pertama Gaby">
+            <div class="letter-signature">
+                <p>Dengan penuh kasih,</p>
+                <h3>Irfan ❤️</h3>
+            </div>
 
-                <img src="gaby1.jpeg"
-                     alt="Gaby di dekat pohon"
-                     draggable="false">
-
+            <button id="hugButton" class="hug-button">
+                Kirim Peluk dari Jauh 🤗
             </button>
 
-            <!-- Foto kedua -->
-            <button class="foto" data-index="1"
-                    aria-label="Lihat foto kedua Gaby">
-
-                <img src="gaby2.jpeg"
-                     alt="Foto close-up Gaby"
-                     draggable="false">
-
-            </button>
-
-            <!-- Foto ketiga -->
-            <button class="foto" data-index="2"
-                    aria-label="Lihat foto ketiga Gaby">
-
-                <img src="gaby3.jpeg"
-                     alt="Gaby dengan rambut terurai"
-                     draggable="false">
-
-            </button>
-
-            <!-- Foto keempat -->
-            <button class="foto" data-index="3"
-                    aria-label="Lihat foto keempat Gaby">
-
-                <img src="gaby4.jpeg"
-                     alt="Foto Gaby di depan cermin"
-                     draggable="false">
-
-            </button>
-
+            <div id="hugMessage" class="hug-message">
+                🤗❤️ Semoga hari-harimu selalu dipenuhi kebahagiaan!
+            </div>
         </section>
     </main>
 
-    <!-- Bagian bawah -->
     <footer class="footer">
-
-        <p class="kalimat">
-            "Kalau bintang punya cahaya, kamu punya tempat
-            tersendiri di hatiku." ❤️
-        </p>
-
-        <div class="tombol">
-
-            <button class="tombol-utama" id="bukaSurat">
-                💌 Buka Surat Cinta
-            </button>
-
-            <button class="tombol-biasa" id="jedaAnimasi">
-                ⏸ Jeda Galaksi
-            </button>
-
-            <button class="tombol-biasa" id="kirimBintang">
-                ✨ Kirim Bintang
-            </button>
-
-        </div>
-
-        <p class="petunjuk">
-            Klik fotonya untuk membaca pesan khusus. ♡
-        </p>
-
+        Dibuat dengan cinta, khusus untuk Gaby ♡
     </footer>
-
-    <!-- Modal surat cinta -->
-    <section class="modal" id="modalSurat"
-             aria-hidden="true">
-
-        <div class="surat" role="dialog"
-             aria-modal="true"
-             aria-labelledby="judulSurat">
-
-            <div class="ikon-surat">💗</div>
-
-            <p class="label-surat">A LETTER FROM MY HEART</p>
-
-            <h2 id="judulSurat">
-                Untuk Gaby, Wanita Tercantikku
-            </h2>
-
-            <div class="isi-surat">
-
-                <p>Hai, Gaby cantik. ❤️</p>
-
-                <p>
-                    Ada sesuatu yang ingin aku sampaikan
-                    buat kamu.
-                </p>
-
-                <p>
-                    Menurutku, kamu itu imut banget, lucu,
-                    dan menggemaskan. Kadang hal sederhana
-                    yang kamu lakukan saja sudah bisa bikin
-                    aku senyum sendiri.
-                </p>
-
-                <p>
-                    Kamu tahu nggak? Buat aku, kamu adalah
-                    wanita paling cantik di dunia. Ada
-                    sesuatu dari dirimu yang membuat kamu
-                    istimewa di mataku.
-                </p>
-
-                <p>
-                    Aku suka melihat senyummu, caramu
-                    tertawa, dan hal-hal kecil yang membuat
-                    kamu menjadi dirimu sendiri.
-                </p>
-
-                <p>
-                    Aku harap kamu selalu percaya diri,
-                    selalu punya alasan untuk tersenyum,
-                    dan nggak pernah lupa kalau kamu
-                    berharga.
-                </p>
-
-                <p>
-                    Kalau suatu hari kamu sedang capek
-                    atau merasa harimu kurang baik,
-                    semoga kamu ingat bahwa ada seseorang
-                    yang menganggapmu begitu istimewa.
-                </p>
-
-                <p>
-                    Tetap jadi Gaby yang lucu, imut,
-                    cantik, dan menggemaskan, ya. 🌷
-                </p>
-
-                <p>
-                    Terima kasih sudah menjadi bagian
-                    dari cerita indah yang ingin aku kenang.
-                </p>
-
-                <p class="penutup-surat">
-                    With love, just for you. ❤️
-                </p>
-
-            </div>
-
-            <button class="tombol-utama" id="tutupSurat">
-                Tutup Surat 💗
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- Pesan saat foto diklik -->
-    <section class="pesan-foto" id="pesanFoto"
-             aria-hidden="true"
-             aria-live="polite">
-
-        <div class="ikon-pesan">♡</div>
-
-        <p id="isiPesan"></p>
-
-        <button class="tombol-utama" id="tutupPesan">
-            Tutup 💗
-        </button>
-
-    </section>
 
 </body>
 </html>
