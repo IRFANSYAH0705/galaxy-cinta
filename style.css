@@ -1,4 +1,6 @@
-/* Pengaturan dasar */
+/* =========================
+   PENGATURAN DASAR
+========================= */
 
 :root {
     --ungu: #a65aff;
@@ -13,15 +15,24 @@
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
     min-height: 100vh;
+    min-height: 100dvh;
     overflow: hidden;
     color: var(--putih);
     font-family: Arial, sans-serif;
 
     background:
-        radial-gradient(ellipse at center, #21113c, transparent 65%),
-        var(--latar);
+        radial-gradient(
+            ellipse at 50% 45%,
+            #291441 0%,
+            #10091f 42%,
+            #05040d 80%
+        );
 }
 
 button {
@@ -30,16 +41,23 @@ button {
     -webkit-tap-highlight-color: transparent;
 }
 
+button:focus-visible {
+    outline: 2px solid var(--pink);
+    outline-offset: 4px;
+}
+
 #bintang {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
     pointer-events: none;
+    z-index: 0;
 }
 
-/* Judul */
+/* =========================
+   JUDUL
+========================= */
 
 .header {
     position: fixed;
@@ -76,19 +94,24 @@ button {
     font-size: 13px;
 }
 
-/* Galaksi */
+/* =========================
+   GALAKSI
+========================= */
 
 .galaksi {
     position: fixed;
     top: 50%;
     left: 50%;
+
     width: min(82vw, 680px);
     height: min(82vw, 680px);
+
     max-width: 72vh;
     max-height: 72vh;
+
     transform: translate(-50%, -50%);
     transform-style: preserve-3d;
-    touch-action: none;
+    touch-action: pan-y;
     z-index: 2;
 }
 
@@ -96,8 +119,10 @@ button {
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 1px solid rgba(191, 151, 255, 0.2);
+
+    border: 1px solid rgba(191, 151, 255, 0.22);
     border-radius: 50%;
+
     transform: translate(-50%, -50%);
     pointer-events: none;
 }
@@ -121,8 +146,10 @@ button {
     position: absolute;
     top: 50%;
     left: 50%;
+
     width: 24%;
     aspect-ratio: 1;
+
     transform: translate(-50%, -50%);
     border-radius: 50%;
 
@@ -135,55 +162,79 @@ button {
         transparent 72%
     );
 
-    box-shadow: 0 0 50px var(--ungu);
+    box-shadow:
+        0 0 25px rgba(166, 90, 255, 0.8),
+        0 0 65px rgba(166, 90, 255, 0.4);
+
+    animation: cahayaPusat 4s ease-in-out infinite;
     pointer-events: none;
 }
 
-/* Foto */
+@keyframes cahayaPusat {
+    0%, 100% {
+        filter: brightness(0.9);
+    }
+
+    50% {
+        filter: brightness(1.2);
+    }
+}
+
+/* =========================
+   FOTO
+========================= */
 
 .foto {
     position: absolute;
     top: 50%;
     left: 50%;
+
     width: clamp(75px, 14vw, 130px);
     aspect-ratio: 3 / 4;
     padding: 4px;
+
     border: none;
     border-radius: 13px;
 
     background: linear-gradient(
         135deg,
-        white,
+        #ffffff,
         #d4a3ff,
         var(--pink)
     );
 
-    box-shadow: 0 0 25px rgba(192, 125, 255, 0.45);
+    box-shadow: 0 0 25px rgba(192, 125, 255, 0.4);
     overflow: hidden;
-    transition: box-shadow 0.3s ease;
+
+    transition:
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
 }
 
 .foto img {
     display: block;
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     border-radius: 9px;
 }
 
-.foto:hover,
-.foto:focus-visible {
+.foto:hover {
     box-shadow: 0 0 35px var(--pink);
-    outline: none;
+    filter: brightness(1.08);
 }
 
-/* Bagian bawah */
+/* =========================
+   TOMBOL DAN TULISAN
+========================= */
 
 .footer {
     position: fixed;
     bottom: 22px;
     left: 0;
     width: 100%;
+
     padding: 0 16px;
 
     display: flex;
@@ -196,12 +247,15 @@ button {
 
 .kalimat {
     max-width: 750px;
+
     color: #f8d9f1;
     font-family: Georgia, serif;
     font-style: italic;
+
     font-size: clamp(14px, 2.5vw, 19px);
     line-height: 1.5;
     text-align: center;
+
     text-shadow: 0 0 15px var(--ungu);
 }
 
@@ -216,10 +270,13 @@ button {
 .surat button,
 .pesanFoto button {
     padding: 11px 15px;
+
     color: white;
     font-size: 12px;
+
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 30px;
+
     background: rgba(40, 23, 65, 0.9);
 
     transition:
@@ -244,10 +301,13 @@ button {
 .petunjuk {
     color: #bfb2d2;
     font-size: 10px;
+    line-height: 1.5;
     text-align: center;
 }
 
-/* Surat cinta */
+/* =========================
+   SURAT CINTA
+========================= */
 
 .modal {
     position: fixed;
@@ -257,11 +317,14 @@ button {
     display: none;
     align-items: center;
     justify-content: center;
+
     padding: 20px;
 
-    background: rgba(3, 2, 12, 0.82);
+    background: rgba(3, 2, 12, 0.84);
     backdrop-filter: blur(12px);
+
     overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .modal.aktif {
@@ -273,14 +336,19 @@ button {
     width: 100%;
     max-width: 430px;
     max-height: 90vh;
+    max-height: 90dvh;
+
     padding: 25px 22px;
     text-align: center;
+
     overflow-y: auto;
+    overscroll-behavior: contain;
 
     border: 1px solid rgba(255, 210, 243, 0.3);
     border-radius: 25px;
 
     background: linear-gradient(145deg, #30204b, #100d24);
+
     box-shadow: 0 0 50px rgba(165, 91, 232, 0.25);
 }
 
@@ -290,6 +358,7 @@ button {
 
 .surat h2 {
     margin: 12px 0 18px;
+
     font-family: Georgia, serif;
     font-size: 26px;
     font-weight: normal;
@@ -299,28 +368,47 @@ button {
     color: #e8dff1;
     font-size: 14px;
     line-height: 1.8;
+    text-align: left;
+}
+
+.isiSurat p {
+    margin-bottom: 16px;
+}
+
+.penutupSurat {
+    color: var(--pink);
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-align: center;
 }
 
 .surat button {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-/* Pesan foto */
+/* =========================
+   PESAN FOTO
+========================= */
 
 .pesanFoto {
     position: fixed;
     top: 50%;
     left: 50%;
+
     width: min(85%, 330px);
     padding: 22px;
+
     display: none;
     text-align: center;
 
     transform: translate(-50%, -50%);
+
     background: rgba(35, 21, 57, 0.97);
     border: 1px solid #c69bff;
     border-radius: 20px;
+
     box-shadow: 0 0 40px rgba(180, 120, 255, 0.35);
+
     z-index: 8;
     line-height: 1.7;
 }
@@ -334,14 +422,19 @@ button {
     margin-top: 15px;
 }
 
-/* Efek bintang */
+/* =========================
+   PARTIKEL BINTANG
+========================= */
 
 .partikel {
     position: fixed;
     z-index: 7;
+
     color: #ffc6ef;
     text-shadow: 0 0 12px #bc8aff;
+
     pointer-events: none;
+
     animation: terbang 1.8s ease-out forwards;
 }
 
@@ -355,16 +448,18 @@ button {
 @keyframes muncul {
     from {
         opacity: 0;
-        scale: 0.95;
+        transform: scale(0.96);
     }
 
     to {
         opacity: 1;
-        scale: 1;
+        transform: scale(1);
     }
 }
 
-/* Tampilan HP */
+/* =========================
+   TAMPILAN HP
+========================= */
 
 @media (max-width: 600px) {
     .header {
@@ -382,8 +477,10 @@ button {
 
     .galaksi {
         top: 48%;
-        width: 100vw;
-        height: 100vw;
+
+        width: min(100vw, 48vh);
+        height: min(100vw, 48vh);
+
         max-width: none;
         max-height: none;
     }
@@ -410,7 +507,6 @@ button {
 
     .petunjuk {
         max-width: 300px;
-        line-height: 1.5;
     }
 
     .surat {
@@ -426,7 +522,9 @@ button {
     }
 }
 
-/* Pengaturan pengurangan animasi */
+/* =========================
+   MENGURANGI ANIMASI
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
     *,
