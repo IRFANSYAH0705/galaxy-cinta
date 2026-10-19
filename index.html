@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#080713">
+    <meta name="theme-color" content="#090714">
 
     <title>My Little Universe ❤️</title>
+
+    <meta name="description"
+          content="Sebuah galaksi kecil yang dibuat khusus untuk Gaby.">
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -13,87 +16,113 @@
 
 <body>
 
-    <!-- Latar bintang -->
+    <!-- Latar belakang bintang -->
     <canvas id="bintang" aria-hidden="true"></canvas>
 
-    <!-- Judul -->
-    <header class="header">
-        <p class="label">MY LITTLE UNIVERSE</p>
+    <!-- Cahaya latar -->
+    <div class="cahaya cahaya-1"></div>
+    <div class="cahaya cahaya-2"></div>
 
-        <h1>My Lovely Gaby <span>♡</span></h1>
+    <!-- Judul website -->
+    <header class="header">
+        <p class="label">A LITTLE UNIVERSE FOR YOU</p>
+
+        <h1>My Lovely <span>Gaby</span></h1>
 
         <p class="subtitle">
-            Di antara jutaan bintang, kamu tetap istimewa.
+            Di antara jutaan bintang, kamu tetap istimewa. ✨
         </p>
     </header>
 
-    <!-- Galaksi dan foto -->
-    <main class="galaksi" id="galaksi">
+    <!-- Area utama galaksi -->
+    <main>
+        <section class="galaksi" id="galaksi"
+                 aria-label="Galaksi berisi empat foto Gaby">
 
-        <div class="orbit orbit-1"></div>
-        <div class="orbit orbit-2"></div>
-        <div class="orbit orbit-3"></div>
+            <!-- Jalur orbit -->
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
 
-        <div class="pusat" aria-hidden="true"></div>
+            <!-- Pusat galaksi -->
+            <div class="pusat">
+                <span>♡</span>
+            </div>
 
-        <button class="foto" data-index="0"
-                aria-label="Lihat foto pertama Gaby">
-            <img src="images/gaby1.jpg"
-                 alt="Gaby di dekat pohon">
-        </button>
+            <!-- Foto pertama -->
+            <button class="foto" data-index="0"
+                    aria-label="Lihat foto pertama Gaby">
 
-        <button class="foto" data-index="1"
-                aria-label="Lihat foto kedua Gaby">
-            <img src="images/gaby2.jpg"
-                 alt="Foto close-up Gaby">
-        </button>
+                <img src="gaby1.jpeg"
+                     alt="Gaby di dekat pohon"
+                     draggable="false">
 
-        <button class="foto" data-index="2"
-                aria-label="Lihat foto ketiga Gaby">
-            <img src="images/gaby3.jpg"
-                 alt="Gaby dengan rambut terurai">
-        </button>
+            </button>
 
-        <button class="foto" data-index="3"
-                aria-label="Lihat foto keempat Gaby">
-            <img src="images/gaby4.jpg"
-                 alt="Gaby di depan cermin">
-        </button>
+            <!-- Foto kedua -->
+            <button class="foto" data-index="1"
+                    aria-label="Lihat foto kedua Gaby">
 
+                <img src="gaby2.jpeg"
+                     alt="Foto close-up Gaby"
+                     draggable="false">
+
+            </button>
+
+            <!-- Foto ketiga -->
+            <button class="foto" data-index="2"
+                    aria-label="Lihat foto ketiga Gaby">
+
+                <img src="gaby3.jpeg"
+                     alt="Gaby dengan rambut terurai"
+                     draggable="false">
+
+            </button>
+
+            <!-- Foto keempat -->
+            <button class="foto" data-index="3"
+                    aria-label="Lihat foto keempat Gaby">
+
+                <img src="gaby4.jpeg"
+                     alt="Foto Gaby di depan cermin"
+                     draggable="false">
+
+            </button>
+
+        </section>
     </main>
 
     <!-- Bagian bawah -->
     <footer class="footer">
 
         <p class="kalimat">
-            "Buat aku, kamu adalah wanita tercantik
-            yang pernah hadir di hidupku. ❤️"
+            "Kalau bintang punya cahaya, kamu punya tempat
+            tersendiri di hatiku." ❤️
         </p>
 
         <div class="tombol">
 
-            <button class="utama" id="bukaSurat">
-                Buka Surat Cinta 💌
+            <button class="tombol-utama" id="bukaSurat">
+                💌 Buka Surat Cinta
             </button>
 
-            <button id="jedaAnimasi">
-                Jeda Galaksi ⏸
+            <button class="tombol-biasa" id="jedaAnimasi">
+                ⏸ Jeda Galaksi
             </button>
 
-            <button id="kirimBintang">
-                Kirim Bintang ✨
+            <button class="tombol-biasa" id="kirimBintang">
+                ✨ Kirim Bintang
             </button>
 
         </div>
 
         <p class="petunjuk">
-            Sentuh foto untuk membaca pesan.
-            Geser galaksi untuk mengubah sudutnya.
+            Klik fotonya untuk membaca pesan khusus. ♡
         </p>
 
     </footer>
 
-    <!-- Surat cinta -->
+    <!-- Modal surat cinta -->
     <section class="modal" id="modalSurat"
              aria-hidden="true">
 
@@ -101,63 +130,75 @@
              aria-modal="true"
              aria-labelledby="judulSurat">
 
-            <div class="ikonSurat">💗</div>
+            <div class="ikon-surat">💗</div>
+
+            <p class="label-surat">A LETTER FROM MY HEART</p>
 
             <h2 id="judulSurat">
-                Untuk Gaby, Wanita Tercantikku 🌷
+                Untuk Gaby, Wanita Tercantikku
             </h2>
 
-            <div class="isiSurat">
+            <div class="isi-surat">
 
-                <p>Hai, Gaby sayangku. ❤️</p>
+                <p>Hai, Gaby cantik. ❤️</p>
 
                 <p>
-                    Aku cuma mau bilang kalau menurutku kamu itu
-                    imut banget, lucu, dan menggemaskan.
-                    Ada aja hal kecil dari kamu yang bisa bikin
+                    Ada sesuatu yang ingin aku sampaikan
+                    buat kamu.
+                </p>
+
+                <p>
+                    Menurutku, kamu itu imut banget, lucu,
+                    dan menggemaskan. Kadang hal sederhana
+                    yang kamu lakukan saja sudah bisa bikin
                     aku senyum sendiri.
                 </p>
 
                 <p>
-                    Buat aku, kamu adalah wanita paling cantik
-                    di dunia. Bukan cuma karena wajahmu yang cantik,
-                    tetapi juga karena kamu punya sesuatu yang
-                    membuatmu istimewa di mataku.
+                    Kamu tahu nggak? Buat aku, kamu adalah
+                    wanita paling cantik di dunia. Ada
+                    sesuatu dari dirimu yang membuat kamu
+                    istimewa di mataku.
                 </p>
 
                 <p>
-                    Bahkan saat kamu melakukan hal sederhana,
-                    kamu tetap bisa bikin aku terpikat.
-                    Mungkin kamu nggak selalu sadar betapa
-                    cantiknya kamu menurutku. 🥹💕
+                    Aku suka melihat senyummu, caramu
+                    tertawa, dan hal-hal kecil yang membuat
+                    kamu menjadi dirimu sendiri.
                 </p>
 
                 <p>
                     Aku harap kamu selalu percaya diri,
-                    tetap tersenyum, dan tetap menjadi Gaby
-                    yang imut, lucu, serta menggemaskan
-                    dengan caramu sendiri.
+                    selalu punya alasan untuk tersenyum,
+                    dan nggak pernah lupa kalau kamu
+                    berharga.
                 </p>
 
                 <p>
-                    Aku senang bisa mengenal kamu.
-                    Semoga ada banyak hal indah yang bisa
-                    kita ceritakan dan kenang bersama.
+                    Kalau suatu hari kamu sedang capek
+                    atau merasa harimu kurang baik,
+                    semoga kamu ingat bahwa ada seseorang
+                    yang menganggapmu begitu istimewa.
                 </p>
 
                 <p>
-                    Jangan lupa jaga diri baik-baik, ya,
-                    wanita cantik kesayanganku. 🌹
+                    Tetap jadi Gaby yang lucu, imut,
+                    cantik, dan menggemaskan, ya. 🌷
                 </p>
 
-                <p class="penutupSurat">
-                    With love, from me to you. ❤️
+                <p>
+                    Terima kasih sudah menjadi bagian
+                    dari cerita indah yang ingin aku kenang.
+                </p>
+
+                <p class="penutup-surat">
+                    With love, just for you. ❤️
                 </p>
 
             </div>
 
-            <button class="utama" id="tutupSurat">
-                Tutup Surat ❤️
+            <button class="tombol-utama" id="tutupSurat">
+                Tutup Surat 💗
             </button>
 
         </div>
@@ -165,14 +206,16 @@
     </section>
 
     <!-- Pesan saat foto diklik -->
-    <section class="pesanFoto" id="pesanFoto"
+    <section class="pesan-foto" id="pesanFoto"
              aria-hidden="true"
              aria-live="polite">
 
+        <div class="ikon-pesan">♡</div>
+
         <p id="isiPesan"></p>
 
-        <button class="utama" id="tutupPesan">
-            Tutup ❤️
+        <button class="tombol-utama" id="tutupPesan">
+            Tutup 💗
         </button>
 
     </section>
