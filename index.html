@@ -12,8 +12,8 @@
 
 <body>
 
-    <!-- BACKGROUND GALAKSI -->
-    <div class="space">
+    <!-- LATAR GALAKSI UTAMA -->
+    <div class="space-background" aria-hidden="true">
         <canvas id="stars"></canvas>
         <canvas id="meteors"></canvas>
 
@@ -22,89 +22,75 @@
 
         <div class="planet planet-blue"></div>
         <div class="planet planet-ring"></div>
-        <div class="planet planet-gold"></div>
+        <div class="planet planet-purple"></div>
     </div>
 
-    <main>
 
-        <!-- HALAMAN PEMBUKA -->
-        <section class="hero">
+    <!-- HALAMAN PEMBUKA -->
+    <section class="opening-page" id="openingPage">
 
-            <div class="scroll-cue">
-                <span class="arrow-down">↓</span>
-                <span>SCROLL TO EXPLORE</span>
-            </div>
+        <div class="opening-content">
 
-            <div class="hero-copy">
+            <p class="eyebrow">A LITTLE UNIVERSE FOR YOU</p>
 
-                <p class="eyebrow">A LITTLE UNIVERSE FOR YOU</p>
+            <h1>Untuk <span>Gaby</span> ♡</h1>
 
-                <h1>Untuk <span>Gaby</span> ♡</h1>
+            <p class="opening-description">
+                Di antara banyaknya bintang, ada satu orang
+                yang selalu punya tempat spesial di hatiku.
+            </p>
 
-                <p>
-                    Di antara banyaknya bintang, ada satu orang
-                    yang selalu punya tempat spesial di hatiku.
-                </p>
+            <button class="main-button" id="enterButton">
+                Buka surat-suratku ↓
+            </button>
 
-                <a href="#letters" class="explore-button">
-                    Buka surat-suratku ↓
-                </a>
+            <p class="scroll-text">
+                ✦ A LITTLE JOURNEY JUST FOR YOU ✦
+            </p>
 
-            </div>
+        </div>
 
-        </section>
+    </section>
 
 
-        <!-- EMPAT SURAT FOTO GABY -->
-        <section class="letters-section" id="letters">
+    <!-- ISI WEBSITE -->
+    <main id="mainContent" hidden>
+
+        <!-- EMPAT FOTO GABY -->
+        <section class="letters-section">
 
             <p class="eyebrow">SOME WORDS FROM MY HEART</p>
 
             <h2>Surat kecil untukmu 💌</h2>
 
-            <p class="section-note">
-                Pilih salah satu kartu untuk membaca suratnya.
+            <p class="section-description">
+                Ada beberapa pesan kecil yang ingin kusampaikan kepadamu.
             </p>
 
             <div class="photo-grid">
 
-                <button class="photo-card" data-letter="0" type="button">
-                    <span class="photo-frame">
-                        <img src="gaby1.jpeg" alt="Foto Gaby 1" loading="lazy">
-                    </span>
-
-                    <span class="card-title">Untuk senyummu 🌷</span>
-                    <span class="card-subtitle">Buka surat pertama</span>
+                <button class="photo-card" data-letter="0">
+                    <img src="gaby1.jpeg" alt="Foto Gaby pertama">
+                    <h3>Untuk senyummu 🌷</h3>
+                    <p>Buka surat pertama</p>
                 </button>
 
-
-                <button class="photo-card" data-letter="1" type="button">
-                    <span class="photo-frame">
-                        <img src="gaby2.jpeg" alt="Foto Gaby 2" loading="lazy">
-                    </span>
-
-                    <span class="card-title">Hal kecil tentangmu ✨</span>
-                    <span class="card-subtitle">Buka surat kedua</span>
+                <button class="photo-card" data-letter="1">
+                    <img src="gaby2.jpeg" alt="Foto Gaby kedua">
+                    <h3>Hal kecil tentangmu ✨</h3>
+                    <p>Buka surat kedua</p>
                 </button>
 
-
-                <button class="photo-card" data-letter="2" type="button">
-                    <span class="photo-frame">
-                        <img src="gaby3.jpeg" alt="Foto Gaby 3" loading="lazy">
-                    </span>
-
-                    <span class="card-title">Kamu yang spesial 💗</span>
-                    <span class="card-subtitle">Buka surat ketiga</span>
+                <button class="photo-card" data-letter="2">
+                    <img src="gaby3.jpeg" alt="Foto Gaby ketiga">
+                    <h3>Kamu yang spesial 💗</h3>
+                    <p>Buka surat ketiga</p>
                 </button>
 
-
-                <button class="photo-card" data-letter="3" type="button">
-                    <span class="photo-frame">
-                        <img src="gaby4.jpeg" alt="Foto Gaby 4" loading="lazy">
-                    </span>
-
-                    <span class="card-title">Satu pesan lagi 🌙</span>
-                    <span class="card-subtitle">Buka surat keempat</span>
+                <button class="photo-card" data-letter="3">
+                    <img src="gaby4.jpeg" alt="Foto Gaby keempat">
+                    <h3>Satu pesan lagi 🌙</h3>
+                    <p>Buka surat keempat</p>
                 </button>
 
             </div>
@@ -112,98 +98,69 @@
         </section>
 
 
-        <!-- KELINCI ANIME -->
+        <!-- SURAT KELINCI -->
         <section class="bunny-section">
 
-            <div class="bunny-scene">
+            <div class="bunny-container">
 
-                <div class="sparkle sparkle-a">✦</div>
-                <div class="sparkle sparkle-b">♡</div>
+                <div class="bunny" aria-label="Kelinci lucu">
 
-                <div class="bunny">
+                    <div class="bunny-ear left"></div>
+                    <div class="bunny-ear right"></div>
 
-                    <span class="ear ear-left"></span>
-                    <span class="ear ear-right"></span>
+                    <div class="bunny-head">
+                        <span class="bunny-eye left"></span>
+                        <span class="bunny-eye right"></span>
 
-                    <span class="bunny-face">
-                        <i class="eye eye-left"></i>
-                        <i class="eye eye-right"></i>
+                        <span class="bunny-cheek left"></span>
+                        <span class="bunny-cheek right"></span>
 
-                        <i class="cheek cheek-left"></i>
-                        <i class="cheek cheek-right"></i>
+                        <span class="bunny-nose"></span>
+                        <span class="bunny-mouth"></span>
+                    </div>
 
-                        <i class="nose"></i>
-                        <i class="mouth"></i>
-                    </span>
-
-                    <span class="bunny-body"></span>
-                    <span class="bunny-tail"></span>
+                    <div class="bunny-body"></div>
+                    <div class="bunny-tail"></div>
 
                 </div>
 
-                <div class="bunny-shadow"></div>
-
             </div>
 
-
-            <div class="bunny-copy">
+            <div class="bunny-description">
 
                 <p class="eyebrow">A MESSAGE FROM A LITTLE BUNNY</p>
 
                 <h2>Eh, ada surat rahasia! 🐰</h2>
 
                 <p>
-                    Katanya ada pesan kecil yang cuma boleh dibaca Gaby.
+                    Ada kelinci kecil yang datang membawa pesan khusus untuk Gaby.
                 </p>
 
-                <button
-                    id="bunnyLetterButton"
-                    class="primary-button"
-                    type="button">
-
+                <button class="main-button" id="bunnyButton">
                     Baca surat kelinci 💌
-
                 </button>
 
             </div>
 
         </section>
 
-
         <footer>
-            Dirangkai dengan sepenuh hati untuk Gaby
-            <span>♡</span>
+            Dirangkai dengan sepenuh hati untuk Gaby ♡
         </footer>
 
     </main>
 
 
     <!-- JENDELA SURAT -->
-    <div
-        class="modal"
-        id="letterModal"
-        aria-hidden="true"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="letterTitle">
+    <div class="modal" id="letterModal" aria-hidden="true">
 
-        <div class="modal-backdrop"></div>
+        <div class="modal-background" id="modalBackground"></div>
 
         <article class="letter-paper">
 
-            <button
-                class="close-button"
-                id="closeModal"
-                type="button"
-                aria-label="Tutup surat">
+            <button class="close-button" id="closeLetter">×</button>
 
-                ×
-
-            </button>
-
-            <div class="letter-decoration" id="letterDecoration">
-                ♡
-            </div>
+            <div class="letter-symbol" id="letterSymbol">♡</div>
 
             <p class="eyebrow" id="letterEyebrow">
                 A LETTER FOR YOU
@@ -211,40 +168,24 @@
 
             <h2 id="letterTitle">Untuk Gaby</h2>
 
-            <div class="letter-content" id="letterContent"></div>
+            <div id="letterContent"></div>
 
-            <div class="surprise-area" id="surpriseArea" hidden>
+            <div class="letter-actions">
 
-                <button
-                    class="primary-button"
-                    id="revealPhoto"
-                    type="button"
-                    hidden>
-
+                <button class="main-button" id="showPhoto" hidden>
                     Lihat foto kecil 💗
-
                 </button>
 
-                <div
-                    class="surprise-image-wrap"
-                    id="surpriseImageWrap"
-                    hidden>
+                <img
+                    id="letterPhoto"
+                    class="letter-photo"
+                    src=""
+                    alt="Foto untuk Gaby"
+                    hidden
+                >
 
-                    <img
-                        id="surpriseImage"
-                        src=""
-                        alt="Foto kejutan untuk Gaby">
-
-                </div>
-
-                <button
-                    class="primary-button surprise-button"
-                    id="startHug"
-                    type="button"
-                    hidden>
-
+                <button class="main-button" id="hugButton" hidden>
                     💗 Buka kejutan spesial 💗
-
                 </button>
 
             </div>
@@ -254,60 +195,67 @@
     </div>
 
 
-    <!-- ANIMASI PELUKAN ANIME -->
-    <div
-        class="hug-scene"
-        id="hugScene"
-        aria-hidden="true">
+    <!-- ADEGAN PELUKAN DENGAN LATAR KHUSUS -->
+    <section class="hug-scene" id="hugScene" aria-hidden="true">
 
-        <button
-            class="hug-close"
-            id="closeHug"
-            type="button"
-            aria-label="Tutup kejutan">
+        <div class="hug-background" aria-hidden="true">
+            <canvas id="hugStars"></canvas>
+            <div class="hug-nebula"></div>
+            <div class="hug-nebula second"></div>
+        </div>
 
-            ×
+        <button class="hug-close" id="closeHug">×</button>
 
-        </button>
+        <p class="hug-eyebrow">JUST FOR YOU, GABY ♡</p>
 
-        <p class="hug-kicker">JUST FOR YOU</p>
+        <div class="hug-stage" id="hugStage">
 
-        <div class="anime-stage">
+            <!-- LAKI-LAKI -->
+            <div class="anime-character boy" id="boy">
 
-            <!-- KARAKTER LAKI-LAKI -->
-            <div class="anime-person boy">
+                <div class="character-hair"></div>
 
-                <span class="hair"></span>
+                <div class="character-head">
+                    <span class="character-eye left"></span>
+                    <span class="character-eye right"></span>
+                    <span class="character-blush left"></span>
+                    <span class="character-blush right"></span>
+                </div>
 
-                <span class="head">
-                    <i class="eye"></i>
-                    <i class="blush"></i>
-                </span>
+                <div class="character-neck"></div>
 
-                <span class="body"></span>
-                <span class="arm"></span>
+                <div class="character-body"></div>
 
-                <span class="leg leg-one"></span>
-                <span class="leg leg-two"></span>
+                <div class="character-arm left"></div>
+                <div class="character-arm right"></div>
+
+                <div class="character-leg left"></div>
+                <div class="character-leg right"></div>
 
             </div>
 
 
-            <!-- KARAKTER PEREMPUAN -->
-            <div class="anime-person girl">
+            <!-- PEREMPUAN -->
+            <div class="anime-character girl" id="girl">
 
-                <span class="hair"></span>
+                <div class="character-hair"></div>
 
-                <span class="head">
-                    <i class="eye"></i>
-                    <i class="blush"></i>
-                </span>
+                <div class="character-head">
+                    <span class="character-eye left"></span>
+                    <span class="character-eye right"></span>
+                    <span class="character-blush left"></span>
+                    <span class="character-blush right"></span>
+                </div>
 
-                <span class="body"></span>
-                <span class="arm"></span>
+                <div class="character-neck"></div>
 
-                <span class="leg leg-one"></span>
-                <span class="leg leg-two"></span>
+                <div class="character-body"></div>
+
+                <div class="character-arm left"></div>
+                <div class="character-arm right"></div>
+
+                <div class="character-leg left"></div>
+                <div class="character-leg right"></div>
 
             </div>
 
@@ -315,17 +263,21 @@
 
         </div>
 
+        <div class="hug-text" id="hugText">
 
-        <h2 class="hug-message">
-            Kalau aku bisa memilih sekali lagi,<br>
-            aku tetap memilih kamu. <span>♡</span>
-        </h2>
+            <h2>
+                Kalau aku bisa memilih sekali lagi,
+                <br>
+                aku tetap memilih kamu. ♡
+            </h2>
 
-        <p class="hug-small">
-            Satu pelukan kecil dari jauh untukmu, Gaby.
-        </p>
+            <p>
+                Satu pelukan kecil dari jauh untukmu, Gaby.
+            </p>
 
-    </div>
+        </div>
+
+    </section>
 
 </body>
 </html>
