@@ -4,46 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#08040f">
+    <title>My Lovely Gaby 💗</title>
 
-    <title>My Lovely Gaby ♥</title>
+    <meta name="theme-color" content="#080510">
+    <meta name="description" content="Sebuah galaksi kecil yang dibuat khusus untuk Gaby.">
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Latar belakang bintang -->
-    <div class="stars" id="stars"></div>
+    <!-- Bintang di latar belakang -->
+    <canvas id="stars"></canvas>
 
-    <!-- Intro pembuka -->
+    <!-- Halaman pembuka -->
     <section class="intro" id="intro">
         <div class="intro-content">
+            <div class="intro-star">✦</div>
 
-            <div class="intro-planet">🪐</div>
+            <p class="intro-label">A LITTLE UNIVERSE MADE JUST FOR YOU</p>
 
-            <p class="intro-label">A LITTLE UNIVERSE</p>
+            <h1>Welcome to My Galaxy 💗</h1>
 
-            <h1>For My Lovely Gaby <span>♥</span></h1>
-
-            <p class="intro-description">
-                Ada seseorang yang membuat semesta terasa lebih indah.
+            <p class="intro-text">
+                Ada seseorang yang membuat dunia sederhana
+                terasa jauh lebih indah.
             </p>
 
-            <button class="main-button" id="startButton">
-                Masuk ke Galaksi ✨
+            <button id="enterButton" class="main-button">
+                ✨ Masuk ke Galaksi
             </button>
 
+            <p class="intro-note">A little universe, just for you.</p>
         </div>
     </section>
 
-    <!-- Halaman utama -->
-    <main class="universe hidden" id="universe">
+    <!-- Website utama -->
+    <main class="main-content" id="mainContent">
 
-        <header class="header">
-
-            <p class="small-title">
-                A LITTLE UNIVERSE MADE JUST FOR YOU ✨
-            </p>
+        <header class="hero">
+            <p class="eyebrow">A LITTLE UNIVERSE MADE JUST FOR YOU ✨</p>
 
             <h1>My Lovely Gaby <span>♥</span></h1>
 
@@ -51,107 +50,116 @@
                 Sebuah pesan kecil untuk seseorang yang istimewa.
             </p>
 
-        </header>
-
-        <button class="letter-button" id="letterButton">
-            💌 Surat Rahasia
-        </button>
-
-        <p class="hint">
-            Sentuh planet atau geser untuk menjelajahi galaksi ♡
-        </p>
-
-        <!-- Area galaksi -->
-        <section class="galaxy-area" id="galaxyArea">
-
-            <!-- Foto dibuat otomatis oleh JavaScript -->
-            <div class="photo-galaxy" id="photoGalaxy"></div>
-
-            <!-- Planet utama -->
-            <button
-                class="planet"
-                id="planet"
-                type="button"
-                aria-label="Buka Surat Rahasia"
-            >
-                <span class="planet-glow"></span>
-                <span class="planet-ring"></span>
-
-                <span class="planet-body">
-                    <span class="planet-letter">💌</span>
-                </span>
+            <button class="main-button letter-button" id="letterButton">
+                💌 Surat Rahasia
             </button>
 
-        </section>
+            <p class="instruction">
+                Sentuh planet atau geser untuk menjelajahi galaksi ♡
+            </p>
+        </header>
 
-        <p class="bottom-text">
-            Di antara jutaan bintang, kamu tetap istimewa. ♥
-        </p>
+        <!-- Area galaksi -->
+        <section class="galaxy-section" id="galaxySection">
 
-    </main>
+            <div class="galaxy" id="galaxy">
 
-    <!-- Surat rahasia -->
-    <section
-        class="letter-overlay hidden"
-        id="letterOverlay"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="letterTitle"
-    >
+                <!-- Foto akan dibuat otomatis oleh JavaScript -->
 
-        <article class="letter-card">
+                <div class="planet" id="planet">
 
-            <button
-                class="close-button"
-                id="closeLetter"
-                type="button"
-                aria-label="Tutup surat"
-            >×</button>
+                    <div class="planet-glow"></div>
 
-            <div class="envelope" id="envelope">💌</div>
+                    <div class="planet-body">
+                        <span class="planet-letter">💌</span>
+                    </div>
 
-            <p class="letter-label">A SECRET LETTER FOR YOU</p>
+                    <div class="planet-ring ring-back"></div>
+                    <div class="planet-ring ring-front"></div>
 
-            <h2 id="letterTitle">Untuk Gaby ♡</h2>
-
-            <div class="letter-content">
-
-                <p>Hai, Gaby cantik. ❤️</p>
-
-                <p>
-                    Kamu itu imut, lucu, dan menggemaskan.
-                    Ada sesuatu dari senyummu yang bisa membuat
-                    hari biasa terasa lebih menyenangkan.
-                </p>
-
-                <p>
-                    Buatku, kamu adalah salah satu wanita
-                    tercantik di dunia. Bukan cuma karena
-                    penampilanmu, tetapi juga karena hal-hal
-                    sederhana yang membuatmu menjadi dirimu sendiri.
-                </p>
-
-                <p>
-                    Kalau galaksi punya jutaan bintang,
-                    aku tetap ingin mengagumi bintang yang
-                    paling istimewa di mataku: kamu.
-                </p>
-
-                <p class="signature">
-                    Dari seseorang yang ingin melihatmu tersenyum. ♥
-                </p>
+                </div>
 
             </div>
 
-            <button class="main-button" id="finishLetter" type="button">
-                Kembali ke Galaksi ✨
-            </button>
+            <div class="galaxy-caption">
+                <span>♡</span>
+                Dibuat dengan cinta khusus untuk Gaby
+                <span>♡</span>
+            </div>
 
-        </article>
+        </section>
 
-    </section>
+        <!-- Surat rahasia -->
+        <div class="modal" id="letterModal" aria-hidden="true">
+
+            <div class="letter-card">
+
+                <button
+                    class="close-button"
+                    id="closeLetter"
+                    aria-label="Tutup surat"
+                >&times;</button>
+
+                <div class="letter-icon">💌</div>
+
+                <p class="letter-label">A LITTLE SECRET FOR YOU</p>
+
+                <h2>Untuk Gaby ♡</h2>
+
+                <div class="letter-content">
+                    <p>
+                        Hai, Gaby.
+                    </p>
+
+                    <p>
+                        Aku cuma mau bilang kalau kamu itu
+                        cantik, imut, lucu, dan menggemaskan.
+                        Ada sesuatu dari senyummu yang bisa
+                        membuat hari biasa terasa lebih indah.
+                    </p>
+
+                    <p>
+                        Kamu punya pesona tersendiri.
+                        Cara kamu tersenyum, cara kamu tertawa,
+                        bahkan hal-hal kecil tentang dirimu
+                        punya tempat spesial di pikiranku.
+                    </p>
+
+                    <p>
+                        Buatku, kamu adalah wanita yang paling
+                        cantik di dunia. Bukan cuma karena
+                        penampilanmu, tetapi juga karena
+                        kamu punya keistimewaanmu sendiri.
+                    </p>
+
+                    <p>
+                        Kalau setiap bintang di langit bisa
+                        mewakili satu alasan kenapa kamu
+                        istimewa, mungkin seluruh galaksi
+                        ini masih belum cukup. 🪐
+                    </p>
+
+                    <p class="letter-ending">
+                        Dengan tulus,<br>
+                        seseorang yang membuat galaksi kecil ini
+                        khusus untukmu. 💗
+                    </p>
+                </div>
+
+                <button class="main-button" id="finishLetter">
+                    Peluk dari jauh ♡
+                </button>
+
+            </div>
+
+        </div>
+
+        <footer>
+            Made with ♡ for Gaby
+        </footer>
+
+    </main>
 
     <script src="script.js"></script>
-
 </body>
 </html>
