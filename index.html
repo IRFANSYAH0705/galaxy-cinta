@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080713">
+
+    <title>My Lovely Gaby ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <canvas id="bintang"></canvas>
+
+    <header class="header">
+        <p class="label">MY LITTLE UNIVERSE</p>
+        <h1>My Lovely Gaby <span>♡</span></h1>
+        <p class="subtitle">
+            Di antara jutaan bintang, kamu tetap istimewa.
+        </p>
+    </header>
+
+    <main class="galaksi" id="galaksi">
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+        <div class="pusat"></div>
+
+        <button class="foto" data-index="0" aria-label="Foto pertama Gaby">
+            <img src="images/foto1.jpg" alt="Foto pertama Gaby">
+        </button>
+
+        <button class="foto" data-index="1" aria-label="Foto kedua Gaby">
+            <img src="images/foto2.jpg" alt="Foto kedua Gaby">
+        </button>
+
+        <button class="foto" data-index="2" aria-label="Foto ketiga Gaby">
+            <img src="images/foto3.jpg" alt="Foto ketiga Gaby">
+        </button>
+
+        <button class="foto" data-index="3" aria-label="Foto keempat Gaby">
+            <img src="images/foto4.jpg" alt="Foto keempat Gaby">
+        </button>
+    </main>
+
+    <footer class="footer">
+        <p class="kalimat">
+            "Buat aku, kamu adalah wanita tercantik
+            yang pernah hadir di hidupku. ❤️"
+        </p>
+
+        <div class="tombol">
+            <button class="utama" id="bukaSurat">
+                Buka Surat Cinta 💌
+            </button>
+
+            <button id="jedaAnimasi">
+                Jeda Galaksi ⏸
+            </button>
+
+            <button id="kirimBintang">
+                Kirim Bintang ✨
+            </button>
+        </div>
+
+        <p class="petunjuk">
+            Geser galaksi untuk mengubah sudutnya.
+            Ketuk foto untuk melihat pesan.
+        </p>
+    </footer>
+
+    <section class="modal" id="modalSurat" aria-hidden="true">
+        <div class="surat" role="dialog" aria-modal="true"
+             aria-labelledby="judulSurat">
+
+            <div class="ikonSurat">💗</div>
+
+            <h2 id="judulSurat">
+                Untuk Gaby, Wanita Tercantikku 🌷
+            </h2>
+
+            <div class="isiSurat">
+                <p>
+                    Hai, Gaby sayangku. ❤️
+                    <br><br>
+
+                    Kamu tahu nggak sih? Menurutku kamu itu imut banget,
+                    lucu, dan menggemaskan. Ada aja hal kecil dari kamu
+                    yang bisa bikin aku senyum sendiri.
+                    <br><br>
+
+                    Buat aku, kamu adalah wanita paling cantik di dunia.
+                    Bukan cuma karena wajahmu yang cantik, tetapi juga
+                    karena hal-hal kecil dari dirimu yang bikin kamu
+                    begitu istimewa.
+                    <br><br>
+
+                    Kadang kamu mungkin nggak sadar betapa cantiknya
+                    kamu di mataku. Bahkan saat kamu cuma tersenyum
+                    atau melakukan hal sederhana, kamu tetap bisa
+                    bikin aku terpikat. 🥹💕
+                    <br><br>
+
+                    Aku harap kamu selalu percaya diri dan tetap jadi
+                    Gaby yang imut, lucu, serta menggemaskan dengan
+                    caramu sendiri.
+                    <br><br>
+
+                    Aku senang bisa mengenal kamu. Semoga aku bisa
+                    terus melihat senyum manismu dan menjadi salah
+                    satu alasan kamu bahagia.
+                    <br><br>
+
+                    Jangan lupa jaga diri baik-baik, ya,
+                    wanita cantik kesayanganku. 🌹
+                    <br><br>
+
+                    <strong>With love, from me to you. ❤️</strong>
+                </p>
+            </div>
+
+            <button class="utama" id="tutupSurat">
+                Tutup Surat ❤️
+            </button>
+        </div>
+    </section>
+
+    <section class="pesanFoto" id="pesanFoto" aria-live="polite">
+        <p id="isiPesan"></p>
+        <button class="utama" id="tutupPesan">Tutup ❤️</button>
+    </section>
+
+</body>
+</html>
