@@ -1,730 +1,1111 @@
-/* ==============================
-   ELEMEN WEBSITE
-============================== */
+import * as THREE from
+    'https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js';
 
-const intro = document.getElementById("intro");
-const enterButton = document.getElementById("enterButton");
-const mainContent = document.getElementById("mainContent");
 
-const galaxy = document.getElementById("galaxy");
-const planet = document.getElementById("planet");
-const photoOrbit = document.getElementById("photoOrbit");
+/* ==========================
+   PENGATURAN AWAL
+========================== */
 
-const letterButton = document.getElementById("letterButton");
-const bottomLetterButton = document.getElementById("bottomLetterButton");
+const sceneElement = document.getElementById("scene");
+const loading = document.getElementById("loading");
 
-const letterModal = document.getElementById("letterModal");
-const closeLetter = document.getElementById("closeLetter");
+const viewer = document.getElementById("photo-viewer");
+const largePhoto = document.getElementById("large-photo");
+const closeViewer = document.getElementById("close-viewer");
+const photoCaption = document.getElementById("photo-caption");
 
-const photoModal = document.getElementById("photoModal");
-const closePhoto = document.getElementById("closePhoto");
 
-const previewImage = document.getElementById("previewImage");
-const previewCaption = document.getElementById("previewCaption");
+/* ==========================
+   MEMBUAT SCENE 3D
+========================== */
 
-const starCanvas = document.getElementById("starCanvas");
-const starContext = starCanvas.getContext("2d");
+const scene = new THREE.Scene();
 
-const shootingStars = document.getElementById("shootingStars");
+scene.background = new THREE.Color(0x05030b);
 
-const photoCards = Array.from(
-    document.querySelectorAll(".photo-card")
+scene.fog = new THREE.FogExp2(
+    0x05030b,
+    0.018
 );
 
 
-/* ==============================
-   INTRO DAN HALAMAN UTAMA
-============================== */
+const camera = new THREE.PerspectiveCamera(
+    48,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    180
+);
 
-let hasEntered = false;
+camera.position.set(0, 1.8, 20);
 
-enterButton.addEventListener("click", function () {
 
-    if (hasEntered) {
-        return;
-    }
-
-    hasEntered = true;
-
-    intro.classList.add("hide");
-    mainContent.classList.add("show");
-
-    setTimeout(function () {
-        intro.style.display = "none";
-    }, 950);
-
+const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: false,
+    powerPreference: "high-performance"
 });
 
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio || 1, 1.8)
+);
 
-/* ==============================
-   BINTANG DI LATAR BELAKANG
-============================== */
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
 
-let stars = [];
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-let canvasWidth = 0;
-let canvasHeight = 0;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-).matches;
+renderer.toneMappingExposure = 1.15;
+
+sceneElement.appendChild(renderer.domElement);
 
 
-function resizeCanvas() {
+/* ==========================
+   CAHAYA GALAKSI
+========================== */
 
-    const pixelRatio = Math.min(
-        window.devicePixelRatio || 1,
-        2
+scene.add(
+    new THREE.AmbientLight(0xffffff, 1.4)
+);
+
+
+const purpleLight = new THREE.PointLight(
+    0x9e54ff,
+    95,
+    45
+);
+
+purpleLight.position.set(0, 1, 0);
+
+scene.add(purpleLight);
+
+
+const pinkLight = new THREE.PointLight(
+    0xe45bca,
+    38,
+    35
+);
+
+pinkLight.position.set(-5, -1, -3);
+
+scene.add(pinkLight);
+
+
+const blueLight = new THREE.PointLight(
+    0x615cff,
+    28,
+    35
+);
+
+blueLight.position.set(5, 2, 3);
+
+scene.add(blueLight);
+
+
+/* ==========================
+   MEMBUAT BINTANG
+========================== */
+
+function makeStars(count) {
+
+    const positions = new Float32Array(count * 3);
+
+    for (let i = 0; i < count; i++) {
+
+        const radius = 18 + Math.random() * 48;
+
+        const theta = Math.random() * Math.PI * 2;
+
+        const phi = Math.acos(
+            2 * Math.random() - 1
+        );
+
+        positions[i * 3] =
+            radius * Math.sin(phi) * Math.cos(theta);
+
+        positions[i * 3 + 1] =
+            radius * Math.cos(phi);
+
+        positions[i * 3 + 2] =
+            radius * Math.sin(phi) * Math.sin(theta);
+
+    }
+
+    const geometry = new THREE.BufferGeometry();
+
+    geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
     );
 
-    canvasWidth = window.innerWidth;
-    canvasHeight = window.innerHeight;
+    const material = new THREE.PointsMaterial({
+        color: 0xf6eaff,
+        size: 0.075,
+        transparent: true,
+        opacity: 0.82,
+        sizeAttenuation: true,
+        depthWrite: false
+    });
 
-    starCanvas.width = Math.floor(
-        canvasWidth * pixelRatio
+    const points = new THREE.Points(
+        geometry,
+        material
     );
 
-    starCanvas.height = Math.floor(
-        canvasHeight * pixelRatio
-    );
+    scene.add(points);
 
-    starCanvas.style.width = canvasWidth + "px";
-    starCanvas.style.height = canvasHeight + "px";
-
-    starContext.setTransform(
-        pixelRatio,
-        0,
-        0,
-        pixelRatio,
-        0,
-        0
-    );
-
-    createStars();
+    return points;
 
 }
 
 
-function createStars() {
+const starField = makeStars(2200);
 
-    stars = [];
 
-    const totalStars = Math.min(
-        180,
-        Math.floor(
-            (canvasWidth * canvasHeight) / 6500
-        )
+/* ==========================
+   CAHAYA PUSARAN
+========================== */
+
+function makeGlowTexture() {
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = 256;
+    canvas.height = 256;
+
+    const ctx = canvas.getContext("2d");
+
+    const gradient = ctx.createRadialGradient(
+        128, 128, 2,
+        128, 128, 128
     );
 
-    for (let i = 0; i < totalStars; i++) {
+    gradient.addColorStop(
+        0,
+        "rgba(196,105,255,0.34)"
+    );
 
-        stars.push({
+    gradient.addColorStop(
+        0.25,
+        "rgba(128,60,214,0.19)"
+    );
 
-            x: Math.random() * canvasWidth,
+    gradient.addColorStop(
+        0.6,
+        "rgba(73,35,130,0.07)"
+    );
 
-            y: Math.random() * canvasHeight,
+    gradient.addColorStop(
+        1,
+        "rgba(20,5,40,0)"
+    );
 
-            radius: Math.random() * 1.5 + 0.3,
+    ctx.fillStyle = gradient;
 
-            opacity: Math.random() * 0.7 + 0.2,
+    ctx.fillRect(
+        0, 0,
+        canvas.width,
+        canvas.height
+    );
 
-            speed: Math.random() * 0.008 + 0.002,
+    return new THREE.CanvasTexture(canvas);
 
-            phase: Math.random() * Math.PI * 2
+}
+
+
+const glowTexture = makeGlowTexture();
+
+
+/* ==========================
+   NEBULA UNGU
+========================== */
+
+for (let i = 0; i < 7; i++) {
+
+    const glow = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+            map: glowTexture,
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            opacity: 0.5
+        })
+    );
+
+    const angle =
+        (i / 7) * Math.PI * 2;
+
+    glow.position.set(
+        Math.cos(angle) * 4.2,
+        Math.sin(angle) * 1.3,
+        -2 - Math.random() * 3
+    );
+
+    glow.scale.set(
+        9 + Math.random() * 5,
+        6 + Math.random() * 4,
+        1
+    );
+
+    scene.add(glow);
+
+}
+
+
+/* ==========================
+   INTI GALAKSI
+========================== */
+
+const core = new THREE.Mesh(
+    new THREE.SphereGeometry(
+        0.55,
+        32,
+        32
+    ),
+
+    new THREE.MeshBasicMaterial({
+        color: 0xe3a2ff,
+        transparent: true,
+        opacity: 0.82
+    })
+);
+
+scene.add(core);
+
+
+const coreGlow = new THREE.Sprite(
+    new THREE.SpriteMaterial({
+        map: glowTexture,
+        color: 0xc16bff,
+        transparent: true,
+        opacity: 1,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    })
+);
+
+coreGlow.scale.set(8, 8, 1);
+
+scene.add(coreGlow);
+
+
+/* ==========================
+   DEBU BINTANG BERBENTUK SPIRAL
+========================== */
+
+const dustCount = 4600;
+
+const dustPositions = new Float32Array(
+    dustCount * 3
+);
+
+const dustColors = new Float32Array(
+    dustCount * 3
+);
+
+const colorA = new THREE.Color(0xb47aff);
+const colorB = new THREE.Color(0xffa5df);
+const colorC = new THREE.Color(0x7e8cff);
+
+
+for (let i = 0; i < dustCount; i++) {
+
+    const arm = Math.floor(
+        Math.random() * 4
+    );
+
+    const radius =
+        0.7 + Math.pow(Math.random(), 0.72) * 10.5;
+
+    const armAngle =
+        arm * Math.PI * 0.5;
+
+    const spiral =
+        radius * 0.48;
+
+    const spread =
+        (Math.random() - 0.5) *
+        (0.35 + radius * 0.09);
+
+    const angle =
+        armAngle + spiral + spread;
+
+
+    dustPositions[i * 3] =
+        Math.cos(angle) * radius;
+
+    dustPositions[i * 3 + 1] =
+        (Math.random() - 0.5) *
+        (0.35 + radius * 0.075);
+
+    dustPositions[i * 3 + 2] =
+        Math.sin(angle) * radius * 0.58;
+
+
+    let color;
+
+    const pick = Math.random();
+
+    if (pick < 0.55) {
+        color = colorA;
+    } else if (pick < 0.82) {
+        color = colorB;
+    } else {
+        color = colorC;
+    }
+
+    const mixedColor = color.clone().lerp(
+        new THREE.Color(0xffffff),
+        Math.random() * 0.35
+    );
+
+    dustColors[i * 3] = mixedColor.r;
+    dustColors[i * 3 + 1] = mixedColor.g;
+    dustColors[i * 3 + 2] = mixedColor.b;
+
+}
+
+
+const dustGeometry = new THREE.BufferGeometry();
+
+dustGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(
+        dustPositions,
+        3
+    )
+);
+
+dustGeometry.setAttribute(
+    "color",
+    new THREE.BufferAttribute(
+        dustColors,
+        3
+    )
+);
+
+
+const dustMaterial = new THREE.PointsMaterial({
+    size: 0.055,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.8,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+});
+
+
+const galacticDust = new THREE.Points(
+    dustGeometry,
+    dustMaterial
+);
+
+scene.add(galacticDust);
+
+
+/* ==========================
+   FOTO GABY
+========================== */
+
+const photoPaths = [
+    "./gaby1.jpeg",
+    "./gaby2.jpeg",
+    "./gaby3.jpeg",
+    "./gaby4.jpeg"
+];
+
+const loader = new THREE.TextureLoader();
+
+const photoTextures = [];
+
+const photoMeshes = [];
+
+const photoGroup = new THREE.Group();
+
+scene.add(photoGroup);
+
+
+/* Foto pengganti jika file tidak ditemukan */
+
+function createFallbackTexture(index) {
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = 256;
+    canvas.height = 340;
+
+    const ctx = canvas.getContext("2d");
+
+    const gradient = ctx.createLinearGradient(
+        0, 0,
+        256, 340
+    );
+
+    gradient.addColorStop(0, "#6b3994");
+    gradient.addColorStop(1, "#e17dbd");
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+        0, 0,
+        256, 340
+    );
+
+    ctx.fillStyle = "white";
+
+    ctx.textAlign = "center";
+
+    ctx.font = "48px Georgia";
+
+    ctx.fillText("♡", 128, 175);
+
+    ctx.font = "17px Arial";
+
+    ctx.fillText(
+        "Foto " + (index + 1),
+        128,
+        220
+    );
+
+    const texture = new THREE.CanvasTexture(canvas);
+
+    texture.colorSpace = THREE.SRGBColorSpace;
+
+    return texture;
+
+}
+
+
+/* Memuat semua foto */
+
+const photoPromises = photoPaths.map(
+    function (path, index) {
+
+        return new Promise(function (resolve) {
+
+            loader.load(
+
+                path,
+
+                function (texture) {
+
+                    texture.colorSpace =
+                        THREE.SRGBColorSpace;
+
+                    texture.anisotropy =
+                        renderer.capabilities.getMaxAnisotropy();
+
+                    photoTextures[index] = texture;
+
+                    resolve(texture);
+
+                },
+
+                undefined,
+
+                function () {
+
+                    console.warn(
+                        "Foto tidak ditemukan: " + path
+                    );
+
+                    const fallback =
+                        createFallbackTexture(index);
+
+                    photoTextures[index] = fallback;
+
+                    resolve(fallback);
+
+                }
+
+            );
 
         });
 
     }
-
-}
-
-
-let animationTime = 0;
+);
 
 
-function drawStars() {
+/* ==========================
+   MEMBUAT KARTU FOTO 3D
+========================== */
 
-    starContext.clearRect(
-        0,
-        0,
-        canvasWidth,
-        canvasHeight
+function createPhotoFrame(texture, index) {
+
+    const group = new THREE.Group();
+
+    const width =
+        0.53 + Math.random() * 0.17;
+
+    const height =
+        width * 1.28;
+
+
+    /* Bingkai putih */
+
+    const border = new THREE.Mesh(
+
+        new THREE.PlaneGeometry(
+            width + 0.075,
+            height + 0.075
+        ),
+
+        new THREE.MeshBasicMaterial({
+            color: 0xfffaff,
+            side: THREE.DoubleSide
+        })
+
     );
 
-    animationTime += reducedMotion ? 0 : 0.016;
+    group.add(border);
 
-    for (const star of stars) {
 
-        let opacity = star.opacity;
+    /* Foto */
 
-        if (!reducedMotion) {
+    const photo = new THREE.Mesh(
 
-            opacity =
-                star.opacity *
-                (
-                    0.65 +
-                    0.35 *
-                    Math.sin(
-                        animationTime * star.speed * 50 +
-                        star.phase
-                    )
-                );
+        new THREE.PlaneGeometry(
+            width,
+            height
+        ),
 
-        }
+        new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.DoubleSide,
+            toneMapped: false
+        })
 
-        starContext.beginPath();
+    );
 
-        starContext.arc(
-            star.x,
-            star.y,
-            star.radius,
-            0,
-            Math.PI * 2
+    photo.position.z = 0.008;
+
+    group.add(photo);
+
+
+    /* Cahaya di sekitar foto */
+
+    const glow = new THREE.Sprite(
+
+        new THREE.SpriteMaterial({
+            map: glowTexture,
+            color: index % 2
+                ? 0xf08bdc
+                : 0xb58aff,
+
+            transparent: true,
+            opacity: 0.34,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        })
+
+    );
+
+    glow.position.z = -0.08;
+
+    glow.scale.set(
+        width * 2.3,
+        height * 2.1,
+        1
+    );
+
+    group.add(glow);
+
+
+    group.userData.photoIndex = index;
+
+    group.userData.phase =
+        Math.random() * Math.PI * 2;
+
+    group.userData.rotationSpeed =
+        (Math.random() - 0.5) * 0.0018;
+
+    return group;
+
+}
+
+
+/* ==========================
+   MENYUSUN GALAKSI FOTO
+========================== */
+
+function buildPhotoGalaxy() {
+
+    photoGroup.clear();
+
+    photoMeshes.length = 0;
+
+
+    const totalCards =
+        window.innerWidth < 600
+            ? 112
+            : 165;
+
+
+    for (let i = 0; i < totalCards; i++) {
+
+        /* Gunakan empat foto secara berulang */
+
+        const photoIndex =
+            i % photoTextures.length;
+
+        const texture =
+            photoTextures[photoIndex];
+
+        const card = createPhotoFrame(
+            texture,
+            photoIndex
         );
 
-        starContext.fillStyle =
-            "rgba(255, 245, 255, " + opacity + ")";
 
-        starContext.shadowBlur =
-            star.radius > 1.2 ? 8 : 2;
+        /* Empat lengan spiral */
 
-        starContext.shadowColor = "#e5c7ff";
+        const arm = i % 4;
 
-        starContext.fill();
+        const progress =
+            i / totalCards;
 
-    }
-
-    starContext.shadowBlur = 0;
-
-    requestAnimationFrame(drawStars);
-
-}
-
-
-window.addEventListener("resize", resizeCanvas);
-
-resizeCanvas();
-drawStars();
-
-
-/* ==============================
-   BINTANG JATUH
-============================== */
-
-function createShootingStar() {
-
-    if (reducedMotion) {
-        return;
-    }
-
-    const star = document.createElement("div");
-
-    star.className = "shooting-star";
-
-    star.style.left =
-        (Math.random() * window.innerWidth * 0.9 + 5) +
-        "px";
-
-    star.style.top =
-        (Math.random() * window.innerHeight * 0.45) +
-        "px";
-
-    shootingStars.appendChild(star);
-
-    star.addEventListener("animationend", function () {
-        star.remove();
-    });
-
-}
-
-
-function scheduleShootingStar() {
-
-    const delay = 1800 + Math.random() * 3500;
-
-    setTimeout(function () {
-
-        createShootingStar();
-
-        scheduleShootingStar();
-
-    }, delay);
-
-}
-
-
-scheduleShootingStar();
-
-
-/* ==============================
-   FOTO MENGELILINGI PLANET
-============================== */
-
-let orbitAngle = 0;
-
-let orbitSpeed = 0.00022;
-
-let isDragging = false;
-
-let lastPointerX = 0;
-
-let lastPointerY = 0;
-
-let dragDistance = 0;
-
-let lastInteractionTime = 0;
-
-
-const photoSettings = [
-
-    {
-        angle: -145,
-        radiusX: 0.31,
-        radiusY: 0.25,
-        depth: 0.1,
-        tilt: -12
-    },
-
-    {
-        angle: -45,
-        radiusX: 0.38,
-        radiusY: 0.35,
-        depth: 0.7,
-        tilt: 9
-    },
-
-    {
-        angle: 45,
-        radiusX: 0.31,
-        radiusY: 0.25,
-        depth: 0.9,
-        tilt: -7
-    },
-
-    {
-        angle: 145,
-        radiusX: 0.38,
-        radiusY: 0.35,
-        depth: 0.2,
-        tilt: 12
-    }
-
-];
-
-
-function getOrbitDimensions() {
-
-    const width = galaxy.clientWidth;
-    const height = galaxy.clientHeight;
-
-    const isSmallPhone = width <= 350;
-    const isPhone = width <= 420;
-    const isTablet = width <= 700;
-
-    let radiusX;
-    let radiusY;
-
-    if (isSmallPhone) {
-
-        radiusX = width * 0.35;
-        radiusY = height * 0.25;
-
-    } else if (isPhone) {
-
-        radiusX = width * 0.36;
-        radiusY = height * 0.28;
-
-    } else if (isTablet) {
-
-        radiusX = width * 0.37;
-        radiusY = height * 0.30;
-
-    } else {
-
-        radiusX = Math.min(width * 0.36, 285);
-        radiusY = Math.min(height * 0.32, 220);
-
-    }
-
-    return {
-        width,
-        height,
-        radiusX,
-        radiusY
-    };
-
-}
-
-
-function animatePhotos() {
-
-    const dimensions = getOrbitDimensions();
-
-    const centerX = dimensions.width / 2;
-
-    const centerY = dimensions.height * 0.41;
-
-    const radiusX = dimensions.radiusX;
-
-    const radiusY = dimensions.radiusY;
-
-
-    if (!reducedMotion && !isDragging) {
-
-        const now = performance.now();
-
-        const elapsed = lastInteractionTime === 0
-            ? 16
-            : Math.min(now - lastInteractionTime, 40);
-
-        orbitAngle += orbitSpeed * elapsed;
-
-    }
-
-    lastInteractionTime = performance.now();
-
-
-    photoCards.forEach(function (card, index) {
-
-        const settings = photoSettings[index];
+        const radius =
+            1.0 + Math.pow(progress, 0.82) * 8.6;
 
         const angle =
-            settings.angle * Math.PI / 180 +
-            orbitAngle;
-
-        const x = Math.cos(angle) * radiusX;
-
-        const y = Math.sin(angle) * radiusY;
-
-        const depth = (Math.sin(angle) + 1) / 2;
-
-        const scale = 0.77 + depth * 0.28;
-
-        const rotation =
-            settings.tilt +
-            Math.sin(angle) * 5;
-
-        const cardWidth = card.offsetWidth;
-
-        const cardHeight = card.offsetHeight;
-
-        const positionX =
-            centerX + x - cardWidth / 2;
-
-        const positionY =
-            centerY + y - cardHeight / 2;
-
-        card.style.transform =
-            "translate3d(" +
-            positionX +
-            "px, " +
-            positionY +
-            "px, 0) " +
-            "rotate(" + rotation + "deg) " +
-            "scale(" + scale + ")";
-
-        card.style.zIndex =
-            String(10 + Math.round(depth * 20));
-
-    });
+            arm * Math.PI * 0.5 +
+            radius * 0.57 +
+            (Math.random() - 0.5) * 0.52;
 
 
-    requestAnimationFrame(animatePhotos);
+        const spread =
+            (Math.random() - 0.5) *
+            (0.7 + radius * 0.12);
+
+
+        const x =
+            Math.cos(angle) * radius + spread;
+
+        const z =
+            Math.sin(angle) * radius * 0.58 +
+            (Math.random() - 0.5) * 1.1;
+
+        const y =
+            (Math.random() - 0.5) *
+            (0.55 + radius * 0.19);
+
+
+        card.position.set(x, y, z);
+
+
+        /* Foto yang jauh dibuat lebih kecil */
+
+        const scale =
+            i < 4
+                ? 1.15
+                : 0.66 + Math.random() * 0.55;
+
+        card.scale.setScalar(scale);
+
+
+        /* Kemiringan setiap foto */
+
+        card.rotation.set(
+            (Math.random() - 0.5) * 0.3,
+            (Math.random() - 0.5) * 0.5,
+            (Math.random() - 0.5) * 0.48
+        );
+
+
+        card.userData.basePosition =
+            card.position.clone();
+
+        card.userData.baseY = y;
+
+        card.userData.distance = radius;
+
+
+        photoGroup.add(card);
+
+        photoMeshes.push(card);
+
+    }
 
 }
 
 
-animatePhotos();
+/* Selesaikan loading foto */
+
+Promise.all(photoPromises).then(function () {
+
+    buildPhotoGalaxy();
+
+    loading.classList.add("done");
+
+    setTimeout(function () {
+        loading.remove();
+    }, 900);
+
+});
 
 
-/* ==============================
-   GESER GALAKSI DENGAN MOUSE
-   ATAU LAYAR SENTUH
-============================== */
+/* ==========================
+   INTERAKSI MOUSE DAN HP
+========================== */
 
-function startDrag(event) {
+let pointerDown = false;
 
-    if (
-        event.target.closest(".photo-card") ||
-        event.target.closest("button") &&
-        !event.target.closest("#planet")
-    ) {
-        return;
+let pointerX = 0;
+
+let pointerY = 0;
+
+let targetRotationY = 0;
+
+let targetRotationX = 0;
+
+let draggingDistance = 0;
+
+
+renderer.domElement.addEventListener(
+    "pointerdown",
+    function (event) {
+
+        pointerDown = true;
+
+        pointerX = event.clientX;
+
+        pointerY = event.clientY;
+
+        draggingDistance = 0;
+
+        renderer.domElement.setPointerCapture(
+            event.pointerId
+        );
+
     }
+);
 
-    isDragging = true;
 
-    lastPointerX = event.clientX;
+renderer.domElement.addEventListener(
+    "pointermove",
+    function (event) {
 
-    lastPointerY = event.clientY;
+        if (!pointerDown) {
+            return;
+        }
 
-    dragDistance = 0;
+        const dx =
+            event.clientX - pointerX;
 
-    if (galaxy.setPointerCapture) {
+        const dy =
+            event.clientY - pointerY;
 
-        try {
-            galaxy.setPointerCapture(event.pointerId);
-        } catch (error) {
-            // Tidak semua browser mendukungnya.
+
+        pointerX = event.clientX;
+
+        pointerY = event.clientY;
+
+
+        draggingDistance +=
+            Math.abs(dx) + Math.abs(dy);
+
+
+        targetRotationY += dx * 0.003;
+
+        targetRotationX += dy * 0.0015;
+
+
+        targetRotationX = Math.max(
+            -0.35,
+            Math.min(0.35, targetRotationX)
+        );
+
+    }
+);
+
+
+function endPointer() {
+    pointerDown = false;
+}
+
+renderer.domElement.addEventListener(
+    "pointerup",
+    endPointer
+);
+
+renderer.domElement.addEventListener(
+    "pointercancel",
+    endPointer
+);
+
+
+/* ==========================
+   MEMBUKA FOTO
+========================== */
+
+const raycaster = new THREE.Raycaster();
+
+const pointer = new THREE.Vector2();
+
+
+renderer.domElement.addEventListener(
+    "click",
+    function (event) {
+
+        if (draggingDistance > 8) {
+            return;
+        }
+
+        const rect =
+            renderer.domElement.getBoundingClientRect();
+
+
+        pointer.x =
+            ((event.clientX - rect.left) / rect.width) * 2 - 1;
+
+        pointer.y =
+            -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+
+        raycaster.setFromCamera(
+            pointer,
+            camera
+        );
+
+
+        const hits = raycaster.intersectObjects(
+            photoGroup.children,
+            true
+        );
+
+
+        if (hits.length === 0) {
+            return;
+        }
+
+
+        let object = hits[0].object;
+
+
+        while (
+            object.parent &&
+            object.parent !== photoGroup
+        ) {
+            object = object.parent;
+        }
+
+
+        const index =
+            object.userData.photoIndex ?? 0;
+
+
+        largePhoto.src =
+            photoPaths[index];
+
+        largePhoto.onerror = function () {
+            largePhoto.removeAttribute("src");
+        };
+
+
+        const captions = [
+            "Senyum manis Gaby ♡",
+            "A lovely memory ♥",
+            "Untuk Gaby yang cantik ✨",
+            "Only for you 💗"
+        ];
+
+
+        photoCaption.textContent =
+            captions[index];
+
+
+        viewer.classList.add("open");
+
+    }
+);
+
+
+/* Tutup foto */
+
+function closePhotoViewer() {
+
+    viewer.classList.remove("open");
+
+    largePhoto.removeAttribute("src");
+
+}
+
+
+closeViewer.addEventListener(
+    "click",
+    closePhotoViewer
+);
+
+
+viewer.addEventListener(
+    "click",
+    function (event) {
+
+        if (event.target === viewer) {
+            closePhotoViewer();
         }
 
     }
+);
 
-}
+
+window.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+            closePhotoViewer();
+        }
+
+    }
+);
 
 
-function moveDrag(event) {
+/* ==========================
+   ANIMASI GALAKSI
+========================== */
 
-    if (!isDragging) {
-        return;
+const clock = new THREE.Clock();
+
+
+function animate() {
+
+    requestAnimationFrame(animate);
+
+    const time =
+        clock.getElapsedTime();
+
+
+    /* Galaksi berputar perlahan */
+
+    if (!pointerDown) {
+        targetRotationY += 0.00065;
     }
 
-    const differenceX = event.clientX - lastPointerX;
 
-    const differenceY = event.clientY - lastPointerY;
+    photoGroup.rotation.y +=
+        (targetRotationY - photoGroup.rotation.y) * 0.035;
 
-    lastPointerX = event.clientX;
+    photoGroup.rotation.x +=
+        (targetRotationX - photoGroup.rotation.x) * 0.035;
 
-    lastPointerY = event.clientY;
 
-    dragDistance += Math.abs(differenceX);
+    /* Gerakan debu bintang */
 
-    orbitAngle += differenceX * 0.008;
+    galacticDust.rotation.y =
+        time * 0.018;
 
-    orbitSpeed = differenceX * 0.00035;
+    galacticDust.rotation.z =
+        Math.sin(time * 0.12) * 0.035;
 
-    orbitSpeed = Math.max(
-        -0.002,
-        Math.min(0.002, orbitSpeed)
+
+    /* Bintang latar belakang */
+
+    starField.rotation.y =
+        time * 0.003;
+
+    starField.rotation.x =
+        Math.sin(time * 0.1) * 0.015;
+
+
+    /* Cahaya inti berdenyut */
+
+    core.scale.setScalar(
+        1 + Math.sin(time * 1.4) * 0.06
     );
 
-    if (Math.abs(differenceY) > 2) {
+    coreGlow.material.opacity =
+        0.7 + Math.sin(time * 1.1) * 0.16;
 
-        planet.style.filter =
-            "brightness(" +
-            Math.min(
-                1.12,
-                1 + Math.abs(differenceY) * 0.002
-            ) +
-            ")";
 
-    }
+    /* Foto bergerak sedikit agar terlihat hidup */
 
-}
+    photoMeshes.forEach(function (card) {
 
+        const baseY =
+            card.userData.baseY;
 
-function endDrag() {
+        card.position.y =
+            baseY +
+            Math.sin(
+                time * 0.55 + card.userData.phase
+            ) * 0.06;
 
-    isDragging = false;
+        card.rotation.z +=
+            card.userData.rotationSpeed * 0.15;
 
-    planet.style.filter = "";
+        const distance =
+            card.position.length();
 
-}
-
-
-galaxy.addEventListener("pointerdown", startDrag);
-
-window.addEventListener("pointermove", moveDrag);
-
-window.addEventListener("pointerup", endDrag);
-
-window.addEventListener("pointercancel", endDrag);
-
-
-/* ==============================
-   INTERAKSI PLANET
-============================== */
-
-function openLetter() {
-
-    letterModal.classList.add("open");
-
-    letterModal.setAttribute("aria-hidden", "false");
-
-    document.body.style.overflow = "hidden";
-
-    closeLetter.focus();
-
-}
-
-
-function closeLetterModal() {
-
-    letterModal.classList.remove("open");
-
-    letterModal.setAttribute("aria-hidden", "true");
-
-    document.body.style.overflow = "";
-
-}
-
-
-planet.addEventListener("click", function () {
-
-    if (dragDistance > 8) {
-        return;
-    }
-
-    openLetter();
-
-});
-
-
-planet.addEventListener("keydown", function (event) {
-
-    if (
-        event.key === "Enter" ||
-        event.key === " "
-    ) {
-
-        event.preventDefault();
-
-        openLetter();
-
-    }
-
-});
-
-
-letterButton.addEventListener("click", openLetter);
-
-bottomLetterButton.addEventListener("click", openLetter);
-
-closeLetter.addEventListener("click", closeLetterModal);
-
-
-/* Tutup surat ketika area gelap ditekan */
-
-letterModal.addEventListener("click", function (event) {
-
-    if (event.target.dataset.close === "true") {
-
-        closeLetterModal();
-
-    }
-
-});
-
-
-/* ==============================
-   PREVIEW FOTO
-============================== */
-
-const photoNames = [
-
-    "Senyum manis Gaby ♡",
-
-    "Satu lagi foto cantikmu ♥",
-
-    "Tetap cantik dengan caramu sendiri ✨",
-
-    "Kenangan kecil untuk Gaby 💗"
-
-];
-
-
-function openPhoto(index) {
-
-    const card = photoCards[index];
-
-    if (!card) {
-        return;
-    }
-
-    const image = card.querySelector("img");
-
-    previewImage.src = image.src;
-
-    previewImage.alt = image.alt;
-
-    previewCaption.textContent = photoNames[index];
-
-    photoModal.classList.add("open");
-
-    photoModal.setAttribute("aria-hidden", "false");
-
-    document.body.style.overflow = "hidden";
-
-    closePhoto.focus();
-
-}
-
-
-function closePhotoModal() {
-
-    photoModal.classList.remove("open");
-
-    photoModal.setAttribute("aria-hidden", "true");
-
-    previewImage.src = "";
-
-    document.body.style.overflow = "";
-
-}
-
-
-photoCards.forEach(function (card, index) {
-
-    card.addEventListener("click", function (event) {
-
-        event.stopPropagation();
-
-        openPhoto(index);
+        card.children[2].material.opacity =
+            Math.max(
+                0.12,
+                0.4 - distance * 0.018
+            );
 
     });
 
-});
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
 
 
-closePhoto.addEventListener("click", closePhotoModal);
+animate();
 
 
-photoModal.addEventListener("click", function (event) {
+/* ==========================
+   RESPONSIVE
+========================== */
 
-    if (event.target.dataset.photoClose === "true") {
+function resize() {
 
-        closePhotoModal();
+    const width =
+        window.innerWidth;
 
-    }
-
-});
-
-
-/* ==============================
-   TOMBOL ESCAPE UNTUK MENUTUP
-============================== */
-
-document.addEventListener("keydown", function (event) {
-
-    if (event.key === "Escape") {
-
-        closeLetterModal();
-
-        closePhotoModal();
-
-    }
-
-});
+    const height =
+        window.innerHeight;
 
 
-/* ==============================
-   CEK FOTO
-============================== */
+    camera.aspect =
+        width / height;
 
-photoCards.forEach(function (card) {
 
-    const image = card.querySelector("img");
+    camera.fov =
+        width < 600 ? 55 : 48;
 
-    image.addEventListener("error", function () {
 
-        console.error(
-            "Foto tidak ditemukan: " + image.getAttribute("src")
-        );
+    camera.position.z =
+        width < 600 ? 23 : 20;
 
-        card.style.background = "#39254a";
 
-        image.alt = "Foto belum berhasil dimuat";
+    camera.updateProjectionMatrix();
 
-    });
 
-});
+    renderer.setPixelRatio(
+        Math.min(
+            window.devicePixelRatio || 1,
+            width < 600 ? 1.5 : 1.8
+        )
+    );
+
+
+    renderer.setSize(
+        width,
+        height
+    );
+
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
+);
